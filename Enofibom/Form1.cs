@@ -17,12 +17,15 @@ namespace Enofibom
 {
     public partial class Form1 : Form
     {
+        GMapOverlay overlay = new GMapOverlay("ABCDS");
+        List<MobiObject> listObject = new List<MobiObject>();
         public Form1()
         {
             InitializeComponent();
             
         }
 
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             mapControl.MapProvider = GMapProviders.GoogleMap;
@@ -34,63 +37,129 @@ namespace Enofibom
 
             mapControl.MinZoom = 5; 
             mapControl.MaxZoom = 22;
-            mapControl.Zoom = 13;
+            mapControl.Zoom = 11;
             mapControl.ShowCenter = false;
 
-
-            
-            //int segments = 500;
-
-            //List<PointLatLng> gpollist = new List<PointLatLng>();
-
-            //for (int i = 0; i < segments; i++)
-            //    gpollist.Add(FindPointAtDistanceFrom(point, i, 1130.89 / 1000));
-
-            //GMapPolygon gpol = new GMapPolygon(gpollist, "pol");
-            //GMapOverlay markers = new GMapOverlay("ABCDS");
-
-            //markers.Polygons.Add(gpol);
-            //mapControl.Overlays.Add(markers);
+            //DrawLine();
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+     
+
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            var point = new PointLatLng(21.020440, 105.843650);
-            GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
-            marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
-            marker.ToolTipText = "dfdfdf" + Environment.NewLine + "yriryri";
-            marker.IsVisible = true;
+            listObject = new List<MobiObject>();
+            var test1 = new MobiObject
+            {
+                IMSI = "452019907817978",
+                MSISDN = "84907055468",
+                CGI = "4G:452-01-101175-11",
+                Kind = "C4G",
+                AngleStart = "",
+                AngleEnd = "",
+                Lat = "21051360",
+                Lng = "105744430",
+                PlanName="GSM",
+                Radius="1000"
+               
+            };
 
+            var test2 = new MobiObject
+            {
+                IMSI = "452019939362924",
+                MSISDN = "84904500084",
+                CGI = "452-01-10050-14241",
+                Kind = "C2G",
+                AngleStart = "",
+                AngleEnd = "",
+                Lat = "21020440",
+                Lng = "105843650",
+                PlanName = "GSM",
+                Radius = "500"
+                
+            };
+            listObject.Add(test1);
+            listObject.Add(test2);
+            dataGrid1.AutoGenerateColumns = false;
+            dataGrid1.DataSource = listObject;
 
-
-
-            var point2 = new PointLatLng(21.016830, 105.855760);
-            var markerLoduc = new GMarkerGoogle(point2, GMarkerGoogleType.blue_dot);
-            markerLoduc.IsVisible = true;
-            markerLoduc.ToolTipMode = MarkerTooltipMode.Always;
-            markerLoduc.ToolTipText = "Lò Đúc" + Environment.NewLine + "Hà Nội";
-
-
-            GMapOverlay markers = new GMapOverlay("ABCDS");
-            //GMapOverlay overlayloduc = new GMapOverlay("ABCDfdfdfdS");
-            mapControl.Overlays.Add(markers);
-            //mapControl.Overlays.Add(overlayloduc);
-
-
-            markers.Markers.Add(marker);
-            markers.Markers.Add(markerLoduc);
-
-
-            //PointLatLng point = new PointLatLng(lat, lon);
-           
-            var polygon1 = CreateCircle(point.Lat, point.Lng, 500, 2);
-            var polygon2 = CreateCircle(point2.Lat, point2.Lng, 1200, 2);
-
-            markers.Polygons.Add(polygon1);
-            markers.Polygons.Add(polygon2);
             
+            gunaDataGrid.DataSource = listObject;
+            gunaDataGrid.AutoGenerateColumns = false;
 
+            gunaDataGrid.Columns.Remove("Kind");
+            //gunaDataGrid.Columns["Kind"].Visible = false;
+
+            gunaDataGrid.Columns.Remove("CGI");
+            gunaDataGrid.Columns.Remove("IMSI");
+            gunaDataGrid.Columns.Remove("PlanName");
+            gunaDataGrid.Columns.Remove("Radius");
+            gunaDataGrid.Columns.Remove("AngleStart");
+            gunaDataGrid.Columns.Remove("AngleEnd");
+            //gunaDataGrid.Columns["CGI"].Visible = false;
+
+
+            mapControl.Overlays.Add(overlay);
+
+            foreach (var item in listObject)
+            {
+                var marker1 = GetMarkerFromData(item);
+                var poly = GetPolygonFromData(item);
+                if (marker1!=null)
+                    overlay.Markers.Add(marker1);
+                if (poly != null)
+                    overlay.Polygons.Add(poly);
+
+            }
+         
+        }
+
+        private GMapMarker GetMarkerFromData(MobiObject temp)
+        {
+            try
+            {
+                var tempLat = temp.Lat.Insert(2, ".");
+                var tempLng = temp.Lng.Insert(3, ".");
+                var realLat = Convert.ToDouble(tempLat);
+                var realLng = Convert.ToDouble(tempLng);
+                var rad = Convert.ToDouble(temp.Radius);
+                var tooltiptext = Environment.NewLine + "IMSI=" + temp.IMSI + "; MSISDN=" + temp.MSISDN + Environment.NewLine +
+                    ";CGI=" + temp.CGI + "; Kind=" + temp.Kind + Environment.NewLine +
+                    "; Lat=" + temp.Lat + "; Lon=" + temp.Lng + "; Radius=" + temp.Radius;
+
+                var point = new PointLatLng(realLat, realLng);
+                GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
+                marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
+                marker.ToolTipText = tooltiptext;
+                marker.IsVisible = true;
+            
+                return marker;
+            }
+            catch
+            {
+                return null;
+            }
+            
+        }
+
+
+        private GMapPolygon GetPolygonFromData(MobiObject temp)
+        {
+            try
+            {
+                var tempLat = temp.Lat.Insert(2, ".");
+                var tempLng = temp.Lng.Insert(3, ".");
+                var realLat = Convert.ToDouble(tempLat);
+                var realLng = Convert.ToDouble(tempLng);
+                var rad = Convert.ToDouble(temp.Radius);
+                var polygon1 = CreateCircle(realLat, realLng, rad, 2);
+                return polygon1;
+            }
+            catch
+            {
+                return null;
+            }
+            
         }
 
         private void RefreshMap()
@@ -178,5 +247,83 @@ namespace Enofibom
             return startPoint.GetDistanceTo(endPoint);
         }
 
+        private void guna2CustomCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            if (mapControl.Overlays.Count > 0)
+            {
+                mapControl.Overlays.RemoveAt(0);
+                mapControl.Refresh();
+            }
+                
+        }
+
+        private void dataGrid1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                
+                var valuelat = listObject[e.RowIndex].Lat;
+                var valuelng = listObject[e.RowIndex].Lng;
+                if (!String.IsNullOrEmpty(valuelat)&& !String.IsNullOrEmpty(valuelng))
+                {
+                    var tempLat = valuelat.Insert(2, ".");
+                    var tempLng = valuelng.Insert(3, ".");
+                    var realLat = Convert.ToDouble(tempLat);
+                    var realLng = Convert.ToDouble(tempLng);
+                    //lat = Convert.ToDouble(valuelat);
+                    //lng = Convert.ToDouble(valuelng);
+
+                    mapControl.Position = new PointLatLng(realLat, realLng);
+                }
+            }
+        }
+
+        private void DrawLine()
+        {
+            //PointLatLng point = new PointLatLng(lat, lon);
+
+            GMapRoute line_layer;
+            GMapOverlay line_overlay = new GMapOverlay();
+
+            line_layer = new GMapRoute("single_line");
+            line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
+
+            line_overlay.Routes.Add(line_layer);
+            mapControl.Overlays.Add(line_overlay);
+
+            //Once the layer is created, simply add the two points you want
+
+            line_layer.Points.Add(new PointLatLng(21.020440, 105.843650));
+            line_layer.Points.Add(new PointLatLng(21.016830, 105.855760));
+            line_layer.Points.Add(new PointLatLng(21.001930, 105.846558));
+
+            //Note that if you are using the MouseEventArgs you need to use local coordinates and convert them:
+            //line_layer.Points.Add(mapControl.FromLocalToLatLng(e.X, e.Y));
+
+            //To force the draw, you need to update the route
+            mapControl.UpdateRouteLocalPosition(line_layer);
+
+            //you can even add markers at the end of the lines by adding markers to the same layer:
+
+            GMapMarker marker_ = new GMarkerGoogle(new PointLatLng(21.020440, 105.843650),GMarkerGoogleType.arrow);
+
+            GMapMarker marker2_ = new GMarkerGoogle(new PointLatLng(21.016830, 105.855760), GMarkerGoogleType.arrow);
+            line_overlay.Markers.Add(marker_);
+            line_overlay.Markers.Add(marker2_);
+        }
+
+        private void txtSearchMSISDN_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                txtSearchMSISDN.Text += ";";
+                txtSearchMSISDN.Select(txtSearchMSISDN.Text.Length, 0);
+            }
+        }
     }
 }
