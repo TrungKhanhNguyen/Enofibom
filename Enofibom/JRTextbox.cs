@@ -25,7 +25,6 @@ namespace Enofibom
         private bool isFocused = false;
 
         //Constructor
-        
 
         //Events
         public event EventHandler _TextChanged;
