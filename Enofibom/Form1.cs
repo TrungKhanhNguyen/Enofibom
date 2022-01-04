@@ -64,37 +64,37 @@ namespace Enofibom
             listObject = new List<MobiObject>();
             #region[TestSearch]
 
-            //var test1 = new MobiObject
-            //{
-            //    IMSI = "452019907817978",
-            //    MSISDN = "84907055468",
-            //    CGI = "4G:452-01-101175-11",
-            //    Kind = "C4G",
-            //    AngleStart = "",
-            //    AngleEnd = "",
-            //    Lat = "21022588".Insert(2,"."),
-            //    Lng = "105843254".Insert(3, "."),
-            //    PlanName = "GSM",
-            //    Radius = "1000"
+            var test1 = new MobiObject
+            {
+                IMSI = "452019907817978",
+                MSISDN = "84907055468",
+                CGI = "4G:452-01-101175-11",
+                Kind = "C4G",
+                AngleStart = "",
+                AngleEnd = "",
+                Lat = "21022588".Insert(2, "."),
+                Lng = "105843254".Insert(3, "."),
+                PlanName = "GSM",
+                Radius = "1000"
 
-            //};
+            };
 
-            //var test2 = new MobiObject
-            //{
-            //    IMSI = "452019939362924",
-            //    MSISDN = "84904500084",
-            //    CGI = "452-01-10050-14241",
-            //    Kind = "C2G",
-            //    AngleStart = "",
-            //    AngleEnd = "",
-            //    Lat = "21020864".Insert(2, "."),
-            //    Lng = "105842030".Insert(3, "."),
-            //    PlanName = "GSM",
-            //    Radius = "500"
+            var test2 = new MobiObject
+            {
+                IMSI = "452019939362924",
+                MSISDN = "84904500084",
+                CGI = "452-01-10050-14241",
+                Kind = "C2G",
+                AngleStart = "",
+                AngleEnd = "",
+                Lat = "21020864".Insert(2, "."),
+                Lng = "105842030".Insert(3, "."),
+                PlanName = "GSM",
+                Radius = "500"
 
-            //};
-            //listObject.Add(test1);
-            //listObject.Add(test2);
+            };
+            listObject.Add(test1);
+            listObject.Add(test2);
             #endregion
 
             var listSDT = txtSearchMSISDN.Text.Split(';');
@@ -222,7 +222,7 @@ namespace Enofibom
         {
             txtCGI.Text = txtIMSI.Text = txtKind.Text = txtLat.Text = txtLon.Text = txtMSISDN.Text = txtPlanName.Text = txtRadius.Text = "";
 
-            dataGrid1.Rows.Clear();
+            dataGrid1.DataSource = null;
             dataGrid1.Refresh();
         }
 
