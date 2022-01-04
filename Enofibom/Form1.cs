@@ -32,15 +32,12 @@ namespace Enofibom
             var point = new PointLatLng(21.020440, 105.843650);
             
             mapControl.Position = point;
-
             mapControl.DragButton = MouseButtons.Left;
-
             mapControl.MinZoom = 5; 
             mapControl.MaxZoom = 22;
             mapControl.Zoom = 11;
             mapControl.ShowCenter = false;
-
-            //DrawLine();
+            DrawLine();
 
         }
 
@@ -57,8 +54,8 @@ namespace Enofibom
                 Kind = "C4G",
                 AngleStart = "",
                 AngleEnd = "",
-                Lat = "21051360",
-                Lng = "105744430",
+                Lat = "21022588",
+                Lng = "105843254",
                 PlanName="GSM",
                 Radius="1000"
                
@@ -72,8 +69,8 @@ namespace Enofibom
                 Kind = "C2G",
                 AngleStart = "",
                 AngleEnd = "",
-                Lat = "21020440",
-                Lng = "105843650",
+                Lat = "21020864",
+                Lng = "105842030",
                 PlanName = "GSM",
                 Radius = "500"
                 
@@ -324,6 +321,11 @@ namespace Enofibom
                 txtSearchMSISDN.Text += ";";
                 txtSearchMSISDN.Select(txtSearchMSISDN.Text.Length, 0);
             }
+        }
+
+        private void mapControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
