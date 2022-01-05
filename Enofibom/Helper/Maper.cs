@@ -14,18 +14,20 @@ namespace Enofibom.Helper
 {
     public class Maper
     {
-        public GMapMarker GetMarkerFromData(MobiObject temp)
+        
+
+        public GMapMarker GetMarkerFromData(Position temp)
         {
             try
             {
                 var tempLat = temp.Lat;
-                var tempLng = temp.Lng;
+                var tempLng = temp.Lon;
                 var realLat = Convert.ToDouble(tempLat);
                 var realLng = Convert.ToDouble(tempLng);
                 var rad = Convert.ToDouble(temp.Radius);
                 var tooltiptext = Environment.NewLine + "IMSI=" + temp.IMSI + "; MSISDN=" + temp.MSISDN + Environment.NewLine +
                     ";CGI=" + temp.CGI + "; Kind=" + temp.Kind + Environment.NewLine +
-                    "; Lat=" + temp.Lat + "; Lon=" + temp.Lng + "; Radius=" + temp.Radius;
+                    "; Lat=" + temp.Lat + "; Lon=" + temp.Lon + "; Radius=" + temp.Radius;
 
                 var point = new PointLatLng(realLat, realLng);
                 GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
@@ -41,12 +43,12 @@ namespace Enofibom.Helper
             }
 
         }
-        public GMapPolygon GetPolygonFromData(MobiObject temp)
+        public GMapPolygon GetPolygonFromData(Position temp)
         {
             try
             {
                 var tempLat = temp.Lat;
-                var tempLng = temp.Lng;
+                var tempLng = temp.Lon;
                 var realLat = Convert.ToDouble(tempLat);
                 var realLng = Convert.ToDouble(tempLng);
                 var rad = Convert.ToDouble(temp.Radius);
@@ -136,5 +138,39 @@ namespace Enofibom.Helper
 
             return startPoint.GetDistanceTo(endPoint);
         }
+
+        //private void DrawLine()
+        //{
+        //    //PointLatLng point = new PointLatLng(lat, lon);
+
+        //    GMapRoute line_layer;
+        //    GMapOverlay line_overlay = new GMapOverlay();
+
+        //    line_layer = new GMapRoute("single_line");
+        //    line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
+
+        //    line_overlay.Routes.Add(line_layer);
+        //    mapControl.Overlays.Add(line_overlay);
+
+        //    //Once the layer is created, simply add the two points you want
+
+        //    line_layer.Points.Add(new PointLatLng(21.020440, 105.843650));
+        //    line_layer.Points.Add(new PointLatLng(21.016830, 105.855760));
+        //    line_layer.Points.Add(new PointLatLng(21.001930, 105.846558));
+
+        //    //Note that if you are using the MouseEventArgs you need to use local coordinates and convert them:
+        //    //line_layer.Points.Add(mapControl.FromLocalToLatLng(e.X, e.Y));
+
+        //    //To force the draw, you need to update the route
+        //    mapControl.UpdateRouteLocalPosition(line_layer);
+
+        //    //you can even add markers at the end of the lines by adding markers to the same layer:
+
+        //    GMapMarker marker_ = new GMarkerGoogle(new PointLatLng(21.020440, 105.843650), GMarkerGoogleType.arrow);
+
+        //    GMapMarker marker2_ = new GMarkerGoogle(new PointLatLng(21.016830, 105.855760), GMarkerGoogleType.arrow);
+        //    line_overlay.Markers.Add(marker_);
+        //    line_overlay.Markers.Add(marker2_);
+        //}
     }
 }
