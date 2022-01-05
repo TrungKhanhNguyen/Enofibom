@@ -109,6 +109,24 @@
     <Compile Include="JRTextbox.Designer.cs">
       <DependentUpon>JRTextbox.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogCheck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LogCheck.Designer.cs">
+      <DependentUpon>LogCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MapOnline.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MapOnline.Designer.cs">
+      <DependentUpon>MapOnline.cs</DependentUpon>
+    </Compile>
     <Compile Include="Member.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -133,11 +151,32 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SignIn.Designer.cs">
+      <DependentUpon>SignIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserManage.Designer.cs">
+      <DependentUpon>UserManage.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JRTextbox.resx">
       <DependentUpon>JRTextbox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogCheck.resx">
+      <DependentUpon>LogCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapOnline.resx">
+      <DependentUpon>MapOnline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -149,6 +188,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SignIn.resx">
+      <DependentUpon>SignIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManage.resx">
+      <DependentUpon>UserManage.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -211,6 +256,12 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\trash_48px.png" />
+    <None Include="Resources\plus_+_48px.png" />
+    <None Include="Resources\Done_48px.png" />
+    <None Include="Resources\broom_48px.png" />
+    <None Include="Resources\lock_50px.png" />
+    <None Include="Resources\person_50px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

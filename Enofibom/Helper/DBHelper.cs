@@ -26,6 +26,18 @@ namespace Enofibom.Helper
             return listPos;
         }
 
+        public Member GetUserLogin(string username, string password)
+        {
+            Member user = null;
+            using (MapOfflineEntities db = new MapOfflineEntities())
+            {
+                var item = db.Members.Where(m => m.Username == username && m.Password == password).FirstOrDefault();
+                if (item != null)
+                    user = item;
+            }
+            return user;
+        }
+
         public async Task InsertToDB(MobiObject mobi)
         {
             await Task.Run(() =>
