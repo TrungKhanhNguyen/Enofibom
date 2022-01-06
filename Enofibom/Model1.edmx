@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="MapOfflineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LogEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" />
+          <Property Name="User" Type="nvarchar" MaxLength="50" />
+          <Property Name="Task" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,6 +22,7 @@
           <Property Name="Username" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="200" />
           <Property Name="Active" Type="bit" />
+          <Property Name="IsAdmin" Type="bit" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
@@ -30,8 +40,10 @@
           <Property Name="RequestTime" Type="datetime" />
           <Property Name="AngleStart" Type="nvarchar" MaxLength="50" />
           <Property Name="AngleEnd" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMEI" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="MapOfflineModelStoreContainer">
+          <EntitySet Name="LogEvent" EntityType="Self.LogEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -40,6 +52,15 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MapOfflineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LogEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventDate" Type="DateTime" Precision="3" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Task" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="Id" />
@@ -48,6 +69,7 @@
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
+          <Property Name="IsAdmin" Type="Boolean" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
@@ -65,8 +87,10 @@
           <Property Name="RequestTime" Type="DateTime" Precision="3" />
           <Property Name="AngleStart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AngleEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMEI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="MapOfflineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LogEvents" EntityType="Self.LogEvent" />
           <EntitySet Name="Members" EntityType="Self.Member" />
           <EntitySet Name="Positions" EntityType="Self.Position" />
         </EntityContainer>
@@ -76,6 +100,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MapOfflineModelStoreContainer" CdmEntityContainer="MapOfflineEntities">
+          <EntitySetMapping Name="LogEvents">
+            <EntityTypeMapping TypeName="MapOfflineModel.LogEvent">
+              <MappingFragment StoreEntitySet="LogEvent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="MapOfflineModel.Member">
               <MappingFragment StoreEntitySet="Member">
@@ -83,6 +117,7 @@
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -101,6 +136,7 @@
                 <ScalarProperty Name="RequestTime" ColumnName="RequestTime" />
                 <ScalarProperty Name="AngleStart" ColumnName="AngleStart" />
                 <ScalarProperty Name="AngleEnd" ColumnName="AngleEnd" />
+                <ScalarProperty Name="IMEI" ColumnName="IMEI" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

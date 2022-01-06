@@ -1,64 +1,69 @@
-﻿using Enofibom.Helper;
-using GMap.NET;
-using GMap.NET.MapProviders;
-using GMap.NET.WindowsForms;
-using GMap.NET.WindowsForms.Markers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Device.Location;
 using System.Drawing;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Security;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Net.Http;
+using System.Net.Security;
+using System.Threading;
 using System.Xml.Linq;
 using Timer = System.Windows.Forms.Timer;
+using GMap.NET.WindowsForms;
+using Enofibom.Helper;
+using GMap.NET;
+using GMap.NET.MapProviders;
+using System.Net;
 
 namespace Enofibom
 {
-    public partial class Form1 : Form
+    public partial class MapUserControl : UserControl
     {
         GMapOverlay overlay = new GMapOverlay("ABCDS");
         List<Position> listObject = new List<Position>();
         private static string url = "https://10.3.64.246/mbfn/sb/lbs/sdk";
+        private static string urlIMEI = "https://10.3.64.246/mbfn/sb/adc/sendMessage?msisdn=";
         System.Windows.Forms.Timer clockCount = new Timer();
         System.Windows.Forms.Timer timer1 = new Timer();
         Maper maper = new Maper();
         DBHelper helper = new DBHelper();
         private Random rd = new Random();
-        GMapMarker currentMarker = null ;
-        List<Position> listHistoryObject = new List<Position>();
-        public Form1()
+        List<GMapMarker> currentListMarker = new List<GMapMarker>(); //List các marker đang hiển thị phần online
+        List<GMapPolygon> currentListPolygon = new List<GMapPolygon>();//List các polygon đang hiển thị online
+        List<Position> listHistoryObject = new List<Position>();//List các marker đang hiển thị phần offline
+        List<IMEIObject> listIMEI = new List<IMEIObject>(); //list các imei đang hiển thị phần online
+        bool isIMEILoaded = false;
+        bool isLocationLoaded = false;
+        public MapUserControl()
         {
             InitializeComponent();
-            
         }
 
-        
-        private void Form1_Load(object sender, EventArgs e)
+        private void MapUserControl_Load(object sender, EventArgs e)
         {
+            var toDate = DateTime.Now;
+            var fromDate = DateTime.Now;
+
             GMaps.Instance.Mode = AccessMode.ServerAndCache;
             mapControl.CacheLocation = "C:/MapCache";
 
             mapControl.MapProvider = GMapProviders.GoogleMap;
             var point = new PointLatLng(21.020440, 105.843650);
-            
+
             mapControl.Position = point;
             mapControl.DragButton = MouseButtons.Left;
-            mapControl.MinZoom = 5; 
+            mapControl.MinZoom = 5;
             mapControl.MaxZoom = 22;
             mapControl.Zoom = 13;
             mapControl.ShowCenter = false;
 
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate { return true; });
             dataGrid1.AutoGenerateColumns = false;
-            dataGridHistory.AutoGenerateColumns = false;
+            //dataGridHistory.AutoGenerateColumns = false;
 
             timer1.Tick += new EventHandler(timer1_Tick);
             timer1.Interval = 60000;
@@ -66,32 +71,14 @@ namespace Enofibom
             clockCount.Tick += new EventHandler(clockCount_Tick);
             mapControl.Overlays.Add(overlay);
 
-        }
+            dpToDate.Value = DateTime.Now;
+            dpFromDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
 
+            lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy");
+            lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy");
 
-       
-        
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-
-            #region[TestSearch]
-
-            //var test1 = new MobiObject
-            //{
-            //    IMSI = "452019907817978",
-            //    MSISDN = "84907055468",
-            //    CGI = "4G:452-01-101175-11",
-            //    Kind = "C4G",
-            //    AngleStart = "",
-            //    AngleEnd = "",
-            //    Lat = "21022588".Insert(2, "."),
-            //    Lng = "105843254".Insert(3, "."),
-            //    PlanName = "GSM",
-            //    Radius = "1000"
-
-            //};
-
-            //var test2 = new MobiObject
+            //GetIMEI();
+            //var test1 = new Position
             //{
             //    IMSI = "452019939362924",
             //    MSISDN = "84904500084",
@@ -100,16 +87,88 @@ namespace Enofibom
             //    AngleStart = "",
             //    AngleEnd = "",
             //    Lat = "21020864".Insert(2, "."),
-            //    Lng = "105842030".Insert(3, "."),
+            //    Lon = "105842030".Insert(3, "."),
             //    PlanName = "GSM",
             //    Radius = "500"
 
             //};
             //listObject.Add(test1);
-            //listObject.Add(test2);
-            #endregion
+            //var marker1 = maper.GetMarkerFromData(test1, 2);
+            //overlay.Markers.Add(marker1);
+        }
+
+       
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            isIMEILoaded = isLocationLoaded = false;
+            GetIMEI();
             GetLocation();
-            
+        }
+
+        private async void GetIMEI()
+        {
+            try
+            {
+                listIMEI = new List<IMEIObject>();
+                var listSDT = txtSearchMSISDN.Text.Split(';');
+                foreach (var sdt in listSDT)
+                {
+                    using (var client = new HttpClient())
+                    {
+                        client.DefaultRequestHeaders.Add("MobifoneKey", "74a5c84c-f2c3-4bbd-9819-5958094d604e");
+                        var contentReponse = "";
+                        using (HttpResponseMessage responseMessage = await client.GetAsync(urlIMEI + sdt.Trim()))
+                        using (HttpContent content = responseMessage.Content)
+                        {
+                            if (responseMessage.StatusCode == HttpStatusCode.OK)
+                            {
+                                contentReponse = content.ReadAsStringAsync().Result;
+                            }
+                        }
+
+                        if (!String.IsNullOrEmpty(contentReponse))
+                        {
+                            string imei, msisdn;
+                            imei = msisdn = "";
+                            XElement xml = XElement.Parse(contentReponse);
+                            if (xml.Descendants("parm").Where(x => x.Attribute("name").Value == "sub.imei").FirstOrDefault() != null)
+                                imei = xml.Descendants("parm").Where(x => x.Attribute("name").Value == "sub.imei").FirstOrDefault().Attribute("value").Value;
+
+                            if (xml.Descendants("parm").Where(x => x.Attribute("name").Value == "MSISDN").FirstOrDefault() != null)
+                                msisdn = xml.Descendants("parm").Where(x => x.Attribute("name").Value == "MSISDN").FirstOrDefault().Attribute("value").Value;
+                            if (!String.IsNullOrEmpty(imei) && !String.IsNullOrEmpty(msisdn))
+                            {
+                                var imeiObj = new IMEIObject
+                                {
+                                    IMEI = imei,
+                                    MSISDN = msisdn.Replace('+', ' ').Trim()
+                                };
+
+                                listIMEI.Add(imeiObj);
+                                var mobiObj = listObject.Where(m => m.MSISDN == imeiObj.MSISDN).FirstOrDefault();
+                                if (mobiObj != null)
+                                    mobiObj.IMEI = imeiObj.IMEI;
+                            }
+
+                        }
+                    }
+                }
+                isIMEILoaded = true;
+                if (isIMEILoaded && isLocationLoaded)
+                {
+                    foreach(var item in listObject)
+                    {
+                        helper.InsertPositionSyncToDB(item);
+                    }
+                }
+            }
+            catch { }
             
         }
 
@@ -117,6 +176,7 @@ namespace Enofibom
         {
             listObject = new List<Position>();
             var listSDT = txtSearchMSISDN.Text.Split(';');
+          
             foreach (var sdt in listSDT)
             {
                 try
@@ -129,7 +189,7 @@ namespace Enofibom
                     })
                     {
                         var inputBody = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:v1='http://schema.intersec.com/igloo/sdk/v1.2'><soapenv:Header/><soapenv:Body><v1:pull.retrieveV3Req><args><params><filter><msisdn><explicit><kind>2</kind>"
-                        + "<m>" + sdt + "</m>"
+                        + "<m>" + sdt.Trim() + "</m>"
                         + "</explicit></msisdn></filter><options><subscriberFields>msisdn</subscriberFields><subscriberFields>imsi</subscriberFields><locationFields>location</locationFields></options></params></args></v1:pull.retrieveV3Req></soapenv:Body></soapenv:Envelope>";
 
                         var httpContent = new StringContent(inputBody, Encoding.UTF8, "application/xml");
@@ -152,11 +212,9 @@ namespace Enofibom
                             if (responseMessage.StatusCode == HttpStatusCode.OK)
                             {
                                 contentReponse = content.ReadAsStringAsync().Result;
-                                
                             }
                         }
                         //await Task.When
-                        
                         if (!String.IsNullOrEmpty(contentReponse))
                         {
                             var respon = contentReponse;
@@ -209,9 +267,12 @@ namespace Enofibom
                                     Lon = tempLong,
                                     MSISDN = msisdn,
                                     Radius = radius,
-                                    PlanName = planName
+                                    PlanName = planName,
+                                    RequestTime = DateTime.Now
                                 };
-                                helper.InsertPositionToDB(mobi);
+                                var imeiObj = listIMEI.Where(m => m.MSISDN == mobi.MSISDN).FirstOrDefault();
+                                if (imeiObj != null)
+                                    mobi.IMEI = imeiObj.IMEI;
                                 listObject.Add(mobi);
                             }
                         }
@@ -227,32 +288,48 @@ namespace Enofibom
 
             dataGrid1.DataSource = listObject;
             var count = 1;
+            isLocationLoaded = true;
             foreach (var item in listObject)
             {
-                var marker1 = maper.GetMarkerFromData(item,count);
+                var marker1 = maper.GetMarkerFromData(item, count);
                 var poly = maper.GetPolygonFromData(item);
                 if (marker1 != null)
+                {
                     overlay.Markers.Add(marker1);
+                    currentListMarker.Add(marker1);
+                }
+                    
                 if (poly != null)
+                {
                     overlay.Polygons.Add(poly);
+                    currentListPolygon.Add(poly);
+                }
+                if (isLocationLoaded && isIMEILoaded)
+                    helper.InsertPositionSyncToDB(item);
                 count++;
             }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-
-            ClearMap();
-            /*=================Clear text==================*/
+            //ClearMap();
+            foreach (var item in currentListMarker)
+            {
+                overlay.Markers.Remove(item);
+            }
+            foreach (var item in currentListPolygon)
+            {
+                overlay.Polygons.Remove(item);
+            }
             ClearText();
         }
 
         private void ClearMap()
         {
-            mapControl.Overlays.Clear();
-            listObject = new List<Position>();
-            overlay = new GMapOverlay(DateTime.Now.ToString());
-            mapControl.Refresh();
+            //mapControl.Overlays.Clear();
+            //listObject = new List<Position>();
+            //overlay = new GMapOverlay(DateTime.Now.ToString());
+            //mapControl.Refresh();
         }
         private void ClearText()
         {
@@ -262,40 +339,6 @@ namespace Enofibom
             dataGrid1.Refresh();
         }
 
-        private void dataGrid1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex != -1)
-            {
-                try
-                {
-                    var valuelat = listObject[e.RowIndex].Lat;
-                    var valuelng = listObject[e.RowIndex].Lon;
-                    //var valuemsisdn = listObject[e.RowIndex].MSISDN;
-                    if (!String.IsNullOrEmpty(valuelat) && !String.IsNullOrEmpty(valuelng))
-                    {  
-                        var realLat = Convert.ToDouble(valuelat);
-                        var realLng = Convert.ToDouble(valuelng);
-                        mapControl.Position = new PointLatLng(realLat, realLng);
-                    }
-                }
-                catch{ }
-            }
-        }
-
-
-        private void txtSearchMSISDN_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space)
-            {
-                txtSearchMSISDN.Text += ";";
-                txtSearchMSISDN.Select(txtSearchMSISDN.Text.Length, 0);
-            }
-        }
-
-        private void mapControl_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void dataGrid1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -311,6 +354,8 @@ namespace Enofibom
                     txtRadius.Text = listObject[e.RowIndex].Radius;
                     txtPlanName.Text = listObject[e.RowIndex].PlanName;
                     txtKind.Text = listObject[e.RowIndex].Kind;
+                    txtReqTime.Text = listObject[e.RowIndex].RequestTime?.ToString("dd/MM/yyyy HH:mm");
+                    txtIMEI.Text = listObject[e.RowIndex].IMEI;
                 }
                 catch
                 {
@@ -320,11 +365,40 @@ namespace Enofibom
             }
         }
 
+        private void dataGrid1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                try
+                {
+                    var valuelat = listObject[e.RowIndex].Lat;
+                    var valuelng = listObject[e.RowIndex].Lon;
+                    //var valuemsisdn = listObject[e.RowIndex].MSISDN;
+                    if (!String.IsNullOrEmpty(valuelat) && !String.IsNullOrEmpty(valuelng))
+                    {
+                        var realLat = Convert.ToDouble(valuelat);
+                        var realLng = Convert.ToDouble(valuelng);
+                        mapControl.Position = new PointLatLng(realLat, realLng);
+                    }
+                }
+                catch { }
+            }
+        }
+
+        private void txtSearchMSISDN_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                txtSearchMSISDN.Text += ";";
+                txtSearchMSISDN.Select(txtSearchMSISDN.Text.Length, 0);
+            }
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             //ClearMap();
             ClearText();
-            GetLocation();
+            LoadData();
         }
 
         private void clockCount_Tick(object sender, EventArgs e)
@@ -337,7 +411,7 @@ namespace Enofibom
 
         private int current = 5;
         private int firstTime = 5;
-        
+
 
         private void checkAuto_CheckedChanged(object sender, EventArgs e)
         {
@@ -348,7 +422,8 @@ namespace Enofibom
                 timer1.Interval = firstTime * 60 * 1000;
                 timer1.Start();
                 clockCount.Start();
-                GetLocation();
+
+                LoadData();
             }
             else
             {
@@ -359,92 +434,141 @@ namespace Enofibom
             }
         }
 
-        #region[Secondary Tab]
-        private void btnClearMark_Click(object sender, EventArgs e)
-        {
-            //ClearMap();
-            if(currentMarker != null)
-            {
-                overlay.Markers.Remove(currentMarker);
-                currentMarker = null;
-                btnClearMark.Enabled = false;
-            }
-        }
+        
+        List<Position> listHistoryPosition = new List<Position>();
+        List<GMapMarker> historyListMarker = new List<GMapMarker>();
+        List<GMapPolygon> historyListPolygon = new List<GMapPolygon>();
 
-        private void btnAddMark_Click(object sender, EventArgs e)
-        {
-            if(!String.IsNullOrEmpty(txtMarkLat.Text) && !String.IsNullOrEmpty(txtMarkLon.Text))
-            {
-                try
-                {
-                    var lat = Convert.ToDouble(txtMarkLat.Text);
-                    var lon = Convert.ToDouble(txtMarkLon.Text);
-                    var point = new PointLatLng(lat, lon);
-                    GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
-                    marker.IsVisible = true;
-                    var tooltiptext = Environment.NewLine +  "Lat=" + lat + "; Lon=" + lon;
-                    marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
-                    marker.ToolTipText = tooltiptext;
-                    overlay.Markers.Add(marker);
-                }
-                catch { }
-            }
-        }
-        #endregion
 
-        private void mapControl_OnMarkerClick(GMapMarker item, MouseEventArgs e)
-        {
-            currentMarker = item;
-            btnClearMark.Enabled = true;
-        }
-
-        private void dataGridHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex != -1)
-            {
-                try
-                {
-                    txtHistoryCGI.Text = listHistoryObject[e.RowIndex].CGI;
-                    txtHistoryIMSI.Text = listHistoryObject[e.RowIndex].IMSI;
-                    txtHistoryMSISDN.Text = listHistoryObject[e.RowIndex].MSISDN;
-                    txtHistoryLat.Text = listHistoryObject[e.RowIndex].Lat;
-                    txtHistoryLon.Text = listHistoryObject[e.RowIndex].Lon;
-                    txtHistoryRadius.Text = listHistoryObject[e.RowIndex].Radius;
-                    txtHistoryPlaneName.Text = listHistoryObject[e.RowIndex].PlanName;
-                    txtHistoryKind.Text = listHistoryObject[e.RowIndex].Kind;
-                    txtHistoryReqTime.Text = listHistoryObject[e.RowIndex].RequestTime?.ToString("dd-MM-yyyy");
-                }
-                catch
-                {
-
-                }
-
-            }
-        }
+        List<Position> listCurrentHistoryPosition = new List<Position>();
 
         private void btnSearchHistory_Click(object sender, EventArgs e)
         {
-            var sdt = txtSearchHistory.Text;
-            listHistoryObject = helper.GetHistoryObject(sdt);
-            dataGridHistory.DataSource = listHistoryObject;
-            var count = 1;
-            foreach (var item in listHistoryObject)
+            ClearHistory();
+            
+            historyListMarker = new List<GMapMarker>(); historyListPolygon = new List<GMapPolygon>();
+            var listSDT = txtSearchHistory.Text.Split(';');
+            List<string> listArraySDT = new List<string>();
+            foreach(var item in listSDT)
             {
-                count++;
-                var marker1 = maper.GetMarkerFromData(item,count);
-                //var poly = maper.GetPolygonFromData(item);
-                if (marker1 != null)
-                    overlay.Markers.Add(marker1);
-                //if (poly != null)
-                //    overlay.Polygons.Add(poly);
+                listArraySDT.Add(item.Trim());
             }
+            listHistoryPosition = helper.GetListPositionByDate(listArraySDT.ToArray(), dpFromDate.Value, dpToDate.Value);
+            var count = 1;
+            foreach (var item in listArraySDT)
+            {
+                var listItem1 = listHistoryPosition.Where(m => m.MSISDN == item).ToList();
+                if(listItem1.Count > 0)
+                {
+                    foreach(var itemPos in listItem1)
+                    {
+                        var marker1 = maper.GetMarkerFromData(itemPos, count);
+                        var poly = maper.GetPolygonFromData(itemPos);
+                        if (marker1 != null)
+                        {
+                            overlay.Markers.Add(marker1);
+                            historyListMarker.Add(marker1);
+                        }
+                        if (poly != null)
+                        {
 
+                            overlay.Polygons.Add(poly);
+                            historyListPolygon.Add(poly);
+                        }
+                    }
+                }
+                count++;
+            }
+          
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            ClearHistory();
+            var trackValue = trackBar1.Value;
+            var frDate = dpFromDate.Value;
+            var toDate = frDate.AddMinutes(trackValue);
+            listCurrentHistoryPosition = listHistoryPosition.Where(m => m.RequestTime >= frDate && m.RequestTime <= toDate).ToList();
+            var listSDT = txtSearchHistory.Text.Split(';');
+           
+            var count = 1;
+            foreach (var item in listSDT)
+            {
+                var listItem1 = listCurrentHistoryPosition.Where(m => m.MSISDN == item.Trim()).ToList();
+                if (listItem1.Count > 0)
+                {
+                    foreach (var itemPos in listItem1)
+                    {
+                        var marker1 = maper.GetMarkerFromData(itemPos, count);
+                        var poly = maper.GetPolygonFromData(itemPos);
+                        if (marker1 != null)
+                        {
+                            overlay.Markers.Add(marker1);
+                            historyListMarker.Add(marker1);
+                        }
+                        if (poly != null)
+                        {
+                            overlay.Polygons.Add(poly);
+                            historyListPolygon.Add(poly);
+                        }
+                    }
+                }
+                count++;
+            }
+           
+        }
+
+        private void ReloadTrackBar()
+        {
+            TimeSpan duration = new TimeSpan(dpToDate.Value.Ticks - dpFromDate.Value.Ticks);
+            var totalCount = duration.TotalMinutes;
+            trackBar1.Maximum = (int)totalCount;
+            trackBar1.Refresh();
+        }
+        private void dpFromDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (dpFromDate.Value.Date > dpToDate.Value.Date)
+            {
+                dpToDate.Value = dpFromDate.Value;
+            }
+            lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy");
+            ReloadTrackBar();
+        }
+
+        private void dpToDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (dpToDate.Value.Date < dpFromDate.Value.Date)
+            {
+                dpToDate.Value = dpFromDate.Value;
+            }
+            lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy");
+            ReloadTrackBar();
         }
 
         private void btnClearHistory_Click(object sender, EventArgs e)
         {
-            ClearMap();
-            listHistoryObject = new List<Position>();
+            ClearHistory();
+        }
+
+        private void ClearHistory()
+        {
+            foreach (var item in historyListMarker)
+            {
+                overlay.Markers.Remove(item);
+            }
+            foreach (var item in historyListPolygon)
+            {
+                overlay.Polygons.Remove(item);
+            }
+        }
+
+        private void txtSearchHistory_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                txtSearchHistory.Text += ";";
+                txtSearchHistory.Select(txtSearchHistory.Text.Length -1, 0);
+            }
         }
     }
 }

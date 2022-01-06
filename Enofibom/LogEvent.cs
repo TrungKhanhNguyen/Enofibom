@@ -12,12 +12,11 @@ namespace Enofibom
     using System;
     using System.Collections.Generic;
     
-    public partial class Member
+    public partial class LogEvent
     {
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public Nullable<bool> Active { get; set; }
-        public Nullable<bool> IsAdmin { get; set; }
+        public Nullable<System.DateTime> EventDate { get; set; }
+        public string User { get; set; }
+        public string Task { get; set; }
     }
 }

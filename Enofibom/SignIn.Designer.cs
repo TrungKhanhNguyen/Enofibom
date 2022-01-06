@@ -162,12 +162,13 @@ namespace Enofibom
             this.txtPassword.IconLeft = global::Enofibom.Properties.Resources.lock_50px;
             this.txtPassword.Location = new System.Drawing.Point(58, 234);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '\0';
+            this.txtPassword.PasswordChar = '●';
             this.txtPassword.PlaceholderText = "Password";
             this.txtPassword.SelectedText = "";
             this.txtPassword.ShadowDecoration.Parent = this.txtPassword;
             this.txtPassword.Size = new System.Drawing.Size(263, 36);
             this.txtPassword.TabIndex = 5;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // txtUsername
             // 

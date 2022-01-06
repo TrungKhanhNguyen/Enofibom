@@ -16,7 +16,7 @@ namespace Enofibom.Helper
     {
         
 
-        public GMapMarker GetMarkerFromData(Position temp)
+        public GMapMarker GetMarkerFromData(Position temp, int numbers)
         {
             try
             {
@@ -31,6 +31,16 @@ namespace Enofibom.Helper
 
                 var point = new PointLatLng(realLat, realLng);
                 GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
+                switch (numbers)
+                {
+                    case 2: marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot); break;
+                    case 3: marker = new GMarkerGoogle(point, GMarkerGoogleType.orange_dot); break;
+                    case 4: marker = new GMarkerGoogle(point, GMarkerGoogleType.green_dot); break;
+                    case 5: marker = new GMarkerGoogle(point, GMarkerGoogleType.pink_dot); break;
+                    case 6: marker = new GMarkerGoogle(point, GMarkerGoogleType.purple_dot); break;
+                    case 7: marker = new GMarkerGoogle(point, GMarkerGoogleType.lightblue_dot); break;
+                }
+
                 marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
                 marker.ToolTipText = tooltiptext;
                 marker.IsVisible = true;

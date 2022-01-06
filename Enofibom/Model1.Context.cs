@@ -25,6 +25,7 @@ namespace Enofibom
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<LogEvent> LogEvents { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
     }

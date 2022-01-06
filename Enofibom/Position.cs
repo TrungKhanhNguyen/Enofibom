@@ -26,5 +26,6 @@ namespace Enofibom
         public Nullable<System.DateTime> RequestTime { get; set; }
         public string AngleStart { get; set; }
         public string AngleEnd { get; set; }
+        public string IMEI { get; set; }
     }
 }

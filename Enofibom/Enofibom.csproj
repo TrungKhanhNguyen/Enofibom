@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>marker-icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -63,6 +66,7 @@
       <HintPath>..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.115.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\lib\net45\System.Data.SQLite.dll</HintPath>
@@ -100,6 +104,8 @@
     <Compile Include="GMapPoint.cs" />
     <Compile Include="Helper\DBHelper.cs" />
     <Compile Include="Helper\Maper.cs" />
+    <Compile Include="Helper\StaticKey.cs" />
+    <Compile Include="IMEIObject.cs" />
     <Compile Include="JRButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     <Compile Include="LogCheck.Designer.cs">
       <DependentUpon>LogCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogEvent.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +135,12 @@
     </Compile>
     <Compile Include="MapOnline.Designer.cs">
       <DependentUpon>MapOnline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MapUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MapUserControl.Designer.cs">
+      <DependentUpon>MapUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Member.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -177,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MapOnline.resx">
       <DependentUpon>MapOnline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapUserControl.resx">
+      <DependentUpon>MapUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -246,6 +264,19 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\trash_48px.png" />
+    <None Include="Resources\plus_+_48px.png" />
+    <None Include="Resources\Done_48px.png" />
+    <None Include="Resources\broom_48px.png" />
+    <None Include="Resources\lock_50px.png" />
+    <None Include="Resources\person_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\broom_48px_102.png" />
+    <None Include="Resources\search_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="marker-icon.ico" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -256,12 +287,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\trash_48px.png" />
-    <None Include="Resources\plus_+_48px.png" />
-    <None Include="Resources\Done_48px.png" />
-    <None Include="Resources\broom_48px.png" />
-    <None Include="Resources\lock_50px.png" />
-    <None Include="Resources\person_50px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

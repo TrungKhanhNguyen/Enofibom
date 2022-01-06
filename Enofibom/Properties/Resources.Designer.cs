@@ -163,6 +163,16 @@ namespace Enofibom.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap broom_48px_102 {
+            get {
+                object obj = ResourceManager.GetObject("broom_48px_102", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Done_48px {
             get {
                 object obj = ResourceManager.GetObject("Done_48px", resourceCulture);
@@ -196,6 +206,16 @@ namespace Enofibom.Properties {
         internal static System.Drawing.Bitmap plus___48px {
             get {
                 object obj = ResourceManager.GetObject("plus_+_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap search_48px {
+            get {
+                object obj = ResourceManager.GetObject("search_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

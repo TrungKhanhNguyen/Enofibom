@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -19,41 +20,48 @@ namespace Enofibom
             InitializeComponent();
         }
 
-        private void btnLogIn_Click(object sender, EventArgs e)
+        private async void btnLogIn_Click(object sender, EventArgs e)
         {
             var username = txtUsername.Text;
-            var password = CreateMD5(txtPassword.Text);
-            //var user = helper.GetUserLogin(username, password);
-            //if(user != null)
-            //{
-                this.Hide();
-                var form1 = new Form1();
-                form1.Closed += (s, args) => this.Close();
-                form1.Show();
-            //}
-            //else
-            //{
-            //    lblNotify.Visible = true;
-            //    lblNotify.Text = "Invalid username or password";
-            //}
+            var password = StaticKey.CreateMD5(txtPassword.Text);
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            try
+            {
+                var user = helper.GetUserLogin(username, password);
+                if (user != null)
+                {
+                    configuration.AppSettings.Settings["IsAdmin"].Value = user.IsAdmin.ToString();
+                    configuration.AppSettings.Settings["UserLoggedIn"].Value = username;
+                    configuration.Save();
+                    ConfigurationManager.RefreshSection("appSettings");
+
+                    var eventLog = new LogEvent
+                    {
+                        EventDate = DateTime.Now,
+                        User = username,
+                        Task = "Logged in"
+                    };
+                    await helper.InsertToLog(eventLog);
+                    this.Hide();
+                    var form1 = new Main();
+                    form1.Closed += (s, args) => this.Close();
+                    form1.Show();
+                }
+                else
+                {
+                    lblNotify.Visible = true;
+                    lblNotify.Text = "Invalid username or password!";
+                }
+            }
+            catch
+            {
+                lblNotify.Visible = true;
+                lblNotify.Text = "Cannot login!!!";
+            }
+            
         }
 
-        private string CreateMD5(string input)
-        {
-            // Use input string to calculate MD5 hash
-            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
-            {
-                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
-                // Convert the byte array to hexadecimal string
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < hashBytes.Length; i++)
-                {
-                    sb.Append(hashBytes[i].ToString("X2"));
-                }
-                return sb.ToString();
-            }
-        }
+        
 
     }
 }
