@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -105,16 +106,8 @@
     <Compile Include="Helper\DBHelper.cs" />
     <Compile Include="Helper\Maper.cs" />
     <Compile Include="Helper\StaticKey.cs" />
+    <Compile Include="Helper\TargetHelper.cs" />
     <Compile Include="IMEIObject.cs" />
-    <Compile Include="JRButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="JRTextbox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="JRTextbox.Designer.cs">
-      <DependentUpon>JRTextbox.cs</DependentUpon>
-    </Compile>
     <Compile Include="LogCheck.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,6 +165,15 @@
     <Compile Include="SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Target.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TargetManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TargetManage.Designer.cs">
+      <DependentUpon>TargetManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -180,9 +182,6 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="JRTextbox.resx">
-      <DependentUpon>JRTextbox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogCheck.resx">
       <DependentUpon>LogCheck.cs</DependentUpon>
@@ -208,6 +207,9 @@
     </Compile>
     <EmbeddedResource Include="SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TargetManage.resx">
+      <DependentUpon>TargetManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManage.resx">
       <DependentUpon>UserManage.cs</DependentUpon>

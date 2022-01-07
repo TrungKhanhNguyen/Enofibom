@@ -39,13 +39,13 @@ namespace Enofibom
             this.guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.guna2TileButton1 = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnLogCheck = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnUserManage = new Guna.UI2.WinForms.Guna2TileButton();
-            this.btnDataOffline = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnDataOnline = new Guna.UI2.WinForms.Guna2TileButton();
-            this.userManage1 = new Enofibom.UserManage();
-            this.logCheck1 = new Enofibom.LogCheck();
-            this.mapUserControl1 = new Enofibom.MapUserControl();
+            this.mapUserControl2 = new Enofibom.MapUserControl();
+            this.logCheck2 = new Enofibom.LogCheck();
+            this.targetManage1 = new Enofibom.TargetManage();
             this.topDockPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -140,15 +140,41 @@ namespace Enofibom
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
+            this.panel2.Controls.Add(this.guna2TileButton1);
             this.panel2.Controls.Add(this.btnLogCheck);
             this.panel2.Controls.Add(this.btnUserManage);
-            this.panel2.Controls.Add(this.btnDataOffline);
             this.panel2.Controls.Add(this.btnDataOnline);
             this.panel2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel2.Location = new System.Drawing.Point(0, 35);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1139, 66);
             this.panel2.TabIndex = 4;
+            // 
+            // guna2TileButton1
+            // 
+            this.guna2TileButton1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.guna2TileButton1.CheckedState.Parent = this.guna2TileButton1;
+            this.guna2TileButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2TileButton1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
+            this.guna2TileButton1.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.guna2TileButton1.CustomImages.Parent = this.guna2TileButton1;
+            this.guna2TileButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2TileButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2TileButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2TileButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2TileButton1.DisabledState.Parent = this.guna2TileButton1;
+            this.guna2TileButton1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
+            this.guna2TileButton1.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2TileButton1.ForeColor = System.Drawing.Color.White;
+            this.guna2TileButton1.HoverState.Parent = this.guna2TileButton1;
+            this.guna2TileButton1.Location = new System.Drawing.Point(395, 0);
+            this.guna2TileButton1.Name = "guna2TileButton1";
+            this.guna2TileButton1.ShadowDecoration.Parent = this.guna2TileButton1;
+            this.guna2TileButton1.Size = new System.Drawing.Size(131, 66);
+            this.guna2TileButton1.TabIndex = 4;
+            this.guna2TileButton1.Text = "Target Management";
+            this.guna2TileButton1.Click += new System.EventHandler(this.guna2TileButton1_Click);
             // 
             // btnLogCheck
             // 
@@ -168,7 +194,7 @@ namespace Enofibom
             this.btnLogCheck.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogCheck.ForeColor = System.Drawing.Color.White;
             this.btnLogCheck.HoverState.Parent = this.btnLogCheck;
-            this.btnLogCheck.Location = new System.Drawing.Point(397, 0);
+            this.btnLogCheck.Location = new System.Drawing.Point(264, 0);
             this.btnLogCheck.Name = "btnLogCheck";
             this.btnLogCheck.ShadowDecoration.Parent = this.btnLogCheck;
             this.btnLogCheck.Size = new System.Drawing.Size(131, 66);
@@ -194,39 +220,13 @@ namespace Enofibom
             this.btnUserManage.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUserManage.ForeColor = System.Drawing.Color.White;
             this.btnUserManage.HoverState.Parent = this.btnUserManage;
-            this.btnUserManage.Location = new System.Drawing.Point(264, 0);
+            this.btnUserManage.Location = new System.Drawing.Point(131, 0);
             this.btnUserManage.Name = "btnUserManage";
             this.btnUserManage.ShadowDecoration.Parent = this.btnUserManage;
             this.btnUserManage.Size = new System.Drawing.Size(131, 66);
             this.btnUserManage.TabIndex = 2;
             this.btnUserManage.Text = "User Management";
             this.btnUserManage.Click += new System.EventHandler(this.btnUserManage_Click);
-            // 
-            // btnDataOffline
-            // 
-            this.btnDataOffline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDataOffline.CheckedState.Parent = this.btnDataOffline;
-            this.btnDataOffline.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDataOffline.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
-            this.btnDataOffline.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
-            this.btnDataOffline.CustomImages.Parent = this.btnDataOffline;
-            this.btnDataOffline.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnDataOffline.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnDataOffline.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnDataOffline.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnDataOffline.DisabledState.Parent = this.btnDataOffline;
-            this.btnDataOffline.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
-            this.btnDataOffline.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDataOffline.ForeColor = System.Drawing.Color.White;
-            this.btnDataOffline.HoverState.Parent = this.btnDataOffline;
-            this.btnDataOffline.Location = new System.Drawing.Point(133, 0);
-            this.btnDataOffline.Name = "btnDataOffline";
-            this.btnDataOffline.ShadowDecoration.Parent = this.btnDataOffline;
-            this.btnDataOffline.Size = new System.Drawing.Size(131, 66);
-            this.btnDataOffline.TabIndex = 1;
-            this.btnDataOffline.Text = "Data Offline";
-            this.btnDataOffline.Click += new System.EventHandler(this.btnDataOffline_Click);
             // 
             // btnDataOnline
             // 
@@ -254,44 +254,39 @@ namespace Enofibom
             this.btnDataOnline.Text = "Data Online";
             this.btnDataOnline.Click += new System.EventHandler(this.btnDataOnline_Click);
             // 
-            // userManage1
+            // mapUserControl2
             // 
-            this.userManage1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.mapUserControl2.BackColor = System.Drawing.SystemColors.Control;
+            this.mapUserControl2.Location = new System.Drawing.Point(12, 107);
+            this.mapUserControl2.Name = "mapUserControl2";
+            this.mapUserControl2.Size = new System.Drawing.Size(1115, 667);
+            this.mapUserControl2.TabIndex = 8;
+            // 
+            // logCheck2
+            // 
+            this.logCheck2.Location = new System.Drawing.Point(12, 107);
+            this.logCheck2.Name = "logCheck2";
+            this.logCheck2.Size = new System.Drawing.Size(1115, 667);
+            this.logCheck2.TabIndex = 7;
+            // 
+            // targetManage1
+            // 
+            this.targetManage1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.userManage1.Location = new System.Drawing.Point(7, 107);
-            this.userManage1.Name = "userManage1";
-            this.userManage1.Size = new System.Drawing.Size(1129, 667);
-            this.userManage1.TabIndex = 8;
-            // 
-            // logCheck1
-            // 
-            this.logCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.logCheck1.Location = new System.Drawing.Point(7, 107);
-            this.logCheck1.Name = "logCheck1";
-            this.logCheck1.Size = new System.Drawing.Size(1129, 667);
-            this.logCheck1.TabIndex = 7;
-            // 
-            // mapUserControl1
-            // 
-            this.mapUserControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mapUserControl1.Location = new System.Drawing.Point(7, 107);
-            this.mapUserControl1.Name = "mapUserControl1";
-            this.mapUserControl1.Size = new System.Drawing.Size(1129, 667);
-            this.mapUserControl1.TabIndex = 9;
+            this.targetManage1.Location = new System.Drawing.Point(12, 107);
+            this.targetManage1.Name = "targetManage1";
+            this.targetManage1.Size = new System.Drawing.Size(1115, 667);
+            this.targetManage1.TabIndex = 9;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1139, 786);
-            this.Controls.Add(this.mapUserControl1);
-            this.Controls.Add(this.userManage1);
-            this.Controls.Add(this.logCheck1);
+            this.Controls.Add(this.targetManage1);
+            this.Controls.Add(this.mapUserControl2);
+            this.Controls.Add(this.logCheck2);
             this.Controls.Add(this.topDockPanel);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -317,11 +312,12 @@ namespace Enofibom
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel topDockPanel;
-        private Guna.UI2.WinForms.Guna2TileButton btnDataOffline;
         private Guna.UI2.WinForms.Guna2TileButton btnUserManage;
         private Guna.UI2.WinForms.Guna2TileButton btnLogCheck;
-        private LogCheck logCheck1;
-        private UserManage userManage1;
-        private MapUserControl mapUserControl1;
+  
+        private Guna.UI2.WinForms.Guna2TileButton guna2TileButton1;
+        private LogCheck logCheck2;
+        private MapUserControl mapUserControl2;
+        private TargetManage targetManage1;
     }
 }

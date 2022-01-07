@@ -211,7 +211,7 @@ namespace Enofibom
                                     Radius = radius,
                                     PlanName = planName
                                 };
-                                helper.InsertPositionToDB(mobi);
+                                await helper.InsertPositionToDB(mobi);
                                 listObject.Add(mobi);
                             }
                         }

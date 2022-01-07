@@ -164,7 +164,7 @@ namespace Enofibom
                 {
                     foreach(var item in listObject)
                     {
-                        helper.InsertPositionSyncToDB(item);
+                        await helper.InsertPositionToDB (item);
                     }
                 }
             }
@@ -174,140 +174,156 @@ namespace Enofibom
 
         private async void GetLocation()
         {
-            listObject = new List<Position>();
-            var listSDT = txtSearchMSISDN.Text.Split(';');
-          
-            foreach (var sdt in listSDT)
+            try
             {
-                try
+                listObject = new List<Position>();
+                var listSDT = txtSearchMSISDN.Text.Split(';');
+
+                foreach (var sdt in listSDT)
                 {
-                    var handler = new HttpClientHandler() { };
-                    using (var httpClient = new HttpClient(handler)
+                    try
                     {
-                        BaseAddress = new Uri(url),
-                        Timeout = new TimeSpan(0, 2, 0)
-                    })
-                    {
-                        var inputBody = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:v1='http://schema.intersec.com/igloo/sdk/v1.2'><soapenv:Header/><soapenv:Body><v1:pull.retrieveV3Req><args><params><filter><msisdn><explicit><kind>2</kind>"
-                        + "<m>" + sdt.Trim() + "</m>"
-                        + "</explicit></msisdn></filter><options><subscriberFields>msisdn</subscriberFields><subscriberFields>imsi</subscriberFields><locationFields>location</locationFields></options></params></args></v1:pull.retrieveV3Req></soapenv:Body></soapenv:Envelope>";
-
-                        var httpContent = new StringContent(inputBody, Encoding.UTF8, "application/xml");
-                        var request = new HttpRequestMessage();
-                        request.Method = HttpMethod.Post;
-                        request.RequestUri = new Uri(url);
-                        request.Content = httpContent;
-                        request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/xml");
-
-
-                        var byteArray = Encoding.ASCII.GetBytes("tctk_api:$5$rounds=5000$bbf460274ac2fcd8$u0raxguDBJcCDUWKabiHX0LXjxuTszOnUJlZhqGXFQ2");
-                        httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-                        httpClient.DefaultRequestHeaders.Add("MobifoneKey", "74a5c84c-f2c3-4bbd-9819-5958094d604e");
-
-                        //var responseMessage = await httpClient.SendAsync(request);
-                        var contentReponse = "";
-                        using (HttpResponseMessage responseMessage = await httpClient.SendAsync(request))
-                        using (HttpContent content = responseMessage.Content)
+                        var handler = new HttpClientHandler() { };
+                        using (var httpClient = new HttpClient(handler)
                         {
-                            if (responseMessage.StatusCode == HttpStatusCode.OK)
-                            {
-                                contentReponse = content.ReadAsStringAsync().Result;
-                            }
-                        }
-                        //await Task.When
-                        if (!String.IsNullOrEmpty(contentReponse))
+                            BaseAddress = new Uri(url),
+                            Timeout = new TimeSpan(0, 2, 0)
+                        })
                         {
-                            var respon = contentReponse;
+                            var inputBody = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:v1='http://schema.intersec.com/igloo/sdk/v1.2'><soapenv:Header/><soapenv:Body><v1:pull.retrieveV3Req><args><params><filter><msisdn><explicit><kind>2</kind>"
+                            + "<m>" + sdt.Trim() + "</m>"
+                            + "</explicit></msisdn></filter><options><subscriberFields>msisdn</subscriberFields><subscriberFields>imsi</subscriberFields><locationFields>location</locationFields></options></params></args></v1:pull.retrieveV3Req></soapenv:Body></soapenv:Envelope>";
 
-                            string imsi, msisdn, longitude, latitude, radius, cgi, kind, anglestart, angleend, planName;
-                            imsi = msisdn = longitude = latitude = radius = cgi = kind = anglestart = angleend = planName = "";
-                            if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "imsi").FirstOrDefault() != null)
-                                imsi = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "imsi").FirstOrDefault().Value;
+                            var httpContent = new StringContent(inputBody, Encoding.UTF8, "application/xml");
+                            var request = new HttpRequestMessage();
+                            request.Method = HttpMethod.Post;
+                            request.RequestUri = new Uri(url);
+                            request.Content = httpContent;
+                            request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/xml");
 
-                            if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "msisdn").FirstOrDefault() != null)
-                                msisdn = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "msisdn").FirstOrDefault().Value;
 
-                            if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "longitude").FirstOrDefault() != null)
-                                longitude = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "longitude").FirstOrDefault().Value;
+                            var byteArray = Encoding.ASCII.GetBytes("tctk_api:$5$rounds=5000$bbf460274ac2fcd8$u0raxguDBJcCDUWKabiHX0LXjxuTszOnUJlZhqGXFQ2");
+                            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                            httpClient.DefaultRequestHeaders.Add("MobifoneKey", "74a5c84c-f2c3-4bbd-9819-5958094d604e");
 
-                            if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "latitude").FirstOrDefault() != null)
-                                latitude = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "latitude").FirstOrDefault().Value;
-
-                            if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "radius").FirstOrDefault() != null)
-                                radius = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "radius").FirstOrDefault().Value;
-
-                            if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "cgi").FirstOrDefault() != null)
-                                cgi = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "cgi").FirstOrDefault().Value;
-
-                            if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "kind").FirstOrDefault() != null)
-                                kind = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "kind").FirstOrDefault().Value;
-
-                            if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "planName").FirstOrDefault() != null)
-                                planName = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "planName").FirstOrDefault().Value;
-
-                            if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleStart").FirstOrDefault() != null)
-                                anglestart = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleStart").FirstOrDefault().Value;
-
-                            if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleEnd").FirstOrDefault() != null)
-                                angleend = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleEnd").FirstOrDefault().Value;
-
-                            if (!String.IsNullOrEmpty(latitude) && !String.IsNullOrEmpty(longitude))
+                            //var responseMessage = await httpClient.SendAsync(request);
+                            var contentReponse = "";
+                            using (HttpResponseMessage responseMessage = await httpClient.SendAsync(request))
+                            using (HttpContent content = responseMessage.Content)
                             {
-                                var tempLong = ""; var tempLat = "";
-                                tempLat = latitude.Insert(2, ".");
-                                tempLong = longitude.Insert(3, ".");
-                                var mobi = new Position
+                                if (responseMessage.StatusCode == HttpStatusCode.OK)
                                 {
-                                    AngleEnd = angleend,
-                                    AngleStart = anglestart,
-                                    CGI = cgi,
-                                    IMSI = imsi,
-                                    Kind = kind,
-                                    Lat = tempLat,
-                                    Lon = tempLong,
-                                    MSISDN = msisdn,
-                                    Radius = radius,
-                                    PlanName = planName,
-                                    RequestTime = DateTime.Now
-                                };
-                                var imeiObj = listIMEI.Where(m => m.MSISDN == mobi.MSISDN).FirstOrDefault();
-                                if (imeiObj != null)
-                                    mobi.IMEI = imeiObj.IMEI;
-                                listObject.Add(mobi);
+                                    contentReponse = content.ReadAsStringAsync().Result;
+                                }
                             }
+                            //await Task.When
+                            if (!String.IsNullOrEmpty(contentReponse))
+                            {
+                                var respon = contentReponse;
+
+                                string imsi, msisdn, longitude, latitude, radius, cgi, kind, anglestart, angleend, planName;
+                                imsi = msisdn = longitude = latitude = radius = cgi = kind = anglestart = angleend = planName = "";
+                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "imsi").FirstOrDefault() != null)
+                                    imsi = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "imsi").FirstOrDefault().Value;
+
+                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "msisdn").FirstOrDefault() != null)
+                                    msisdn = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "msisdn").FirstOrDefault().Value;
+
+                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "longitude").FirstOrDefault() != null)
+                                    longitude = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "longitude").FirstOrDefault().Value;
+
+                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "latitude").FirstOrDefault() != null)
+                                    latitude = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "latitude").FirstOrDefault().Value;
+
+                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "radius").FirstOrDefault() != null)
+                                    radius = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "radius").FirstOrDefault().Value;
+
+                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "cgi").FirstOrDefault() != null)
+                                    cgi = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "cgi").FirstOrDefault().Value;
+
+                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "kind").FirstOrDefault() != null)
+                                    kind = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "kind").FirstOrDefault().Value;
+
+                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "planName").FirstOrDefault() != null)
+                                    planName = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "planName").FirstOrDefault().Value;
+
+                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleStart").FirstOrDefault() != null)
+                                    anglestart = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleStart").FirstOrDefault().Value;
+
+                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleEnd").FirstOrDefault() != null)
+                                    angleend = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleEnd").FirstOrDefault().Value;
+
+                                if (!String.IsNullOrEmpty(latitude) && !String.IsNullOrEmpty(longitude))
+                                {
+                                    var tempLong = ""; var tempLat = "";
+                                    tempLat = latitude.Insert(2, ".");
+                                    tempLong = longitude.Insert(3, ".");
+                                    var mobi = new Position
+                                    {
+                                        AngleEnd = angleend,
+                                        AngleStart = anglestart,
+                                        CGI = cgi,
+                                        IMSI = imsi,
+                                        Kind = kind,
+                                        Lat = tempLat,
+                                        Lon = tempLong,
+                                        MSISDN = msisdn,
+                                        Radius = radius,
+                                        PlanName = planName,
+                                        RequestTime = DateTime.Now
+                                    };
+                                    var imeiObj = listIMEI.Where(m => m.MSISDN == mobi.MSISDN).FirstOrDefault();
+                                    if (imeiObj != null)
+                                        mobi.IMEI = imeiObj.IMEI;
+                                    listObject.Add(mobi);
+                                }
+                            }
+
                         }
+                    }
+                    catch
+                    {
 
                     }
+                    //Thread.Sleep(rd.Next(1000, 1500));
                 }
-                catch
+
+                dataGrid1.DataSource = listObject;
+                var count = 1;
+                isLocationLoaded = true;
+                foreach (var item in listObject)
                 {
+                    var marker1 = maper.GetMarkerFromData(item, count);
+                    var poly = maper.GetPolygonFromData(item);
+                    if (marker1 != null)
+                    {
+                        overlay.Markers.Add(marker1);
+                        currentListMarker.Add(marker1);
+                    }
 
+                    if (poly != null)
+                    {
+                        overlay.Polygons.Add(poly);
+                        currentListPolygon.Add(poly);
+                    }
+                    if (isLocationLoaded && isIMEILoaded)
+                        await helper.InsertPositionToDB(item);
+                    count++;
                 }
-                //Thread.Sleep(rd.Next(1000, 1500));
+                var userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
+                var tempLog = new LogEvent
+                {
+                    EventDate = DateTime.Now,
+                    User = userLoggedIn,
+                    Task = "Search number: " + txtSearchMSISDN.Text
+                };
+                await helper.InsertToLog(tempLog);
             }
-
-            dataGrid1.DataSource = listObject;
-            var count = 1;
-            isLocationLoaded = true;
-            foreach (var item in listObject)
+            catch
             {
-                var marker1 = maper.GetMarkerFromData(item, count);
-                var poly = maper.GetPolygonFromData(item);
-                if (marker1 != null)
-                {
-                    overlay.Markers.Add(marker1);
-                    currentListMarker.Add(marker1);
-                }
-                    
-                if (poly != null)
-                {
-                    overlay.Polygons.Add(poly);
-                    currentListPolygon.Add(poly);
-                }
-                if (isLocationLoaded && isIMEILoaded)
-                    helper.InsertPositionSyncToDB(item);
-                count++;
+
             }
+            
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -324,13 +340,7 @@ namespace Enofibom
             ClearText();
         }
 
-        private void ClearMap()
-        {
-            //mapControl.Overlays.Clear();
-            //listObject = new List<Position>();
-            //overlay = new GMapOverlay(DateTime.Now.ToString());
-            //mapControl.Refresh();
-        }
+       
         private void ClearText()
         {
             txtCGI.Text = txtIMSI.Text = txtKind.Text = txtLat.Text = txtLon.Text = txtMSISDN.Text = txtPlanName.Text = txtRadius.Text = "";

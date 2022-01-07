@@ -20,10 +20,14 @@ namespace Enofibom
 
         private void Main_Load(object sender, EventArgs e)
         {
-            mapUserControl1.Show();
-            mapUserControl1.BringToFront();
-            userManage1.Hide();
-            logCheck1.Hide();
+            mapUserControl2.Show();
+            mapUserControl2.BringToFront();
+            logCheck2.Hide();
+            targetManage1.Hide();
+            //mapUserControl1.Show();
+            //mapUserControl1.BringToFront();
+            //userManage1.Hide();
+            //logCheck1.Hide();
             btnLogCheck.Visible = false;
             btnUserManage.Visible = false;
             string isAdmin = System.Configuration.ConfigurationManager.AppSettings[StaticKey.IsAdmin];
@@ -42,16 +46,17 @@ namespace Enofibom
 
         private void btnLogCheck_Click(object sender, EventArgs e)
         {
-            userManage1.Hide();
-            logCheck1.Show();
-            logCheck1.BringToFront();
+           
+            mapUserControl2.Hide();
+            
+            logCheck2.Show();
+            logCheck2.BringToFront();
+            targetManage1.Hide();
         }
 
         private void btnUserManage_Click(object sender, EventArgs e)
         {
-            userManage1.Show();
-            userManage1.BringToFront();
-            logCheck1.Hide();
+            
         }
 
         private void btnDataOffline_Click(object sender, EventArgs e)
@@ -61,10 +66,20 @@ namespace Enofibom
 
         private void btnDataOnline_Click(object sender, EventArgs e)
         {
-            mapUserControl1.Show();
-            mapUserControl1.BringToFront();
-            userManage1.Hide();
-            logCheck1.Hide();
+            //mapUserControl1.Show();
+            //mapUserControl1.BringToFront();
+            //userManage1.Hide();
+            //logCheck1.Hide();
+        }
+
+        private void guna2TileButton1_Click(object sender, EventArgs e)
+        {
+            mapUserControl2.Hide();
+
+            logCheck2.Hide();
+            
+            targetManage1.Show();
+            targetManage1.BringToFront();
         }
     }
 }

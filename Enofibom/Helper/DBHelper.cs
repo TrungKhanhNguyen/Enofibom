@@ -104,17 +104,7 @@ namespace Enofibom.Helper
                 }
             });
         }
-        public void InsertPositionSyncToDB(Position mobi)
-        {
-           
-                //
-                using (MapOfflineEntities db = new MapOfflineEntities())
-                {
-                    db.Positions.Add(mobi);
-                    db.SaveChanges();
-                }
-            
-        }
+        
 
 
         public List<Position> GetHistoryObject(string phone)
@@ -141,5 +131,48 @@ namespace Enofibom.Helper
             }
             return listObject;
         }
+
+
+        #region[Target]
+        public List<Target> GetAllTarget()
+        {
+            var listTarget = new List<Target>();
+            using (MapOfflineEntities db = new MapOfflineEntities())
+            {
+                listTarget = db.Targets.ToList();
+            }
+            return listTarget;
+        }
+
+        public void InsertTarget(Target target)
+        {
+            using (MapOfflineEntities db = new MapOfflineEntities())
+            {
+                db.Targets.Add(target);
+                db.SaveChanges();
+            }
+        }
+        public void UpdateTarget(Target target, string targetName, string IMSI, string IMEI, bool isActive)
+        {
+            using (MapOfflineEntities db = new MapOfflineEntities())
+            {
+                db.Entry(target).State = EntityState.Modified;
+                target.IsActive = isActive;
+                target.IMEI = IMEI;
+                target.IMSI = IMSI;
+                db.SaveChanges();
+            }
+        }
+
+        public void DeleteTarget(Target target)
+        {
+            using (MapOfflineEntities db = new MapOfflineEntities())
+            {
+                db.Targets.Remove(target);
+                db.SaveChanges();
+            }
+        }
+
+        #endregion
     }
 }

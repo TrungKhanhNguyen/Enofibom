@@ -15,12 +15,13 @@ namespace Enofibom
     {
         DBHelper helper = new DBHelper();
         List<Member> listMember = new List<Member>();
+        string userLoggedIn = "";
         public UserManage()
         {
             InitializeComponent();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private async void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -36,6 +37,13 @@ namespace Enofibom
                 };
                 helper.InsertUser(newUser);
                 ReloadData();
+                var tempLog = new LogEvent
+                {
+                    EventDate = DateTime.Now,
+                    User = userLoggedIn,
+                    Task = "Add new user " + newUser.Username
+                };
+                await helper.InsertToLog(tempLog);
             }
             catch { }
             
@@ -49,7 +57,7 @@ namespace Enofibom
             dataGridView1.Refresh();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
@@ -59,6 +67,14 @@ namespace Enofibom
                 {
                     helper.UpdateUser(mem,chkIsActive.Checked, chkIsAdmin.Checked);
                     ReloadData();
+                    
+                    var tempLog = new LogEvent
+                    {
+                        EventDate = DateTime.Now,
+                        User = userLoggedIn,
+                        Task = "Update user " + mem.Username + " info"
+                    };
+                    await helper.InsertToLog(tempLog);
                 }
             }
             catch { }
@@ -77,6 +93,7 @@ namespace Enofibom
         {
             dataGridView1.AutoGenerateColumns = false;
             ReloadData();
+            userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
         }
 
        

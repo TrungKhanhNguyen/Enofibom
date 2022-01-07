@@ -27,7 +27,7 @@ namespace Enofibom.Helper
                 var rad = Convert.ToDouble(temp.Radius);
                 var tooltiptext = Environment.NewLine + "IMSI=" + temp.IMSI + "; MSISDN=" + temp.MSISDN + Environment.NewLine +
                     ";CGI=" + temp.CGI + "; Kind=" + temp.Kind + Environment.NewLine +
-                    "; Lat=" + temp.Lat + "; Lon=" + temp.Lon + "; Radius=" + temp.Radius;
+                    "; Lat=" + temp.Lat + "; Lon=" + temp.Lon + "; Radius=" + temp.Radius + "; Req Time=" + temp.RequestTime;
 
                 var point = new PointLatLng(realLat, realLng);
                 GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);

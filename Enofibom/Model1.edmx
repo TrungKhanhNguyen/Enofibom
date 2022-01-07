@@ -12,7 +12,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EventDate" Type="datetime" />
           <Property Name="User" Type="nvarchar" MaxLength="50" />
-          <Property Name="Task" Type="nvarchar" MaxLength="50" />
+          <Property Name="Task" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -42,10 +42,23 @@
           <Property Name="AngleEnd" Type="nvarchar" MaxLength="50" />
           <Property Name="IMEI" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Target">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MSISDN" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMEI" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMSI" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsRequest" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="TargetName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityContainer Name="MapOfflineModelStoreContainer">
           <EntitySet Name="LogEvent" EntityType="Self.LogEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Target" EntityType="Self.Target" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -59,7 +72,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EventDate" Type="DateTime" Precision="3" />
           <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Task" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Task" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -89,10 +102,23 @@
           <Property Name="AngleEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IMEI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Target">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MSISDN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMEI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMSI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsRequest" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="TargetName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityContainer Name="MapOfflineEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="LogEvents" EntityType="Self.LogEvent" />
           <EntitySet Name="Members" EntityType="Self.Member" />
           <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="Targets" EntityType="Self.Target" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -137,6 +163,19 @@
                 <ScalarProperty Name="AngleStart" ColumnName="AngleStart" />
                 <ScalarProperty Name="AngleEnd" ColumnName="AngleEnd" />
                 <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Targets">
+            <EntityTypeMapping TypeName="MapOfflineModel.Target">
+              <MappingFragment StoreEntitySet="Target">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
+                <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+                <ScalarProperty Name="IMSI" ColumnName="IMSI" />
+                <ScalarProperty Name="IsRequest" ColumnName="IsRequest" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TargetName" ColumnName="TargetName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
