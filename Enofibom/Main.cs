@@ -24,12 +24,11 @@ namespace Enofibom
             mapUserControl2.BringToFront();
             logCheck2.Hide();
             targetManage1.Hide();
-            //mapUserControl1.Show();
-            //mapUserControl1.BringToFront();
-            //userManage1.Hide();
-            //logCheck1.Hide();
+            userManage1.Hide();
+            changePasswordControl1.Hide();
             btnLogCheck.Visible = false;
             btnUserManage.Visible = false;
+            btnTargetManage.Visible = false;
             string isAdmin = System.Configuration.ConfigurationManager.AppSettings[StaticKey.IsAdmin];
             string userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
             try
@@ -48,7 +47,7 @@ namespace Enofibom
         {
            
             mapUserControl2.Hide();
-            
+            changePasswordControl1.Hide();
             logCheck2.Show();
             logCheck2.BringToFront();
             targetManage1.Hide();
@@ -56,20 +55,23 @@ namespace Enofibom
 
         private void btnUserManage_Click(object sender, EventArgs e)
         {
-            
+            mapUserControl2.Hide();
+            logCheck2.Hide();
+            userManage1.Show();
+            userManage1.BringToFront();
+            targetManage1.Hide();
+            changePasswordControl1.Hide();
         }
 
-        private void btnDataOffline_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnDataOnline_Click(object sender, EventArgs e)
         {
-            //mapUserControl1.Show();
-            //mapUserControl1.BringToFront();
-            //userManage1.Hide();
-            //logCheck1.Hide();
+            mapUserControl2.Show();
+            mapUserControl2.BringToFront();
+            logCheck2.Hide();
+            targetManage1.Hide();
+            userManage1.Hide();
+            changePasswordControl1.Hide();
         }
 
         private void guna2TileButton1_Click(object sender, EventArgs e)
@@ -77,9 +79,26 @@ namespace Enofibom
             mapUserControl2.Hide();
 
             logCheck2.Hide();
-            
+            changePasswordControl1.Hide();
             targetManage1.Show();
             targetManage1.BringToFront();
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var form1 = new SignIn();
+            form1.Closed += (s, args) => this.Close();
+            form1.Show();
+        }
+
+        private void lblUserLoggedIn_Click(object sender, EventArgs e)
+        {
+            mapUserControl2.Hide();
+            logCheck2.Hide();
+            targetManage1.Hide();
+            changePasswordControl1.Show();
+            changePasswordControl1.BringToFront();
         }
     }
 }

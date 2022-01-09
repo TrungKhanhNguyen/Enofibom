@@ -41,7 +41,6 @@ namespace Enofibom
             this.btnSave = new Guna.UI2.WinForms.Guna2Button();
             this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.lblID = new System.Windows.Forms.Label();
             this.MSISDN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IMEI = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +48,7 @@ namespace Enofibom
             this.TargetName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsRequest = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.lblID = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -325,14 +325,6 @@ namespace Enofibom
             this.dataGridView1.TabIndex = 15;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // lblID
-            // 
-            this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(737, 102);
-            this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(0, 13);
-            this.lblID.TabIndex = 16;
-            // 
             // MSISDN
             // 
             this.MSISDN.DataPropertyName = "MSISDN";
@@ -382,6 +374,15 @@ namespace Enofibom
             this.IsActive.HeaderText = "IsActive";
             this.IsActive.Name = "IsActive";
             this.IsActive.ReadOnly = true;
+            // 
+            // lblID
+            // 
+            this.lblID.AutoSize = true;
+            this.lblID.Location = new System.Drawing.Point(737, 102);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(0, 13);
+            this.lblID.TabIndex = 16;
+            this.lblID.Visible = false;
             // 
             // TargetManage
             // 

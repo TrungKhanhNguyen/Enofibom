@@ -30,6 +30,7 @@ namespace Enofibom
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.topDockPanel = new System.Windows.Forms.Panel();
@@ -39,13 +40,17 @@ namespace Enofibom
             this.guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.guna2TileButton1 = new Guna.UI2.WinForms.Guna2TileButton();
+            this.btnLogOut = new System.Windows.Forms.Label();
+            this.lblUserLoggedIn = new System.Windows.Forms.Label();
+            this.btnTargetManage = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnLogCheck = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnUserManage = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnDataOnline = new Guna.UI2.WinForms.Guna2TileButton();
+            this.userManage1 = new Enofibom.UserManage();
+            this.targetManage1 = new Enofibom.TargetManage();
             this.mapUserControl2 = new Enofibom.MapUserControl();
             this.logCheck2 = new Enofibom.LogCheck();
-            this.targetManage1 = new Enofibom.TargetManage();
+            this.changePasswordControl1 = new Enofibom.PageControls.ChangePasswordControl();
             this.topDockPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +74,7 @@ namespace Enofibom
             this.topDockPanel.Controls.Add(this.guna2ControlBox2);
             this.topDockPanel.Controls.Add(this.guna2ControlBox3);
             this.topDockPanel.Controls.Add(this.label1);
+            this.topDockPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.topDockPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topDockPanel.Location = new System.Drawing.Point(0, 0);
             this.topDockPanel.Name = "topDockPanel";
@@ -140,7 +146,9 @@ namespace Enofibom
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
-            this.panel2.Controls.Add(this.guna2TileButton1);
+            this.panel2.Controls.Add(this.btnLogOut);
+            this.panel2.Controls.Add(this.lblUserLoggedIn);
+            this.panel2.Controls.Add(this.btnTargetManage);
             this.panel2.Controls.Add(this.btnLogCheck);
             this.panel2.Controls.Add(this.btnUserManage);
             this.panel2.Controls.Add(this.btnDataOnline);
@@ -150,31 +158,59 @@ namespace Enofibom
             this.panel2.Size = new System.Drawing.Size(1139, 66);
             this.panel2.TabIndex = 4;
             // 
-            // guna2TileButton1
+            // btnLogOut
             // 
-            this.guna2TileButton1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnLogOut.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnLogOut.AutoSize = true;
+            this.btnLogOut.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogOut.ForeColor = System.Drawing.Color.White;
+            this.btnLogOut.Location = new System.Drawing.Point(1075, 34);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(52, 17);
+            this.btnLogOut.TabIndex = 6;
+            this.btnLogOut.Text = "Logout";
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
+            // lblUserLoggedIn
+            // 
+            this.lblUserLoggedIn.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblUserLoggedIn.AutoSize = true;
+            this.lblUserLoggedIn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblUserLoggedIn.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserLoggedIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
+            this.lblUserLoggedIn.Location = new System.Drawing.Point(1025, 34);
+            this.lblUserLoggedIn.Margin = new System.Windows.Forms.Padding(3, 0, 15, 0);
+            this.lblUserLoggedIn.Name = "lblUserLoggedIn";
+            this.lblUserLoggedIn.Size = new System.Drawing.Size(35, 17);
+            this.lblUserLoggedIn.TabIndex = 5;
+            this.lblUserLoggedIn.Text = "root";
+            this.lblUserLoggedIn.Click += new System.EventHandler(this.lblUserLoggedIn_Click);
+            // 
+            // btnTargetManage
+            // 
+            this.btnTargetManage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.guna2TileButton1.CheckedState.Parent = this.guna2TileButton1;
-            this.guna2TileButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2TileButton1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
-            this.guna2TileButton1.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
-            this.guna2TileButton1.CustomImages.Parent = this.guna2TileButton1;
-            this.guna2TileButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2TileButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2TileButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2TileButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2TileButton1.DisabledState.Parent = this.guna2TileButton1;
-            this.guna2TileButton1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
-            this.guna2TileButton1.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2TileButton1.ForeColor = System.Drawing.Color.White;
-            this.guna2TileButton1.HoverState.Parent = this.guna2TileButton1;
-            this.guna2TileButton1.Location = new System.Drawing.Point(395, 0);
-            this.guna2TileButton1.Name = "guna2TileButton1";
-            this.guna2TileButton1.ShadowDecoration.Parent = this.guna2TileButton1;
-            this.guna2TileButton1.Size = new System.Drawing.Size(131, 66);
-            this.guna2TileButton1.TabIndex = 4;
-            this.guna2TileButton1.Text = "Target Management";
-            this.guna2TileButton1.Click += new System.EventHandler(this.guna2TileButton1_Click);
+            this.btnTargetManage.CheckedState.Parent = this.btnTargetManage;
+            this.btnTargetManage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTargetManage.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
+            this.btnTargetManage.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.btnTargetManage.CustomImages.Parent = this.btnTargetManage;
+            this.btnTargetManage.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnTargetManage.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnTargetManage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnTargetManage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnTargetManage.DisabledState.Parent = this.btnTargetManage;
+            this.btnTargetManage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
+            this.btnTargetManage.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTargetManage.ForeColor = System.Drawing.Color.White;
+            this.btnTargetManage.HoverState.Parent = this.btnTargetManage;
+            this.btnTargetManage.Location = new System.Drawing.Point(395, 0);
+            this.btnTargetManage.Name = "btnTargetManage";
+            this.btnTargetManage.ShadowDecoration.Parent = this.btnTargetManage;
+            this.btnTargetManage.Size = new System.Drawing.Size(131, 66);
+            this.btnTargetManage.TabIndex = 4;
+            this.btnTargetManage.Text = "Target Management";
+            this.btnTargetManage.Click += new System.EventHandler(this.guna2TileButton1_Click);
             // 
             // btnLogCheck
             // 
@@ -254,20 +290,15 @@ namespace Enofibom
             this.btnDataOnline.Text = "Data Online";
             this.btnDataOnline.Click += new System.EventHandler(this.btnDataOnline_Click);
             // 
-            // mapUserControl2
+            // userManage1
             // 
-            this.mapUserControl2.BackColor = System.Drawing.SystemColors.Control;
-            this.mapUserControl2.Location = new System.Drawing.Point(12, 107);
-            this.mapUserControl2.Name = "mapUserControl2";
-            this.mapUserControl2.Size = new System.Drawing.Size(1115, 667);
-            this.mapUserControl2.TabIndex = 8;
-            // 
-            // logCheck2
-            // 
-            this.logCheck2.Location = new System.Drawing.Point(12, 107);
-            this.logCheck2.Name = "logCheck2";
-            this.logCheck2.Size = new System.Drawing.Size(1115, 667);
-            this.logCheck2.TabIndex = 7;
+            this.userManage1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.userManage1.Location = new System.Drawing.Point(12, 107);
+            this.userManage1.Name = "userManage1";
+            this.userManage1.Size = new System.Drawing.Size(1115, 667);
+            this.userManage1.TabIndex = 10;
             // 
             // targetManage1
             // 
@@ -279,23 +310,58 @@ namespace Enofibom
             this.targetManage1.Size = new System.Drawing.Size(1115, 667);
             this.targetManage1.TabIndex = 9;
             // 
+            // mapUserControl2
+            // 
+            this.mapUserControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapUserControl2.BackColor = System.Drawing.SystemColors.Control;
+            this.mapUserControl2.Location = new System.Drawing.Point(12, 107);
+            this.mapUserControl2.Name = "mapUserControl2";
+            this.mapUserControl2.Size = new System.Drawing.Size(1115, 667);
+            this.mapUserControl2.TabIndex = 8;
+            // 
+            // logCheck2
+            // 
+            this.logCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.logCheck2.Location = new System.Drawing.Point(12, 107);
+            this.logCheck2.Name = "logCheck2";
+            this.logCheck2.Size = new System.Drawing.Size(1115, 667);
+            this.logCheck2.TabIndex = 7;
+            // 
+            // changePasswordControl1
+            // 
+            this.changePasswordControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.changePasswordControl1.Location = new System.Drawing.Point(12, 107);
+            this.changePasswordControl1.Name = "changePasswordControl1";
+            this.changePasswordControl1.Size = new System.Drawing.Size(1115, 667);
+            this.changePasswordControl1.TabIndex = 11;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1139, 786);
+            this.Controls.Add(this.changePasswordControl1);
+            this.Controls.Add(this.userManage1);
             this.Controls.Add(this.targetManage1);
             this.Controls.Add(this.mapUserControl2);
             this.Controls.Add(this.logCheck2);
             this.Controls.Add(this.topDockPanel);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "Main";
             this.Load += new System.EventHandler(this.Main_Load);
             this.topDockPanel.ResumeLayout(false);
             this.topDockPanel.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -315,9 +381,13 @@ namespace Enofibom
         private Guna.UI2.WinForms.Guna2TileButton btnUserManage;
         private Guna.UI2.WinForms.Guna2TileButton btnLogCheck;
   
-        private Guna.UI2.WinForms.Guna2TileButton guna2TileButton1;
+        private Guna.UI2.WinForms.Guna2TileButton btnTargetManage;
         private LogCheck logCheck2;
         private MapUserControl mapUserControl2;
         private TargetManage targetManage1;
+        private UserManage userManage1;
+        private System.Windows.Forms.Label btnLogOut;
+        private System.Windows.Forms.Label lblUserLoggedIn;
+        private PageControls.ChangePasswordControl changePasswordControl1;
     }
 }

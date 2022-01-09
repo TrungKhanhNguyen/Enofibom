@@ -75,8 +75,13 @@ namespace Enofibom
         private void TargetManage_Load(object sender, EventArgs e)
         {
             dataGridView1.AutoGenerateColumns = false;
-            ReloadData();
             userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
+            if (!this.DesignMode)
+            {
+                ReloadData();
+            }
+                
+            
         }
     }
 }

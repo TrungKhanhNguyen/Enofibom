@@ -76,25 +76,6 @@ namespace Enofibom
 
             lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy");
             lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy");
-
-            //GetIMEI();
-            //var test1 = new Position
-            //{
-            //    IMSI = "452019939362924",
-            //    MSISDN = "84904500084",
-            //    CGI = "452-01-10050-14241",
-            //    Kind = "C2G",
-            //    AngleStart = "",
-            //    AngleEnd = "",
-            //    Lat = "21020864".Insert(2, "."),
-            //    Lon = "105842030".Insert(3, "."),
-            //    PlanName = "GSM",
-            //    Radius = "500"
-
-            //};
-            //listObject.Add(test1);
-            //var marker1 = maper.GetMarkerFromData(test1, 2);
-            //overlay.Markers.Add(marker1);
         }
 
        

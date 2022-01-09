@@ -1,12 +1,6 @@
 ﻿using Enofibom.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Enofibom
@@ -16,38 +10,16 @@ namespace Enofibom
         DBHelper helper = new DBHelper();
         List<Member> listMember = new List<Member>();
         string userLoggedIn = "";
+        UserHelper userHelper = new UserHelper();
         public UserManage()
         {
             InitializeComponent();
         }
 
-        private async void btnAdd_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var username = txtUsername.Text;
-                var chkActive = chkIsActive.Checked;
-                var chkAdmin = chkIsAdmin.Checked;
-                var newUser = new Member
-                {
-                    Username = username,
-                    Password = StaticKey.CreateMD5("123456"),
-                    Active = chkActive,
-                    IsAdmin = chkAdmin
-                };
-                helper.InsertUser(newUser);
-                ReloadData();
-                var tempLog = new LogEvent
-                {
-                    EventDate = DateTime.Now,
-                    User = userLoggedIn,
-                    Task = "Add new user " + newUser.Username
-                };
-                await helper.InsertToLog(tempLog);
-            }
-            catch { }
-            
-            
+            userHelper.AddUser(txtUsername.Text, chkIsActive.Checked, chkIsAdmin.Checked, userLoggedIn);
+            ReloadData();
         }
 
         private void ReloadData()
@@ -57,27 +29,10 @@ namespace Enofibom
             dataGridView1.Refresh();
         }
 
-        private async void btnSave_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var id = Convert.ToInt32(lblID.Text);
-                var mem = listMember.Where(m => m.Id == id).FirstOrDefault();
-                if (mem != null)
-                {
-                    helper.UpdateUser(mem,chkIsActive.Checked, chkIsAdmin.Checked);
-                    ReloadData();
-                    
-                    var tempLog = new LogEvent
-                    {
-                        EventDate = DateTime.Now,
-                        User = userLoggedIn,
-                        Task = "Update user " + mem.Username + " info"
-                    };
-                    await helper.InsertToLog(tempLog);
-                }
-            }
-            catch { }
+            userHelper.UpdateUser(listMember, lblID.Text, chkIsActive.Checked, chkIsAdmin.Checked, userLoggedIn);
+            ReloadData();
         }
 
 
@@ -92,7 +47,12 @@ namespace Enofibom
         private void UserManage_Load(object sender, EventArgs e)
         {
             dataGridView1.AutoGenerateColumns = false;
-            ReloadData();
+            if (!this.DesignMode)
+            {
+                // Do stuff...
+                ReloadData();
+            }
+            
             userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
         }
 

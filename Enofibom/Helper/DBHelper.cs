@@ -67,6 +67,20 @@ namespace Enofibom.Helper
             return listMember;
         }
 
+        public void UpdatePassword(int id,string newpassword)
+        {
+            using (MapOfflineEntities db = new MapOfflineEntities())
+            {
+                var tempTarget = db.Members.Where(m => m.Id == id).FirstOrDefault();
+                if (tempTarget != null)
+                {
+                   
+                    tempTarget.Password = newpassword;
+                    db.SaveChanges();
+                }
+            }
+        }
+
         public Member GetUserLogin(string username, string password)
         {
             Member user = null;
@@ -144,6 +158,16 @@ namespace Enofibom.Helper
             return listTarget;
         }
 
+        public List<Target> GetAllActiveTarget()
+        {
+            var listTarget = new List<Target>();
+            using (MapOfflineEntities db = new MapOfflineEntities())
+            {
+                listTarget = db.Targets.Where(m=>m.IsActive == true).ToList();
+            }
+            return listTarget;
+        }
+
         public void InsertTarget(Target target)
         {
             using (MapOfflineEntities db = new MapOfflineEntities())
@@ -156,11 +180,18 @@ namespace Enofibom.Helper
         {
             using (MapOfflineEntities db = new MapOfflineEntities())
             {
-                db.Entry(target).State = EntityState.Modified;
-                target.IsActive = isActive;
-                target.IMEI = IMEI;
-                target.IMSI = IMSI;
-                db.SaveChanges();
+                var tempTarget = db.Targets.Where(m => m.Id == target.Id).FirstOrDefault();
+                if (tempTarget != null)
+                {
+                    tempTarget.IsActive = isActive;
+                    tempTarget.IMEI = IMEI;
+                    tempTarget.IMSI = IMSI;
+                    tempTarget.TargetName = targetName;
+                    db.SaveChanges();
+                }
+                
+               
+                
             }
         }
 

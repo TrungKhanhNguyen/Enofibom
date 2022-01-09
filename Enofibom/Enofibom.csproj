@@ -36,7 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>marker-icon.ico</ApplicationIcon>
+    <ApplicationIcon>place.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Enofibom.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -83,6 +86,7 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -96,6 +100,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoRequestPosition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoRequestPosition.Designer.cs">
+      <DependentUpon>AutoRequestPosition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +117,7 @@
     <Compile Include="Helper\Maper.cs" />
     <Compile Include="Helper\StaticKey.cs" />
     <Compile Include="Helper\TargetHelper.cs" />
+    <Compile Include="Helper\UserHelper.cs" />
     <Compile Include="IMEIObject.cs" />
     <Compile Include="LogCheck.cs">
       <SubType>UserControl</SubType>
@@ -119,9 +130,11 @@
     </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="MapOnline.cs">
       <SubType>UserControl</SubType>
@@ -154,6 +167,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PageControls\ChangePasswordControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PageControls\ChangePasswordControl.Designer.cs">
+      <DependentUpon>ChangePasswordControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Position.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -161,9 +180,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignIn.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Target.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -180,6 +201,9 @@
     <Compile Include="UserManage.Designer.cs">
       <DependentUpon>UserManage.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AutoRequestPosition.resx">
+      <DependentUpon>AutoRequestPosition.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -188,12 +212,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="MapOnline.resx">
       <DependentUpon>MapOnline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MapUserControl.resx">
       <DependentUpon>MapUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageControls\ChangePasswordControl.resx">
+      <DependentUpon>ChangePasswordControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -207,6 +235,7 @@
     </Compile>
     <EmbeddedResource Include="SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="TargetManage.resx">
       <DependentUpon>TargetManage.cs</DependentUpon>
@@ -289,6 +318,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="place.ico" />
+    <None Include="Resources\password_reset_48px.png" />
+    <None Include="Resources\oldpassword.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
