@@ -28,6 +28,8 @@ namespace Enofibom
         private void btnStart_Click(object sender, EventArgs e)
         {
             timer1.Start();
+            btnStart.Enabled = false;
+            btnStop.Enabled = true;
         }
 
         private void AutoRequestPosition_Load(object sender, EventArgs e)
@@ -36,11 +38,15 @@ namespace Enofibom
            
             timer1.Tick += new EventHandler(timer1_Tick);
             timer1.Interval = (int)numericUpDown1.Value * 60 * 1000;
+            btnStart.Enabled = true;
+            btnStop.Enabled = false;
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             timer1.Stop();
+            btnStart.Enabled = true;
+            btnStop.Enabled = false;
         }
 
         private async void timer1_Tick(object sender, EventArgs e)
