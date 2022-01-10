@@ -13,6 +13,7 @@ namespace Enofibom
 {
     public partial class Main : Form
     {
+        string userLoggedIn = "";
         public Main()
         {
             InitializeComponent();
@@ -30,7 +31,8 @@ namespace Enofibom
             btnUserManage.Visible = false;
             btnTargetManage.Visible = false;
             string isAdmin = System.Configuration.ConfigurationManager.AppSettings[StaticKey.IsAdmin];
-            string userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
+            userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
+            lblUserLoggedIn.Text = userLoggedIn;
             try
             {
                 if (Convert.ToBoolean(isAdmin))

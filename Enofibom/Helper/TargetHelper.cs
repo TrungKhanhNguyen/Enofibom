@@ -16,7 +16,7 @@ namespace Enofibom.Helper
                 return tempList.Count();
             return 0;
         }
-        public void AddTarget(List<Target> listTarget, string MSISDN, string name, string IMSI, string IMEI, bool isActive,string userLoggedIn)
+        public async void AddTarget(List<Target> listTarget, string MSISDN, string name, string IMSI, string IMEI, bool isActive,string userLoggedIn)
         {
             try
             {
@@ -39,13 +39,13 @@ namespace Enofibom.Helper
                         Task = "Add new target " + target.MSISDN + ", Target name " + name + ", IMEI " + IMEI +
                         ", IMSI " + IMSI + ", IsActive " + isActive
                     };
-                    helper.InsertToLog(tempLog);
+                    await helper.InsertToLog(tempLog);
                 }
             }
             catch { }
         }
 
-        public void SaveTarget(List<Target> listTarget,string idTarget, string name, string IMSI, string IMEI, bool isActive, string userLoggedIn)
+        public async void SaveTarget(List<Target> listTarget,string idTarget, string name, string IMSI, string IMEI, bool isActive, string userLoggedIn)
         {
             try
             {
@@ -65,14 +65,14 @@ namespace Enofibom.Helper
                             Task = "Edit target " + mem.MSISDN + ", Target name " + name + ", IMEI " + IMEI +
                             ", IMSI " + IMSI + ", IsActive " + isActive
                         };
-                        helper.InsertToLog(tempLog);
+                        await helper.InsertToLog(tempLog);
                     }
                 }
             }
             catch { }
         }
 
-        public void DeleteTarget(List<Target> listTarget, string idTarget, string userLoggedIn)
+        public async void DeleteTarget(List<Target> listTarget, string idTarget, string userLoggedIn)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace Enofibom.Helper
                         User = userLoggedIn,
                         Task = "Delete target " + target.MSISDN
                     };
-                    helper.InsertToLog(tempLog);
+                    await helper.InsertToLog(tempLog);
                 }
             }
             catch { }
