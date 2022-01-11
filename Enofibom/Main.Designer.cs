@@ -46,11 +46,11 @@ namespace Enofibom
             this.btnLogCheck = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnUserManage = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnDataOnline = new Guna.UI2.WinForms.Guna2TileButton();
+            this.changePasswordControl1 = new Enofibom.PageControls.ChangePasswordControl();
             this.userManage1 = new Enofibom.UserManage();
             this.targetManage1 = new Enofibom.TargetManage();
             this.mapUserControl2 = new Enofibom.MapUserControl();
             this.logCheck2 = new Enofibom.LogCheck();
-            this.changePasswordControl1 = new Enofibom.PageControls.ChangePasswordControl();
             this.topDockPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -78,7 +78,7 @@ namespace Enofibom
             this.topDockPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topDockPanel.Location = new System.Drawing.Point(0, 0);
             this.topDockPanel.Name = "topDockPanel";
-            this.topDockPanel.Size = new System.Drawing.Size(1139, 35);
+            this.topDockPanel.Size = new System.Drawing.Size(1144, 35);
             this.topDockPanel.TabIndex = 6;
             // 
             // guna2ControlBox1
@@ -87,7 +87,7 @@ namespace Enofibom
             this.guna2ControlBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(68)))), ((int)(((byte)(94)))));
             this.guna2ControlBox1.HoverState.Parent = this.guna2ControlBox1;
             this.guna2ControlBox1.IconColor = System.Drawing.Color.White;
-            this.guna2ControlBox1.Location = new System.Drawing.Point(1091, 3);
+            this.guna2ControlBox1.Location = new System.Drawing.Point(1096, 3);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.ShadowDecoration.Parent = this.guna2ControlBox1;
             this.guna2ControlBox1.Size = new System.Drawing.Size(45, 29);
@@ -111,7 +111,7 @@ namespace Enofibom
             this.guna2ControlBox2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(68)))), ((int)(((byte)(94)))));
             this.guna2ControlBox2.HoverState.Parent = this.guna2ControlBox2;
             this.guna2ControlBox2.IconColor = System.Drawing.Color.White;
-            this.guna2ControlBox2.Location = new System.Drawing.Point(1040, 3);
+            this.guna2ControlBox2.Location = new System.Drawing.Point(1045, 3);
             this.guna2ControlBox2.Name = "guna2ControlBox2";
             this.guna2ControlBox2.ShadowDecoration.Parent = this.guna2ControlBox2;
             this.guna2ControlBox2.Size = new System.Drawing.Size(45, 29);
@@ -124,7 +124,7 @@ namespace Enofibom
             this.guna2ControlBox3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(68)))), ((int)(((byte)(94)))));
             this.guna2ControlBox3.HoverState.Parent = this.guna2ControlBox3;
             this.guna2ControlBox3.IconColor = System.Drawing.Color.White;
-            this.guna2ControlBox3.Location = new System.Drawing.Point(989, 3);
+            this.guna2ControlBox3.Location = new System.Drawing.Point(994, 3);
             this.guna2ControlBox3.Name = "guna2ControlBox3";
             this.guna2ControlBox3.ShadowDecoration.Parent = this.guna2ControlBox3;
             this.guna2ControlBox3.Size = new System.Drawing.Size(45, 29);
@@ -155,16 +155,17 @@ namespace Enofibom
             this.panel2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel2.Location = new System.Drawing.Point(0, 35);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1139, 66);
+            this.panel2.Size = new System.Drawing.Size(1144, 66);
             this.panel2.TabIndex = 4;
             // 
             // btnLogOut
             // 
             this.btnLogOut.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnLogOut.AutoSize = true;
+            this.btnLogOut.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogOut.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogOut.ForeColor = System.Drawing.Color.White;
-            this.btnLogOut.Location = new System.Drawing.Point(1075, 34);
+            this.btnLogOut.Location = new System.Drawing.Point(1080, 34);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(52, 17);
             this.btnLogOut.TabIndex = 6;
@@ -178,7 +179,7 @@ namespace Enofibom
             this.lblUserLoggedIn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblUserLoggedIn.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserLoggedIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
-            this.lblUserLoggedIn.Location = new System.Drawing.Point(1025, 34);
+            this.lblUserLoggedIn.Location = new System.Drawing.Point(1030, 34);
             this.lblUserLoggedIn.Margin = new System.Windows.Forms.Padding(3, 0, 15, 0);
             this.lblUserLoggedIn.Name = "lblUserLoggedIn";
             this.lblUserLoggedIn.Size = new System.Drawing.Size(35, 17);
@@ -290,14 +291,26 @@ namespace Enofibom
             this.btnDataOnline.Text = "Data Online";
             this.btnDataOnline.Click += new System.EventHandler(this.btnDataOnline_Click);
             // 
+            // changePasswordControl1
+            // 
+            this.changePasswordControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.changePasswordControl1.Location = new System.Drawing.Point(12, 107);
+            this.changePasswordControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.changePasswordControl1.Name = "changePasswordControl1";
+            this.changePasswordControl1.Size = new System.Drawing.Size(1119, 618);
+            this.changePasswordControl1.TabIndex = 11;
+            // 
             // userManage1
             // 
             this.userManage1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.userManage1.Location = new System.Drawing.Point(12, 107);
+            this.userManage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userManage1.Name = "userManage1";
-            this.userManage1.Size = new System.Drawing.Size(1115, 667);
+            this.userManage1.Size = new System.Drawing.Size(1120, 677);
             this.userManage1.TabIndex = 10;
             // 
             // targetManage1
@@ -306,8 +319,9 @@ namespace Enofibom
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.targetManage1.Location = new System.Drawing.Point(12, 107);
+            this.targetManage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.targetManage1.Name = "targetManage1";
-            this.targetManage1.Size = new System.Drawing.Size(1115, 667);
+            this.targetManage1.Size = new System.Drawing.Size(1120, 677);
             this.targetManage1.TabIndex = 9;
             // 
             // mapUserControl2
@@ -317,8 +331,9 @@ namespace Enofibom
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mapUserControl2.BackColor = System.Drawing.SystemColors.Control;
             this.mapUserControl2.Location = new System.Drawing.Point(12, 107);
+            this.mapUserControl2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.mapUserControl2.Name = "mapUserControl2";
-            this.mapUserControl2.Size = new System.Drawing.Size(1115, 667);
+            this.mapUserControl2.Size = new System.Drawing.Size(1120, 677);
             this.mapUserControl2.TabIndex = 8;
             // 
             // logCheck2
@@ -327,25 +342,16 @@ namespace Enofibom
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.logCheck2.Location = new System.Drawing.Point(12, 107);
+            this.logCheck2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.logCheck2.Name = "logCheck2";
-            this.logCheck2.Size = new System.Drawing.Size(1115, 667);
+            this.logCheck2.Size = new System.Drawing.Size(1120, 677);
             this.logCheck2.TabIndex = 7;
-            // 
-            // changePasswordControl1
-            // 
-            this.changePasswordControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.changePasswordControl1.Location = new System.Drawing.Point(12, 107);
-            this.changePasswordControl1.Name = "changePasswordControl1";
-            this.changePasswordControl1.Size = new System.Drawing.Size(1115, 667);
-            this.changePasswordControl1.TabIndex = 11;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1139, 786);
+            this.ClientSize = new System.Drawing.Size(1144, 725);
             this.Controls.Add(this.changePasswordControl1);
             this.Controls.Add(this.userManage1);
             this.Controls.Add(this.targetManage1);

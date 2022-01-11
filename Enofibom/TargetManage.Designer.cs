@@ -29,7 +29,7 @@ namespace Enofibom
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkActive = new Guna.UI2.WinForms.Guna2CheckBox();
             this.txtIMSI = new Guna.UI2.WinForms.Guna2TextBox();
@@ -72,7 +72,7 @@ namespace Enofibom
             // 
             // chkActive
             // 
-            this.chkActive.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.chkActive.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkActive.AutoSize = true;
             this.chkActive.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
             this.chkActive.CheckedState.BorderRadius = 0;
@@ -90,7 +90,7 @@ namespace Enofibom
             // 
             // txtIMSI
             // 
-            this.txtIMSI.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtIMSI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtIMSI.BorderRadius = 5;
             this.txtIMSI.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtIMSI.DefaultText = "";
@@ -116,7 +116,7 @@ namespace Enofibom
             // 
             // txtIMEI
             // 
-            this.txtIMEI.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtIMEI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtIMEI.BorderRadius = 5;
             this.txtIMEI.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtIMEI.DefaultText = "";
@@ -142,7 +142,7 @@ namespace Enofibom
             // 
             // txtTargetName
             // 
-            this.txtTargetName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtTargetName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtTargetName.BorderRadius = 5;
             this.txtTargetName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTargetName.DefaultText = "";
@@ -168,7 +168,7 @@ namespace Enofibom
             // 
             // txtMSISDN
             // 
-            this.txtMSISDN.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtMSISDN.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtMSISDN.BorderRadius = 5;
             this.txtMSISDN.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtMSISDN.DefaultText = "";
@@ -194,7 +194,7 @@ namespace Enofibom
             // 
             // btnAdd
             // 
-            this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAdd.BorderRadius = 3;
             this.btnAdd.CheckedState.Parent = this.btnAdd;
             this.btnAdd.CustomImages.Parent = this.btnAdd;
@@ -219,7 +219,7 @@ namespace Enofibom
             // 
             // btnClear
             // 
-            this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnClear.BorderRadius = 3;
             this.btnClear.CheckedState.Parent = this.btnClear;
             this.btnClear.CustomImages.Parent = this.btnClear;
@@ -244,7 +244,7 @@ namespace Enofibom
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSave.BorderRadius = 3;
             this.btnSave.CheckedState.Parent = this.btnSave;
             this.btnSave.CustomImages.Parent = this.btnSave;
@@ -269,7 +269,7 @@ namespace Enofibom
             // 
             // btnDelete
             // 
-            this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnDelete.BorderRadius = 3;
             this.btnDelete.CheckedState.Parent = this.btnDelete;
             this.btnDelete.CustomImages.Parent = this.btnDelete;
@@ -300,14 +300,14 @@ namespace Enofibom
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MSISDN,

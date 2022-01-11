@@ -44,7 +44,7 @@ namespace Enofibom
                     await helper.InsertToLog(eventLog);
                     this.Hide();
                     var form1 = new Main();
-                    form1.Closed += (s, args) => this.Close();
+                    form1.Closed += (s, args) => { this.Close(); };
                     form1.Show();
                 }
                 else

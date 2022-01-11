@@ -73,7 +73,7 @@ namespace Enofibom
 
             dpToDate.Value = DateTime.Now;
             dpFromDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-
+            txtCurrentValue.Text = dpFromDate.Value.ToString("dd/MM/yyyy HH:mm:ss");
             lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy");
             lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy");
         }
@@ -244,6 +244,13 @@ namespace Enofibom
                         var lat = Convert.ToDouble(item.Lat);
                         var lon = Convert.ToDouble(item.Lon);
                         mapControl.Position = new PointLatLng(lat, lon);
+                        mapControl.Refresh();
+                    }
+                    else
+                    {
+                        mapControl.Position = new PointLatLng(13.769040, 109.228371);
+                        mapControl.Zoom = 6;
+                        mapControl.Refresh();
                     }
 
                     if (isLocationLoaded && isIMEILoaded)
@@ -388,6 +395,7 @@ namespace Enofibom
         List<Position> listHistoryPosition = new List<Position>();
         List<GMapMarker> historyListMarker = new List<GMapMarker>();
         List<GMapPolygon> historyListPolygon = new List<GMapPolygon>();
+        List<GMapRoute> historyListRoute = new List<GMapRoute>();
 
 
         List<Position> listCurrentHistoryPosition = new List<Position>();
@@ -397,6 +405,7 @@ namespace Enofibom
             ClearHistory();
             
             historyListMarker = new List<GMapMarker>(); historyListPolygon = new List<GMapPolygon>();
+            historyListRoute = new List<GMapRoute>();
             var listSDT = txtSearchHistory.Text.Split(';');
             List<string> listArraySDT = new List<string>();
             foreach(var item in listSDT)
@@ -426,10 +435,36 @@ namespace Enofibom
                             historyListPolygon.Add(poly);
                         }
                     }
+                    if(listItem1.Count > 1)
+                    {
+                        for (int i = 0; i < listItem1.Count - 1; i++)
+                        {
+                            GMapRoute line_layer = new GMapRoute("single_line");
+                            line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
+
+                            var lat1 = Convert.ToDouble(listItem1[i].Lat);
+                            var lon1 = Convert.ToDouble(listItem1[i].Lon);
+
+                            var lat2 = Convert.ToDouble(listItem1[i + 1].Lat);
+                            var lon2 = Convert.ToDouble(listItem1[i + 1].Lon);
+
+                            var point1 = new PointLatLng(lat1, lon1);
+                            var point2 = new PointLatLng(lat2, lon2);
+
+                            line_layer.Points.Add(point1);
+                            line_layer.Points.Add(point2);
+                            overlay.Routes.Add(line_layer);
+                            historyListRoute.Add(line_layer);
+                            //To force the draw, you need to update the route
+                            //mapControl.UpdateRouteLocalPosition(line_layer);
+                            
+                        }
+                    }
+                    mapControl.Refresh();
                 }
                 count++;
             }
-          
+            //var kkk = historyListRoute;
         }
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
@@ -440,7 +475,7 @@ namespace Enofibom
             var toDate = frDate.AddMinutes(trackValue);
             listCurrentHistoryPosition = listHistoryPosition.Where(m => m.RequestTime >= frDate && m.RequestTime <= toDate).ToList();
             var listSDT = txtSearchHistory.Text.Split(';');
-           
+            txtCurrentValue.Text = toDate.ToString("dd/MM/yyyy HH:mm:ss");
             var count = 1;
             foreach (var item in listSDT)
             {
@@ -462,10 +497,40 @@ namespace Enofibom
                             historyListPolygon.Add(poly);
                         }
                     }
+
+                    if (listItem1.Count > 1)
+                    {
+                        for (int i = 0; i < listItem1.Count - 1; i++)
+                        {
+                            GMapRoute line_layer;
+                            line_layer = new GMapRoute("single_line");
+                            line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
+
+                            overlay.Routes.Add(line_layer);
+
+                            var lat1 = Convert.ToDouble(listItem1[i].Lat);
+                            var lon1 = Convert.ToDouble(listItem1[i].Lon);
+
+                            var lat2 = Convert.ToDouble(listItem1[i + 1].Lat);
+                            var lon2 = Convert.ToDouble(listItem1[i + 1].Lon);
+
+                            var point1 = new PointLatLng(lat1, lon1);
+                            var point2 = new PointLatLng(lat2, lon2);
+
+                            line_layer.Points.Add(point1);
+                            line_layer.Points.Add(point2);
+                            historyListRoute.Add(line_layer);
+                            //To force the draw, you need to update the route
+                            mapControl.UpdateRouteLocalPosition(line_layer);
+                        }
+                        //mapControl.Refresh();
+                    }
                 }
                 count++;
             }
-           
+
+            
+
         }
 
         private void ReloadTrackBar()
@@ -498,6 +563,7 @@ namespace Enofibom
         private void btnClearHistory_Click(object sender, EventArgs e)
         {
             ClearHistory();
+            listHistoryPosition = new List<Position>();
         }
 
         private void ClearHistory()
@@ -510,14 +576,20 @@ namespace Enofibom
             {
                 overlay.Polygons.Remove(item);
             }
+            foreach (var item in historyListRoute)
+            {
+                overlay.Routes.Remove(item);
+                mapControl.UpdateRouteLocalPosition(item);
+            }
+            
         }
 
         private void txtSearchHistory_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space)
             {
-                txtSearchHistory.Text += ";";
-                txtSearchHistory.Select(txtSearchHistory.Text.Length -1, 0);
+                txtSearchHistory.Text += "; ";
+                txtSearchHistory.Select(txtSearchHistory.Text.Length - 1, 0);
             }
         }
     }

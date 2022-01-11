@@ -33,12 +33,16 @@ namespace Enofibom
             string isAdmin = System.Configuration.ConfigurationManager.AppSettings[StaticKey.IsAdmin];
             userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
             lblUserLoggedIn.Text = userLoggedIn;
+
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            this.WindowState = FormWindowState.Maximized;
             try
             {
                 if (Convert.ToBoolean(isAdmin))
                 {
                     btnLogCheck.Visible = true;
                     btnUserManage.Visible = true;
+                    btnTargetManage.Visible = true;
                 }
                     
             }
@@ -90,7 +94,7 @@ namespace Enofibom
         {
             this.Hide();
             var form1 = new SignIn();
-            form1.Closed += (s, args) => this.Close();
+            form1.Closed += (s, args) => { this.Close(); };
             form1.Show();
         }
 

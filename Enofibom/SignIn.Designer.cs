@@ -124,7 +124,7 @@ namespace Enofibom
             this.btnLogIn.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogIn.ForeColor = System.Drawing.Color.White;
             this.btnLogIn.HoverState.Parent = this.btnLogIn;
-            this.btnLogIn.Location = new System.Drawing.Point(58, 292);
+            this.btnLogIn.Location = new System.Drawing.Point(58, 295);
             this.btnLogIn.Name = "btnLogIn";
             this.btnLogIn.ShadowDecoration.Parent = this.btnLogIn;
             this.btnLogIn.Size = new System.Drawing.Size(263, 40);
@@ -137,7 +137,7 @@ namespace Enofibom
             this.lblNotify.AutoSize = true;
             this.lblNotify.Font = new System.Drawing.Font("Cambria", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNotify.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.lblNotify.Location = new System.Drawing.Point(75, 144);
+            this.lblNotify.Location = new System.Drawing.Point(75, 147);
             this.lblNotify.Name = "lblNotify";
             this.lblNotify.Size = new System.Drawing.Size(227, 19);
             this.lblNotify.TabIndex = 7;
@@ -161,7 +161,7 @@ namespace Enofibom
             this.txtPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtPassword.HoverState.Parent = this.txtPassword;
             this.txtPassword.IconLeft = global::Enofibom.Properties.Resources.lock_50px;
-            this.txtPassword.Location = new System.Drawing.Point(58, 234);
+            this.txtPassword.Location = new System.Drawing.Point(58, 237);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
             this.txtPassword.PlaceholderText = "Password";
@@ -188,7 +188,7 @@ namespace Enofibom
             this.txtUsername.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtUsername.HoverState.Parent = this.txtUsername;
             this.txtUsername.IconLeft = global::Enofibom.Properties.Resources.person_50px;
-            this.txtUsername.Location = new System.Drawing.Point(58, 176);
+            this.txtUsername.Location = new System.Drawing.Point(58, 179);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.PasswordChar = '\0';
             this.txtUsername.PlaceholderText = "Username";
