@@ -136,12 +136,6 @@
       <DependentUpon>Main.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="MapOnline.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MapOnline.Designer.cs">
-      <DependentUpon>MapOnline.cs</DependentUpon>
-    </Compile>
     <Compile Include="MapUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -213,9 +207,6 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MapOnline.resx">
-      <DependentUpon>MapOnline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MapUserControl.resx">
       <DependentUpon>MapUserControl.cs</DependentUpon>

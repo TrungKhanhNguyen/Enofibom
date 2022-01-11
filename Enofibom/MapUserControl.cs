@@ -58,7 +58,7 @@ namespace Enofibom
             mapControl.DragButton = MouseButtons.Left;
             mapControl.MinZoom = 5;
             mapControl.MaxZoom = 22;
-            mapControl.Zoom = 13;
+            mapControl.Zoom = 12;
             mapControl.ShowCenter = false;
 
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate { return true; });
@@ -200,64 +200,15 @@ namespace Enofibom
                             //await Task.When
                             if (!String.IsNullOrEmpty(contentReponse))
                             {
-                                var respon = contentReponse;
-
-                                string imsi, msisdn, longitude, latitude, radius, cgi, kind, anglestart, angleend, planName;
-                                imsi = msisdn = longitude = latitude = radius = cgi = kind = anglestart = angleend = planName = "";
-                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "imsi").FirstOrDefault() != null)
-                                    imsi = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "imsi").FirstOrDefault().Value;
-
-                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "msisdn").FirstOrDefault() != null)
-                                    msisdn = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "msisdn").FirstOrDefault().Value;
-
-                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "longitude").FirstOrDefault() != null)
-                                    longitude = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "longitude").FirstOrDefault().Value;
-
-                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "latitude").FirstOrDefault() != null)
-                                    latitude = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "latitude").FirstOrDefault().Value;
-
-                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "radius").FirstOrDefault() != null)
-                                    radius = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "radius").FirstOrDefault().Value;
-
-                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "cgi").FirstOrDefault() != null)
-                                    cgi = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "cgi").FirstOrDefault().Value;
-
-                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "kind").FirstOrDefault() != null)
-                                    kind = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "kind").FirstOrDefault().Value;
-
-                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "planName").FirstOrDefault() != null)
-                                    planName = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "planName").FirstOrDefault().Value;
-
-                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleStart").FirstOrDefault() != null)
-                                    anglestart = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleStart").FirstOrDefault().Value;
-
-                                if (XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleEnd").FirstOrDefault() != null)
-                                    angleend = XElement.Parse(respon).Descendants().Where(m => m.Name.LocalName.ToString() == "angleEnd").FirstOrDefault().Value;
-
-                                if (!String.IsNullOrEmpty(latitude) && !String.IsNullOrEmpty(longitude))
+                                var mobi = helper.GetPositionObjectByContentReponse(contentReponse);
+                                if (mobi != null)
                                 {
-                                    var tempLong = ""; var tempLat = "";
-                                    tempLat = latitude.Insert(2, ".");
-                                    tempLong = longitude.Insert(3, ".");
-                                    var mobi = new Position
-                                    {
-                                        AngleEnd = angleend,
-                                        AngleStart = anglestart,
-                                        CGI = cgi,
-                                        IMSI = imsi,
-                                        Kind = kind,
-                                        Lat = tempLat,
-                                        Lon = tempLong,
-                                        MSISDN = msisdn,
-                                        Radius = radius,
-                                        PlanName = planName,
-                                        RequestTime = DateTime.Now
-                                    };
                                     var imeiObj = listIMEI.Where(m => m.MSISDN == mobi.MSISDN).FirstOrDefault();
                                     if (imeiObj != null)
                                         mobi.IMEI = imeiObj.IMEI;
                                     listObject.Add(mobi);
                                 }
+                               
                             }
 
                         }
@@ -287,6 +238,14 @@ namespace Enofibom
                         overlay.Polygons.Add(poly);
                         currentListPolygon.Add(poly);
                     }
+
+                    if (listObject.Count == 1)
+                    {
+                        var lat = Convert.ToDouble(item.Lat);
+                        var lon = Convert.ToDouble(item.Lon);
+                        mapControl.Position = new PointLatLng(lat, lon);
+                    }
+
                     if (isLocationLoaded && isIMEILoaded)
                         await helper.InsertPositionToDB(item);
                     count++;

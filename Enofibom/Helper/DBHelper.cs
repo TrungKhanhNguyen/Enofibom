@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Enofibom.Helper
 {
@@ -25,6 +26,85 @@ namespace Enofibom.Helper
                 listPos.Add(pos);
             }
             return listPos;
+        }
+
+        public string GetLastCharacter(string source, int length)
+        {
+            if (length >= source.Length)
+                return source;
+            return source.Substring(source.Length - length);
+        }
+
+        public Position GetPositionObjectByContentReponse(string response)
+        {
+            try
+            {
+                string imsi, msisdn, longitude, latitude, radius, cgi, kind, anglestart, angleend, planName;
+                imsi = msisdn = longitude = latitude = radius = cgi = kind = anglestart = angleend = planName = "";
+
+                XElement root = XElement.Parse(response);
+                var currLocation = root.Descendants().Where(m => m.Name.LocalName.ToString() == "currLocation").FirstOrDefault();
+                var prevNode = root.Descendants().Where(m => m.Name.LocalName.ToString() == "prevLocation").FirstOrDefault();
+
+                var currLat = currLocation.Descendants("latitude").FirstOrDefault().Value;
+                var currLon = currLocation.Descendants("longitude").FirstOrDefault().Value;
+                var currRadius = currLocation.Descendants("radius").FirstOrDefault().Value;
+
+                imsi = root.Descendants("imsi").FirstOrDefault().Value;
+                msisdn = root.Descendants("msisdn").FirstOrDefault().Value;
+                if (!String.IsNullOrEmpty(currLat) && !String.IsNullOrEmpty(currLon))
+                {
+                    if (GetLastCharacter(currLat, 4) != "0000" && GetLastCharacter(currLon, 4) != "0000")
+                    {
+                        cgi = currLocation.Descendants("cgi").FirstOrDefault().Value;
+                        kind = currLocation.Descendants("kind").FirstOrDefault().Value;
+                        latitude = currLat;
+                        longitude = currLon;
+                        radius = currRadius;
+                        planName = currLocation.Descendants("planName").FirstOrDefault().Value;
+                        anglestart = currLocation.Descendants("angleStart").FirstOrDefault().Value;
+                        angleend = currLocation.Descendants("angleEnd").FirstOrDefault().Value;
+                    }
+                    else
+                    {
+                        cgi = prevNode.Descendants("cgi").FirstOrDefault().Value;
+                        kind = prevNode.Descendants("kind").FirstOrDefault().Value;
+                        latitude = prevNode.Descendants("latitude").FirstOrDefault().Value;
+                        longitude = prevNode.Descendants("longitude").FirstOrDefault().Value;
+                        radius = prevNode.Descendants("radius").FirstOrDefault().Value;
+                        planName = prevNode.Descendants("planName").FirstOrDefault().Value;
+                        anglestart = prevNode.Descendants("angleStart").FirstOrDefault().Value;
+                        angleend = prevNode.Descendants("angleEnd").FirstOrDefault().Value;
+                    }
+
+                }
+
+
+                if (!String.IsNullOrEmpty(latitude) && !String.IsNullOrEmpty(longitude))
+                {
+                    var tempLong = ""; var tempLat = "";
+                    tempLat = latitude.Insert(2, ".");
+                    tempLong = longitude.Insert(3, ".");
+                    var mobi = new Position
+                    {
+                        AngleEnd = angleend,
+                        AngleStart = anglestart,
+                        CGI = cgi,
+                        IMSI = imsi,
+                        Kind = kind,
+                        Lat = tempLat,
+                        Lon = tempLong,
+                        MSISDN = msisdn,
+                        Radius = radius,
+                        PlanName = planName,
+                        RequestTime = DateTime.Now
+                    };
+                    return mobi;
+                }
+                return null;
+            }
+            catch { return null; }
+            
         }
 
         public List<LogEvent> GetLogByDate(DateTime frDate, DateTime toDate)

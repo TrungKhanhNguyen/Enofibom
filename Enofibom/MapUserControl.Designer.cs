@@ -45,6 +45,10 @@ namespace Enofibom
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.txtSearchMSISDN = new Guna.UI2.WinForms.Guna2TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtIMEI = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtReqTime = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtPlanName = new System.Windows.Forms.Label();
             this.txtLon = new System.Windows.Forms.Label();
             this.txtKind = new System.Windows.Forms.Label();
@@ -64,6 +68,8 @@ namespace Enofibom
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnClearHistory = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSearchHistory = new Guna.UI2.WinForms.Guna2Button();
             this.txtCurrentValue = new System.Windows.Forms.Label();
             this.dpToDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
@@ -71,12 +77,6 @@ namespace Enofibom
             this.lblToDate = new System.Windows.Forms.Label();
             this.lblFromDate = new System.Windows.Forms.Label();
             this.txtSearchHistory = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtReqTime = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnClearHistory = new Guna.UI2.WinForms.Guna2Button();
-            this.btnSearchHistory = new Guna.UI2.WinForms.Guna2Button();
-            this.txtIMEI = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
@@ -141,9 +141,8 @@ namespace Enofibom
             this.lblCountLeft.Location = new System.Drawing.Point(5, 27);
             this.lblCountLeft.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCountLeft.Name = "lblCountLeft";
-            this.lblCountLeft.Size = new System.Drawing.Size(54, 17);
+            this.lblCountLeft.Size = new System.Drawing.Size(0, 17);
             this.lblCountLeft.TabIndex = 25;
-            this.lblCountLeft.Text = "label20";
             // 
             // label2
             // 
@@ -274,6 +273,7 @@ namespace Enofibom
             this.btnClear.BorderRadius = 2;
             this.btnClear.BorderThickness = 1;
             this.btnClear.CheckedState.Parent = this.btnClear;
+            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClear.CustomImages.Parent = this.btnClear;
             this.btnClear.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnClear.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -299,6 +299,7 @@ namespace Enofibom
             this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSearch.BorderRadius = 2;
             this.btnSearch.CheckedState.Parent = this.btnSearch;
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.CustomImages.Parent = this.btnSearch;
             this.btnSearch.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnSearch.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -375,6 +376,46 @@ namespace Enofibom
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Location Detail";
+            // 
+            // txtIMEI
+            // 
+            this.txtIMEI.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtIMEI.AutoSize = true;
+            this.txtIMEI.Location = new System.Drawing.Point(294, 160);
+            this.txtIMEI.Name = "txtIMEI";
+            this.txtIMEI.Size = new System.Drawing.Size(0, 17);
+            this.txtIMEI.TabIndex = 19;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(249, 160);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 17);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "IMEI:";
+            // 
+            // txtReqTime
+            // 
+            this.txtReqTime.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtReqTime.AutoSize = true;
+            this.txtReqTime.Location = new System.Drawing.Point(86, 160);
+            this.txtReqTime.Name = "txtReqTime";
+            this.txtReqTime.Size = new System.Drawing.Size(0, 17);
+            this.txtReqTime.TabIndex = 17;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(11, 160);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 17);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Req Time:";
             // 
             // txtPlanName
             // 
@@ -582,6 +623,59 @@ namespace Enofibom
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "History Check";
             // 
+            // btnClearHistory
+            // 
+            this.btnClearHistory.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnClearHistory.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.btnClearHistory.BorderRadius = 2;
+            this.btnClearHistory.BorderThickness = 1;
+            this.btnClearHistory.CheckedState.Parent = this.btnClearHistory;
+            this.btnClearHistory.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClearHistory.CustomImages.Parent = this.btnClearHistory;
+            this.btnClearHistory.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnClearHistory.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnClearHistory.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnClearHistory.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnClearHistory.DisabledState.Parent = this.btnClearHistory;
+            this.btnClearHistory.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.btnClearHistory.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearHistory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.btnClearHistory.HoverState.Parent = this.btnClearHistory;
+            this.btnClearHistory.Image = global::Enofibom.Properties.Resources.broom_48px_102;
+            this.btnClearHistory.ImageSize = new System.Drawing.Size(16, 16);
+            this.btnClearHistory.Location = new System.Drawing.Point(229, 97);
+            this.btnClearHistory.Name = "btnClearHistory";
+            this.btnClearHistory.ShadowDecoration.Parent = this.btnClearHistory;
+            this.btnClearHistory.Size = new System.Drawing.Size(122, 30);
+            this.btnClearHistory.TabIndex = 27;
+            this.btnClearHistory.Text = "Clear";
+            this.btnClearHistory.Click += new System.EventHandler(this.btnClearHistory_Click);
+            // 
+            // btnSearchHistory
+            // 
+            this.btnSearchHistory.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnSearchHistory.BorderRadius = 2;
+            this.btnSearchHistory.CheckedState.Parent = this.btnSearchHistory;
+            this.btnSearchHistory.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSearchHistory.CustomImages.Parent = this.btnSearchHistory;
+            this.btnSearchHistory.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSearchHistory.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSearchHistory.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSearchHistory.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSearchHistory.DisabledState.Parent = this.btnSearchHistory;
+            this.btnSearchHistory.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
+            this.btnSearchHistory.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchHistory.ForeColor = System.Drawing.Color.White;
+            this.btnSearchHistory.HoverState.Parent = this.btnSearchHistory;
+            this.btnSearchHistory.Image = global::Enofibom.Properties.Resources.search_48px;
+            this.btnSearchHistory.Location = new System.Drawing.Point(101, 97);
+            this.btnSearchHistory.Name = "btnSearchHistory";
+            this.btnSearchHistory.ShadowDecoration.Parent = this.btnSearchHistory;
+            this.btnSearchHistory.Size = new System.Drawing.Size(122, 30);
+            this.btnSearchHistory.TabIndex = 26;
+            this.btnSearchHistory.Text = "Search";
+            this.btnSearchHistory.Click += new System.EventHandler(this.btnSearchHistory_Click);
+            // 
             // txtCurrentValue
             // 
             this.txtCurrentValue.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -696,97 +790,6 @@ namespace Enofibom
             this.txtSearchHistory.Size = new System.Drawing.Size(421, 30);
             this.txtSearchHistory.TabIndex = 22;
             this.txtSearchHistory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchHistory_KeyDown);
-            // 
-            // txtReqTime
-            // 
-            this.txtReqTime.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtReqTime.AutoSize = true;
-            this.txtReqTime.Location = new System.Drawing.Point(86, 160);
-            this.txtReqTime.Name = "txtReqTime";
-            this.txtReqTime.Size = new System.Drawing.Size(0, 17);
-            this.txtReqTime.TabIndex = 17;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(11, 160);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 17);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Req Time:";
-            // 
-            // btnClearHistory
-            // 
-            this.btnClearHistory.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnClearHistory.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.btnClearHistory.BorderRadius = 2;
-            this.btnClearHistory.BorderThickness = 1;
-            this.btnClearHistory.CheckedState.Parent = this.btnClearHistory;
-            this.btnClearHistory.CustomImages.Parent = this.btnClearHistory;
-            this.btnClearHistory.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnClearHistory.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnClearHistory.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnClearHistory.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnClearHistory.DisabledState.Parent = this.btnClearHistory;
-            this.btnClearHistory.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.btnClearHistory.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearHistory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            this.btnClearHistory.HoverState.Parent = this.btnClearHistory;
-            this.btnClearHistory.Image = global::Enofibom.Properties.Resources.broom_48px_102;
-            this.btnClearHistory.ImageSize = new System.Drawing.Size(16, 16);
-            this.btnClearHistory.Location = new System.Drawing.Point(229, 97);
-            this.btnClearHistory.Name = "btnClearHistory";
-            this.btnClearHistory.ShadowDecoration.Parent = this.btnClearHistory;
-            this.btnClearHistory.Size = new System.Drawing.Size(122, 30);
-            this.btnClearHistory.TabIndex = 27;
-            this.btnClearHistory.Text = "Clear";
-            this.btnClearHistory.Click += new System.EventHandler(this.btnClearHistory_Click);
-            // 
-            // btnSearchHistory
-            // 
-            this.btnSearchHistory.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnSearchHistory.BorderRadius = 2;
-            this.btnSearchHistory.CheckedState.Parent = this.btnSearchHistory;
-            this.btnSearchHistory.CustomImages.Parent = this.btnSearchHistory;
-            this.btnSearchHistory.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSearchHistory.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSearchHistory.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSearchHistory.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSearchHistory.DisabledState.Parent = this.btnSearchHistory;
-            this.btnSearchHistory.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
-            this.btnSearchHistory.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchHistory.ForeColor = System.Drawing.Color.White;
-            this.btnSearchHistory.HoverState.Parent = this.btnSearchHistory;
-            this.btnSearchHistory.Image = global::Enofibom.Properties.Resources.search_48px;
-            this.btnSearchHistory.Location = new System.Drawing.Point(101, 97);
-            this.btnSearchHistory.Name = "btnSearchHistory";
-            this.btnSearchHistory.ShadowDecoration.Parent = this.btnSearchHistory;
-            this.btnSearchHistory.Size = new System.Drawing.Size(122, 30);
-            this.btnSearchHistory.TabIndex = 26;
-            this.btnSearchHistory.Text = "Search";
-            this.btnSearchHistory.Click += new System.EventHandler(this.btnSearchHistory_Click);
-            // 
-            // txtIMEI
-            // 
-            this.txtIMEI.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtIMEI.AutoSize = true;
-            this.txtIMEI.Location = new System.Drawing.Point(294, 160);
-            this.txtIMEI.Name = "txtIMEI";
-            this.txtIMEI.Size = new System.Drawing.Size(0, 17);
-            this.txtIMEI.TabIndex = 19;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(249, 160);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 17);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "IMEI:";
             // 
             // MapUserControl
             // 
