@@ -275,6 +275,7 @@ namespace Enofibom
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+
             //ClearMap();
             foreach (var item in currentListMarker)
             {
