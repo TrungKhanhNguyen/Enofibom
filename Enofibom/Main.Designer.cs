@@ -196,11 +196,7 @@ namespace Enofibom
             this.btnTargetManage.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
             this.btnTargetManage.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.btnTargetManage.CustomImages.Parent = this.btnTargetManage;
-            this.btnTargetManage.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnTargetManage.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnTargetManage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnTargetManage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnTargetManage.DisabledState.Parent = this.btnTargetManage;
+            
             this.btnTargetManage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
             this.btnTargetManage.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTargetManage.ForeColor = System.Drawing.Color.White;
@@ -222,11 +218,7 @@ namespace Enofibom
             this.btnLogCheck.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
             this.btnLogCheck.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.btnLogCheck.CustomImages.Parent = this.btnLogCheck;
-            this.btnLogCheck.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnLogCheck.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnLogCheck.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnLogCheck.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnLogCheck.DisabledState.Parent = this.btnLogCheck;
+            
             this.btnLogCheck.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
             this.btnLogCheck.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogCheck.ForeColor = System.Drawing.Color.White;
@@ -248,11 +240,7 @@ namespace Enofibom
             this.btnUserManage.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
             this.btnUserManage.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.btnUserManage.CustomImages.Parent = this.btnUserManage;
-            this.btnUserManage.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnUserManage.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnUserManage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnUserManage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnUserManage.DisabledState.Parent = this.btnUserManage;
+            
             this.btnUserManage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
             this.btnUserManage.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUserManage.ForeColor = System.Drawing.Color.White;
@@ -274,11 +262,7 @@ namespace Enofibom
             this.btnDataOnline.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
             this.btnDataOnline.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.btnDataOnline.CustomImages.Parent = this.btnDataOnline;
-            this.btnDataOnline.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnDataOnline.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnDataOnline.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnDataOnline.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnDataOnline.DisabledState.Parent = this.btnDataOnline;
+            
             this.btnDataOnline.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
             this.btnDataOnline.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDataOnline.ForeColor = System.Drawing.Color.White;

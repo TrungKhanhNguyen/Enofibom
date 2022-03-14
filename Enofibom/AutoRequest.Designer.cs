@@ -226,11 +226,7 @@ namespace Enofibom
             this.btnStop1.CheckedState.Parent = this.btnStop1;
             this.btnStop1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStop1.CustomImages.Parent = this.btnStop1;
-            this.btnStop1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnStop1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnStop1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnStop1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnStop1.DisabledState.Parent = this.btnStop1;
+            
             this.btnStop1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnStop1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnStop1.ForeColor = System.Drawing.Color.White;
@@ -274,11 +270,7 @@ namespace Enofibom
             this.btnStop2.CheckedState.Parent = this.btnStop2;
             this.btnStop2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStop2.CustomImages.Parent = this.btnStop2;
-            this.btnStop2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnStop2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnStop2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnStop2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnStop2.DisabledState.Parent = this.btnStop2;
+            
             this.btnStop2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnStop2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnStop2.ForeColor = System.Drawing.Color.White;
@@ -369,11 +361,7 @@ namespace Enofibom
             this.btnStop3.CheckedState.Parent = this.btnStop3;
             this.btnStop3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStop3.CustomImages.Parent = this.btnStop3;
-            this.btnStop3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnStop3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnStop3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnStop3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnStop3.DisabledState.Parent = this.btnStop3;
+            
             this.btnStop3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnStop3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnStop3.ForeColor = System.Drawing.Color.White;
@@ -474,11 +462,7 @@ namespace Enofibom
             this.btnStart1.CheckedState.Parent = this.btnStart1;
             this.btnStart1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStart1.CustomImages.Parent = this.btnStart1;
-            this.btnStart1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnStart1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnStart1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnStart1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnStart1.DisabledState.Parent = this.btnStart1;
+            
             this.btnStart1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
             this.btnStart1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnStart1.ForeColor = System.Drawing.Color.White;
@@ -497,11 +481,7 @@ namespace Enofibom
             this.btnStart2.CheckedState.Parent = this.btnStart2;
             this.btnStart2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStart2.CustomImages.Parent = this.btnStart2;
-            this.btnStart2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnStart2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnStart2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnStart2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnStart2.DisabledState.Parent = this.btnStart2;
+            
             this.btnStart2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
             this.btnStart2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnStart2.ForeColor = System.Drawing.Color.White;
@@ -520,11 +500,7 @@ namespace Enofibom
             this.btnStart3.CheckedState.Parent = this.btnStart3;
             this.btnStart3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStart3.CustomImages.Parent = this.btnStart3;
-            this.btnStart3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnStart3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnStart3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnStart3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnStart3.DisabledState.Parent = this.btnStart3;
+            
             this.btnStart3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
             this.btnStart3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnStart3.ForeColor = System.Drawing.Color.White;

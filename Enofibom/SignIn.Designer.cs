@@ -115,11 +115,7 @@ namespace Enofibom
             this.btnLogIn.CheckedState.Parent = this.btnLogIn;
             this.btnLogIn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogIn.CustomImages.Parent = this.btnLogIn;
-            this.btnLogIn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnLogIn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnLogIn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnLogIn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnLogIn.DisabledState.Parent = this.btnLogIn;
+            
             this.btnLogIn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
             this.btnLogIn.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogIn.ForeColor = System.Drawing.Color.White;
