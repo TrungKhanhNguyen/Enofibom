@@ -62,8 +62,10 @@ namespace Enofibom
             // 
             // guna2DragControl1
             // 
+            this.guna2DragControl1.ContainerControl = this;
             this.guna2DragControl1.DockIndicatorTransparencyValue = 0.6D;
             this.guna2DragControl1.TargetControl = this.topDockPanel;
+            this.guna2DragControl1.TransparentWhileDrag = true;
             this.guna2DragControl1.UseTransparentDrag = true;
             // 
             // topDockPanel
@@ -74,7 +76,7 @@ namespace Enofibom
             this.topDockPanel.Controls.Add(this.guna2ControlBox2);
             this.topDockPanel.Controls.Add(this.guna2ControlBox3);
             this.topDockPanel.Controls.Add(this.label1);
-            this.topDockPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.topDockPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.topDockPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topDockPanel.Location = new System.Drawing.Point(0, 0);
             this.topDockPanel.Name = "topDockPanel";
@@ -196,7 +198,6 @@ namespace Enofibom
             this.btnTargetManage.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
             this.btnTargetManage.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.btnTargetManage.CustomImages.Parent = this.btnTargetManage;
-            
             this.btnTargetManage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
             this.btnTargetManage.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTargetManage.ForeColor = System.Drawing.Color.White;
@@ -218,7 +219,6 @@ namespace Enofibom
             this.btnLogCheck.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
             this.btnLogCheck.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.btnLogCheck.CustomImages.Parent = this.btnLogCheck;
-            
             this.btnLogCheck.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
             this.btnLogCheck.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogCheck.ForeColor = System.Drawing.Color.White;
@@ -240,7 +240,6 @@ namespace Enofibom
             this.btnUserManage.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
             this.btnUserManage.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.btnUserManage.CustomImages.Parent = this.btnUserManage;
-            
             this.btnUserManage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
             this.btnUserManage.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUserManage.ForeColor = System.Drawing.Color.White;
@@ -262,7 +261,6 @@ namespace Enofibom
             this.btnDataOnline.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
             this.btnDataOnline.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.btnDataOnline.CustomImages.Parent = this.btnDataOnline;
-            
             this.btnDataOnline.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
             this.btnDataOnline.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDataOnline.ForeColor = System.Drawing.Color.White;

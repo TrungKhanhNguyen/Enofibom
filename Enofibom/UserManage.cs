@@ -1,4 +1,5 @@
-﻿using Enofibom.Helper;
+﻿using Enofibom.ApiHelper;
+using Enofibom.Helper;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -7,10 +8,10 @@ namespace Enofibom
 {
     public partial class UserManage : UserControl
     {
-        DBHelper helper = new DBHelper();
+        MemberHelper helper = new MemberHelper();
         List<Member> listMember = new List<Member>();
         string userLoggedIn = "";
-        UserHelper userHelper = new UserHelper();
+        //UserHelper userHelper = new UserHelper();
         public UserManage()
         {
             InitializeComponent();
@@ -22,9 +23,9 @@ namespace Enofibom
             ReloadData();
         }
 
-        private void ReloadData()
+        private async void ReloadData()
         {
-            listMember = helper.GetAllMember();
+            listMember = await helper.GetAllMember();
             dataGridView1.DataSource = listMember;
             dataGridView1.Refresh();
         }

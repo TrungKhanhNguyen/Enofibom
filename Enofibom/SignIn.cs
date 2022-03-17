@@ -1,4 +1,5 @@
-﻿using Enofibom.Helper;
+﻿using Enofibom.ApiHelper;
+using Enofibom.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace Enofibom
 {
     public partial class SignIn : Form
     {
-        DBHelper helper = new DBHelper();
+        MemberHelper helper = new MemberHelper();
         public SignIn()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace Enofibom
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             try
             {
-                var user = helper.GetUserLogin(username, password);
+                var user = await helper.getMemberByUsernameAndPass(username, password);
                 if (user != null)
                 {
                     configuration.AppSettings.Settings["IsAdmin"].Value = user.IsAdmin.ToString();
@@ -41,7 +42,7 @@ namespace Enofibom
                         User = username,
                         Task = "Logged in"
                     };
-                    await helper.InsertToLog(eventLog);
+                    await DBHelper.InsertToLog(eventLog);
                     this.Hide();
                     var form1 = new Main();
                     form1.Closed += (s, args) => { this.Close(); };

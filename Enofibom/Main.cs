@@ -51,7 +51,6 @@ namespace Enofibom
 
         private void btnLogCheck_Click(object sender, EventArgs e)
         {
-           
             mapUserControl2.Hide();
             changePasswordControl1.Hide();
             logCheck2.Show();

@@ -137,15 +137,7 @@ namespace Enofibom.Helper
             }
         }
 
-        public List<Member> GetAllMember()
-        {
-            var listMember = new List<Member>();
-            using (MapOfflineEntities db = new MapOfflineEntities())
-            {
-                listMember = db.Members.ToList();
-            }
-            return listMember;
-        }
+        
 
         public void UpdatePassword(int id,string newpassword)
         {
@@ -161,19 +153,8 @@ namespace Enofibom.Helper
             }
         }
 
-        public Member GetUserLogin(string username, string password)
-        {
-            Member user = null;
-            using (MapOfflineEntities db = new MapOfflineEntities())
-            {
-                var item = db.Members.Where(m => m.Username == username && m.Password == password && m.Active == true).FirstOrDefault();
-                if (item != null)
-                    user = item;
-            }
-            return user;
-        }
-
-        public async Task InsertToLog(LogEvent eventLog)
+        
+        public static async Task InsertToLog(LogEvent eventLog)
         {
             await Task.Run(() =>
             {
