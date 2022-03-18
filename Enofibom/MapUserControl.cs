@@ -18,6 +18,7 @@ using Enofibom.Helper;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using System.Net;
+using Enofibom.ApiHelper;
 
 namespace Enofibom
 {
@@ -31,18 +32,16 @@ namespace Enofibom
         System.Windows.Forms.Timer timer1 = new Timer();
         Maper maper = new Maper();
         DBHelper helper = new DBHelper();
-        private Random rd = new Random();
         List<GMapMarker> currentListMarker = new List<GMapMarker>(); //List các marker đang hiển thị phần online
         List<GMapPolygon> currentListPolygon = new List<GMapPolygon>();//List các polygon đang hiển thị online
-        List<Position> listHistoryObject = new List<Position>();//List các marker đang hiển thị phần offline
         List<IMEIObject> listIMEI = new List<IMEIObject>(); //list các imei đang hiển thị phần online
         bool isIMEILoaded = false;
         bool isLocationLoaded = false;
+        APIConnect api = new APIConnect();
         public MapUserControl()
         {
             InitializeComponent();
         }
-
         private void MapUserControl_Load(object sender, EventArgs e)
         {
             var toDate = DateTime.Now;
@@ -50,10 +49,8 @@ namespace Enofibom
 
             GMaps.Instance.Mode = AccessMode.ServerAndCache;
             mapControl.CacheLocation = "C:/MapCache";
-
             mapControl.MapProvider = GMapProviders.GoogleMap;
             var point = new PointLatLng(21.020440, 105.843650);
-
             mapControl.Position = point;
             mapControl.DragButton = MouseButtons.Left;
             mapControl.MinZoom = 5;
@@ -71,14 +68,8 @@ namespace Enofibom
             clockCount.Tick += new EventHandler(clockCount_Tick);
             mapControl.Overlays.Add(overlay);
 
-            dpToDate.Value = DateTime.Now;
-            dpFromDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-            txtCurrentValue.Text = dpFromDate.Value.ToString("dd/MM/yyyy HH:mm:ss");
-            lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy");
-            lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy");
+            
         }
-
-       
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -100,52 +91,18 @@ namespace Enofibom
                 var listSDT = txtSearchMSISDN.Text.Split(';');
                 foreach (var sdt in listSDT)
                 {
-                    using (var client = new HttpClient())
-                    {
-                        client.DefaultRequestHeaders.Add("MobifoneKey", "74a5c84c-f2c3-4bbd-9819-5958094d604e");
-                        var contentReponse = "";
-                        using (HttpResponseMessage responseMessage = await client.GetAsync(urlIMEI + sdt.Trim()))
-                        using (HttpContent content = responseMessage.Content)
-                        {
-                            if (responseMessage.StatusCode == HttpStatusCode.OK)
-                            {
-                                contentReponse = content.ReadAsStringAsync().Result;
-                            }
-                        }
-
-                        if (!String.IsNullOrEmpty(contentReponse))
-                        {
-                            string imei, msisdn;
-                            imei = msisdn = "";
-                            XElement xml = XElement.Parse(contentReponse);
-                            if (xml.Descendants("parm").Where(x => x.Attribute("name").Value == "sub.imei").FirstOrDefault() != null)
-                                imei = xml.Descendants("parm").Where(x => x.Attribute("name").Value == "sub.imei").FirstOrDefault().Attribute("value").Value;
-
-                            if (xml.Descendants("parm").Where(x => x.Attribute("name").Value == "MSISDN").FirstOrDefault() != null)
-                                msisdn = xml.Descendants("parm").Where(x => x.Attribute("name").Value == "MSISDN").FirstOrDefault().Attribute("value").Value;
-                            if (!String.IsNullOrEmpty(imei) && !String.IsNullOrEmpty(msisdn))
-                            {
-                                var imeiObj = new IMEIObject
-                                {
-                                    IMEI = imei,
-                                    MSISDN = msisdn.Replace('+', ' ').Trim()
-                                };
-
-                                listIMEI.Add(imeiObj);
-                                var mobiObj = listObject.Where(m => m.MSISDN == imeiObj.MSISDN).FirstOrDefault();
-                                if (mobiObj != null)
-                                    mobiObj.IMEI = imeiObj.IMEI;
-                            }
-
-                        }
-                    }
+                    var imeiObj = await api.GetIMEI(sdt);
+                    listIMEI.Add(imeiObj);
+                    var mobiObj = listObject.Where(m => m.MSISDN == imeiObj.MSISDN).FirstOrDefault();
+                    if (mobiObj != null)
+                        mobiObj.IMEI = imeiObj.IMEI;
                 }
                 isIMEILoaded = true;
                 if (isIMEILoaded && isLocationLoaded)
                 {
                     foreach(var item in listObject)
                     {
-                        await helper.InsertPositionToDB (item);
+                        await helper.InsertPositionToDB(item);
                     }
                 }
             }
@@ -162,62 +119,15 @@ namespace Enofibom
 
                 foreach (var sdt in listSDT)
                 {
-                    try
+                    var mobi = await api.GetLocation(sdt); 
+                    if (mobi != null)
                     {
-                        var handler = new HttpClientHandler() { };
-                        using (var httpClient = new HttpClient(handler)
-                        {
-                            BaseAddress = new Uri(url),
-                            Timeout = new TimeSpan(0, 2, 0)
-                        })
-                        {
-                            var inputBody = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:v1='http://schema.intersec.com/igloo/sdk/v1.2'><soapenv:Header/><soapenv:Body><v1:pull.retrieveV3Req><args><params><filter><msisdn><explicit><kind>2</kind>"
-                            + "<m>" + sdt.Trim() + "</m>"
-                            + "</explicit></msisdn></filter><options><subscriberFields>msisdn</subscriberFields><subscriberFields>imsi</subscriberFields><locationFields>location</locationFields></options></params></args></v1:pull.retrieveV3Req></soapenv:Body></soapenv:Envelope>";
-
-                            var httpContent = new StringContent(inputBody, Encoding.UTF8, "application/xml");
-                            var request = new HttpRequestMessage();
-                            request.Method = HttpMethod.Post;
-                            request.RequestUri = new Uri(url);
-                            request.Content = httpContent;
-                            request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/xml");
-
-
-                            var byteArray = Encoding.ASCII.GetBytes("tctk_api:$5$rounds=5000$bbf460274ac2fcd8$u0raxguDBJcCDUWKabiHX0LXjxuTszOnUJlZhqGXFQ2");
-                            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-                            httpClient.DefaultRequestHeaders.Add("MobifoneKey", "74a5c84c-f2c3-4bbd-9819-5958094d604e");
-
-                            //var responseMessage = await httpClient.SendAsync(request);
-                            var contentReponse = "";
-                            using (HttpResponseMessage responseMessage = await httpClient.SendAsync(request))
-                            using (HttpContent content = responseMessage.Content)
-                            {
-                                if (responseMessage.StatusCode == HttpStatusCode.OK)
-                                {
-                                    contentReponse = content.ReadAsStringAsync().Result;
-                                }
-                            }
-                            //await Task.When
-                            if (!String.IsNullOrEmpty(contentReponse))
-                            {
-                                var mobi = helper.GetPositionObjectByContentReponse(contentReponse);
-                                if (mobi != null)
-                                {
-                                    var imeiObj = listIMEI.Where(m => m.MSISDN == mobi.MSISDN).FirstOrDefault();
-                                    if (imeiObj != null)
-                                        mobi.IMEI = imeiObj.IMEI;
-                                    listObject.Add(mobi);
-                                }
-                               
-                            }
-
-                        }
+                        var imeiObj = listIMEI.Where(m => m.MSISDN == mobi.MSISDN).FirstOrDefault();
+                        if (imeiObj != null)
+                            mobi.IMEI = imeiObj.IMEI;
+                        listObject.Add(mobi);
                     }
-                    catch
-                    {
-
-                    }
-                    //Thread.Sleep(rd.Next(1000, 1500));
+                   
                 }
 
                 dataGrid1.DataSource = listObject;
@@ -275,7 +185,6 @@ namespace Enofibom
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-
             //ClearMap();
             foreach (var item in currentListMarker)
             {
@@ -292,7 +201,7 @@ namespace Enofibom
         private void ClearText()
         {
             txtCGI.Text = txtIMSI.Text = txtKind.Text = txtLat.Text = txtLon.Text = txtMSISDN.Text = txtPlanName.Text = txtRadius.Text = "";
-
+            txtLocationStamp.Text = txtEventStamp.Text = "";
             dataGrid1.DataSource = null;
             dataGrid1.Refresh();
         }
@@ -312,7 +221,8 @@ namespace Enofibom
                     txtRadius.Text = listObject[e.RowIndex].Radius;
                     txtPlanName.Text = listObject[e.RowIndex].PlanName;
                     txtKind.Text = listObject[e.RowIndex].Kind;
-                    txtReqTime.Text = listObject[e.RowIndex].RequestTime?.ToString("dd/MM/yyyy HH:mm");
+                    txtLocationStamp.Text = listObject[e.RowIndex].locStamp?.ToString("dd/MM/yyyy HH:mm");
+                    txtEventStamp.Text = listObject[e.RowIndex].eventStamp?.ToString("dd/MM/yyyy HH:mm");
                     txtIMEI.Text = listObject[e.RowIndex].IMEI;
                 }
                 catch
@@ -393,205 +303,5 @@ namespace Enofibom
         }
 
         
-        List<Position> listHistoryPosition = new List<Position>();
-        List<GMapMarker> historyListMarker = new List<GMapMarker>();
-        List<GMapPolygon> historyListPolygon = new List<GMapPolygon>();
-        List<GMapRoute> historyListRoute = new List<GMapRoute>();
-
-
-        List<Position> listCurrentHistoryPosition = new List<Position>();
-
-        private void btnSearchHistory_Click(object sender, EventArgs e)
-        {
-            ClearHistory();
-            
-            historyListMarker = new List<GMapMarker>(); historyListPolygon = new List<GMapPolygon>();
-            historyListRoute = new List<GMapRoute>();
-            var listSDT = txtSearchHistory.Text.Split(';');
-            List<string> listArraySDT = new List<string>();
-            foreach(var item in listSDT)
-            {
-                listArraySDT.Add(item.Trim());
-            }
-            listHistoryPosition = helper.GetListPositionByDate(listArraySDT.ToArray(), dpFromDate.Value, dpToDate.Value);
-            var count = 1;
-            foreach (var item in listArraySDT)
-            {
-                var listItem1 = listHistoryPosition.Where(m => m.MSISDN == item).ToList();
-                if(listItem1.Count > 0)
-                {
-                    foreach(var itemPos in listItem1)
-                    {
-                        var marker1 = maper.GetMarkerFromData(itemPos, count);
-                        var poly = maper.GetPolygonFromData(itemPos);
-                        if (marker1 != null)
-                        {
-                            overlay.Markers.Add(marker1);
-                            historyListMarker.Add(marker1);
-                        }
-                        if (poly != null)
-                        {
-
-                            overlay.Polygons.Add(poly);
-                            historyListPolygon.Add(poly);
-                        }
-                    }
-                    if(listItem1.Count > 1)
-                    {
-                        for (int i = 0; i < listItem1.Count - 1; i++)
-                        {
-                            GMapRoute line_layer = new GMapRoute("single_line");
-                            line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
-
-                            var lat1 = Convert.ToDouble(listItem1[i].Lat);
-                            var lon1 = Convert.ToDouble(listItem1[i].Lon);
-
-                            var lat2 = Convert.ToDouble(listItem1[i + 1].Lat);
-                            var lon2 = Convert.ToDouble(listItem1[i + 1].Lon);
-
-                            var point1 = new PointLatLng(lat1, lon1);
-                            var point2 = new PointLatLng(lat2, lon2);
-
-                            line_layer.Points.Add(point1);
-                            line_layer.Points.Add(point2);
-                            overlay.Routes.Add(line_layer);
-                            historyListRoute.Add(line_layer);
-                            //To force the draw, you need to update the route
-                            //mapControl.UpdateRouteLocalPosition(line_layer);
-                            
-                        }
-                    }
-                    mapControl.Refresh();
-                }
-                count++;
-            }
-            //var kkk = historyListRoute;
-        }
-
-        private void trackBar1_ValueChanged(object sender, EventArgs e)
-        {
-            ClearHistory();
-            var trackValue = trackBar1.Value;
-            var frDate = dpFromDate.Value;
-            var toDate = frDate.AddMinutes(trackValue);
-            listCurrentHistoryPosition = listHistoryPosition.Where(m => m.RequestTime >= frDate && m.RequestTime <= toDate).ToList();
-            var listSDT = txtSearchHistory.Text.Split(';');
-            txtCurrentValue.Text = toDate.ToString("dd/MM/yyyy HH:mm:ss");
-            var count = 1;
-            foreach (var item in listSDT)
-            {
-                var listItem1 = listCurrentHistoryPosition.Where(m => m.MSISDN == item.Trim()).ToList();
-                if (listItem1.Count > 0)
-                {
-                    foreach (var itemPos in listItem1)
-                    {
-                        var marker1 = maper.GetMarkerFromData(itemPos, count);
-                        var poly = maper.GetPolygonFromData(itemPos);
-                        if (marker1 != null)
-                        {
-                            overlay.Markers.Add(marker1);
-                            historyListMarker.Add(marker1);
-                        }
-                        if (poly != null)
-                        {
-                            overlay.Polygons.Add(poly);
-                            historyListPolygon.Add(poly);
-                        }
-                    }
-
-                    if (listItem1.Count > 1)
-                    {
-                        for (int i = 0; i < listItem1.Count - 1; i++)
-                        {
-                            GMapRoute line_layer;
-                            line_layer = new GMapRoute("single_line");
-                            line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
-
-                            overlay.Routes.Add(line_layer);
-
-                            var lat1 = Convert.ToDouble(listItem1[i].Lat);
-                            var lon1 = Convert.ToDouble(listItem1[i].Lon);
-
-                            var lat2 = Convert.ToDouble(listItem1[i + 1].Lat);
-                            var lon2 = Convert.ToDouble(listItem1[i + 1].Lon);
-
-                            var point1 = new PointLatLng(lat1, lon1);
-                            var point2 = new PointLatLng(lat2, lon2);
-
-                            line_layer.Points.Add(point1);
-                            line_layer.Points.Add(point2);
-                            historyListRoute.Add(line_layer);
-                            //To force the draw, you need to update the route
-                            mapControl.UpdateRouteLocalPosition(line_layer);
-                        }
-                        //mapControl.Refresh();
-                    }
-                }
-                count++;
-            }
-
-            
-
-        }
-
-        private void ReloadTrackBar()
-        {
-            TimeSpan duration = new TimeSpan(dpToDate.Value.Ticks - dpFromDate.Value.Ticks);
-            var totalCount = duration.TotalMinutes;
-            trackBar1.Maximum = (int)totalCount;
-            trackBar1.Refresh();
-        }
-        private void dpFromDate_ValueChanged(object sender, EventArgs e)
-        {
-            if (dpFromDate.Value.Date > dpToDate.Value.Date)
-            {
-                dpToDate.Value = dpFromDate.Value;
-            }
-            lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy");
-            ReloadTrackBar();
-        }
-
-        private void dpToDate_ValueChanged(object sender, EventArgs e)
-        {
-            if (dpToDate.Value.Date < dpFromDate.Value.Date)
-            {
-                dpToDate.Value = dpFromDate.Value;
-            }
-            lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy");
-            ReloadTrackBar();
-        }
-
-        private void btnClearHistory_Click(object sender, EventArgs e)
-        {
-            ClearHistory();
-            listHistoryPosition = new List<Position>();
-        }
-
-        private void ClearHistory()
-        {
-            foreach (var item in historyListMarker)
-            {
-                overlay.Markers.Remove(item);
-            }
-            foreach (var item in historyListPolygon)
-            {
-                overlay.Polygons.Remove(item);
-            }
-            foreach (var item in historyListRoute)
-            {
-                overlay.Routes.Remove(item);
-                mapControl.UpdateRouteLocalPosition(item);
-            }
-            
-        }
-
-        private void txtSearchHistory_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space)
-            {
-                txtSearchHistory.Text += "; ";
-                txtSearchHistory.Select(txtSearchHistory.Text.Length - 1, 0);
-            }
-        }
     }
 }

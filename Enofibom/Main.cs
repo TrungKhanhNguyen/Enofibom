@@ -24,12 +24,12 @@ namespace Enofibom
             mapUserControl2.Show();
             mapUserControl2.BringToFront();
             logCheck2.Hide();
-            
             userManage1.Hide();
             changePasswordControl1.Hide();
+            historyMap1.Hide();
+
             btnLogCheck.Visible = false;
             btnUserManage.Visible = false;
-            btnTargetManage.Visible = false;
             string isAdmin = System.Configuration.ConfigurationManager.AppSettings[StaticKey.IsAdmin];
             userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
             lblUserLoggedIn.Text = userLoggedIn;
@@ -42,7 +42,6 @@ namespace Enofibom
                 {
                     btnLogCheck.Visible = true;
                     btnUserManage.Visible = true;
-                    btnTargetManage.Visible = true;
                 }
                     
             }
@@ -79,14 +78,6 @@ namespace Enofibom
             changePasswordControl1.Hide();
         }
 
-        private void guna2TileButton1_Click(object sender, EventArgs e)
-        {
-            mapUserControl2.Hide();
-
-            logCheck2.Hide();
-            changePasswordControl1.Hide();
-            
-        }
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
@@ -103,6 +94,15 @@ namespace Enofibom
             
             changePasswordControl1.Show();
             changePasswordControl1.BringToFront();
+        }
+
+        private void btnHistoryCheck_Click(object sender, EventArgs e)
+        {
+            mapUserControl2.Hide();
+            logCheck2.Hide();
+            changePasswordControl1.Hide();
+            historyMap1.Show();
+            historyMap1.BringToFront();
         }
     }
 }

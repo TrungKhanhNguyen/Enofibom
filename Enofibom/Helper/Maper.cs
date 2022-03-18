@@ -27,8 +27,8 @@ namespace Enofibom.Helper
                 var rad = Convert.ToDouble(temp.Radius);
                 var tooltiptext = Environment.NewLine + "IMSI=" + temp.IMSI + "; MSISDN=" + temp.MSISDN + Environment.NewLine +
                     ";CGI=" + temp.CGI + "; Kind=" + temp.Kind + Environment.NewLine +
-                    "; Lat=" + temp.Lat + "; Lon=" + temp.Lon + "; Radius=" + temp.Radius + "; Req Time=" + temp.RequestTime?.ToString("dd/MM/yyyy HH:mm:ss");
-
+                    "; Lat=" + temp.Lat + "; Lon=" + temp.Lon + "; Radius=" + temp.Radius + "; Event Time=" + temp.eventStamp?.ToString("dd/MM/yyyy HH:mm:ss")
+                    + "; Location Time=" + temp.locStamp?.ToString("dd/MM/yyyy HH:mm:ss");
                 var point = new PointLatLng(realLat, realLng);
                 GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
                 switch (numbers)
@@ -40,18 +40,15 @@ namespace Enofibom.Helper
                     case 6: marker = new GMarkerGoogle(point, GMarkerGoogleType.purple_dot); break;
                     case 7: marker = new GMarkerGoogle(point, GMarkerGoogleType.lightblue_dot); break;
                 }
-
                 marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
                 marker.ToolTipText = tooltiptext;
                 marker.IsVisible = true;
-
                 return marker;
             }
             catch
             {
                 return null;
             }
-
         }
         public GMapPolygon GetPolygonFromData(Position temp)
         {
@@ -69,23 +66,16 @@ namespace Enofibom.Helper
             {
                 return null;
             }
-
         }
-
-
-
         public GMapPolygon CreateCircle(Double lat, Double lon, double radius, int ColorIndex)
         {
             PointLatLng point = new PointLatLng(lat, lon);
             int segments = 1080;
-
             List<PointLatLng> gpollist = new List<PointLatLng>();
-
             for (int i = 0; i < segments; i++)
             {
                 gpollist.Add(FindPointAtDistanceFrom(point, i * (Math.PI / 180), radius / 1000));
             }
-
             GMapPolygon polygon = new GMapPolygon(gpollist, "Circle");
             switch (ColorIndex)
             {
@@ -103,8 +93,6 @@ namespace Enofibom.Helper
                     MessageBox.Show("No search zone found!");
                     break;
             }
-
-
             polygon.Stroke = new Pen(Color.Gray, 1);
             return polygon;
         }
@@ -149,29 +137,6 @@ namespace Enofibom.Helper
             return startPoint.GetDistanceTo(endPoint);
         }
 
-        private void DrawLine(GMapControl mapControl)
-        {
-            //PointLatLng point = new PointLatLng(lat, lon);
-
-            GMapRoute line_layer;
-            GMapOverlay line_overlay = new GMapOverlay();
-
-            line_layer = new GMapRoute("single_line");
-            line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
-
-            line_overlay.Routes.Add(line_layer);
-            mapControl.Overlays.Add(line_overlay);
-
-            //Once the layer is created, simply add the two points you want
-
-            line_layer.Points.Add(new PointLatLng(21.020440, 105.843650));
-            //line_layer.Points.Add(new PointLatLng(21.016830, 105.855760));
-            line_layer.Points.Add(new PointLatLng(21.001930, 105.846558));
-
-            //To force the draw, you need to update the route
-            mapControl.UpdateRouteLocalPosition(line_layer);
-
-            
-        }
+      
     }
 }

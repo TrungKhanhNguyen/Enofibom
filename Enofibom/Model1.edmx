@@ -37,10 +37,11 @@
           <Property Name="Lon" Type="nvarchar" MaxLength="50" />
           <Property Name="Radius" Type="nvarchar" MaxLength="50" />
           <Property Name="PlanName" Type="nvarchar" MaxLength="50" />
-          <Property Name="RequestTime" Type="datetime" />
+          <Property Name="locStamp" Type="datetime" />
           <Property Name="AngleStart" Type="nvarchar" MaxLength="50" />
           <Property Name="AngleEnd" Type="nvarchar" MaxLength="50" />
           <Property Name="IMEI" Type="nvarchar" MaxLength="50" />
+          <Property Name="eventStamp" Type="datetime" />
         </EntityType>
         <EntityType Name="Target">
           <Key>
@@ -97,10 +98,11 @@
           <Property Name="Lon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Radius" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PlanName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RequestTime" Type="DateTime" Precision="3" />
+          <Property Name="locStamp" Type="DateTime" Precision="3" />
           <Property Name="AngleStart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AngleEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IMEI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eventStamp" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Target">
           <Key>
@@ -159,10 +161,11 @@
                 <ScalarProperty Name="Lon" ColumnName="Lon" />
                 <ScalarProperty Name="Radius" ColumnName="Radius" />
                 <ScalarProperty Name="PlanName" ColumnName="PlanName" />
-                <ScalarProperty Name="RequestTime" ColumnName="RequestTime" />
+                <ScalarProperty Name="locStamp" ColumnName="locStamp" />
                 <ScalarProperty Name="AngleStart" ColumnName="AngleStart" />
                 <ScalarProperty Name="AngleEnd" ColumnName="AngleEnd" />
                 <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+                <ScalarProperty Name="eventStamp" ColumnName="eventStamp" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

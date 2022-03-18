@@ -1,4 +1,5 @@
-﻿using Enofibom.Helper;
+﻿using Enofibom.ApiHelper;
+using Enofibom.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,7 @@ namespace Enofibom
         System.Windows.Forms.Timer clockCount3 = new Timer();
 
         DBHelper helper = new DBHelper();
+        APIConnect api = new APIConnect();
         public AutoRequest()
         {
             InitializeComponent();
@@ -60,56 +62,10 @@ namespace Enofibom
         }
         private async void GetLocationAsync(string phoneNumber)
         {
-            var url = StaticKey.requestPositionUrl;
             try
             {
-
-                var handler = new HttpClientHandler() { };
-                CookieContainer cookies = new CookieContainer();
-                handler.CookieContainer = cookies;
-                using (var httpClient = new HttpClient(handler)
-                {
-                    BaseAddress = new Uri(url),
-                    Timeout = new TimeSpan(0, 2, 0)
-                })
-                {
-                    var inputBody = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:v1='http://schema.intersec.com/igloo/sdk/v1.2'><soapenv:Header/><soapenv:Body><v1:pull.retrieveV3Req><args><params><filter><msisdn><explicit><kind>2</kind>"
-                    + "<m>" + phoneNumber.Trim() + "</m>"
-                    + "</explicit></msisdn></filter><options><subscriberFields>msisdn</subscriberFields><subscriberFields>imsi</subscriberFields><locationFields>location</locationFields></options></params></args></v1:pull.retrieveV3Req></soapenv:Body></soapenv:Envelope>";
-
-                    var httpContent = new StringContent(inputBody, Encoding.UTF8, "application/xml");
-                    var request = new HttpRequestMessage();
-                    request.Method = HttpMethod.Post;
-                    request.RequestUri = new Uri(url);
-                    request.Content = httpContent;
-                    request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/xml");
-
-                    var byteArray = Encoding.ASCII.GetBytes("tctk_api:$5$rounds=5000$bbf460274ac2fcd8$u0raxguDBJcCDUWKabiHX0LXjxuTszOnUJlZhqGXFQ2");
-                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-                    httpClient.DefaultRequestHeaders.Add("MobifoneKey", "74a5c84c-f2c3-4bbd-9819-5958094d604e");
-
-                    var contentReponse = "";
-                    using (HttpResponseMessage responseMessage = await httpClient.SendAsync(request))
-                    using (HttpContent content = responseMessage.Content)
-                    {
-                        if (responseMessage.StatusCode == HttpStatusCode.OK)
-                        {
-                            contentReponse = content.ReadAsStringAsync().Result;
-                        }
-                    }
-                    //await Task.When
-                    if (!String.IsNullOrEmpty(contentReponse))
-                    {
-
-                        var mobi = helper.GetPositionObjectByContentReponse(contentReponse);
-                        if (mobi != null)
-                        {
-                            await helper.InsertPositionToDB(mobi);
-                        }
-                        
-                    }
-
-                }
+                var mobi = await api.GetLocation(phoneNumber);
+                await helper.InsertPositionToDB(mobi);
             }
             catch
             {

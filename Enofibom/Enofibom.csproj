@@ -112,7 +112,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiHelper\MemberHelper.cs" />
+    <Compile Include="ApiHelper\APIConnect.cs" />
     <Compile Include="AutoRequest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +130,12 @@
     <Compile Include="Helper\Maper.cs" />
     <Compile Include="Helper\StaticKey.cs" />
     <Compile Include="Helper\UserHelper.cs" />
+    <Compile Include="HistoryMap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HistoryMap.Designer.cs">
+      <DependentUpon>HistoryMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="IMEIObject.cs" />
     <Compile Include="LogCheck.cs">
       <SubType>UserControl</SubType>
@@ -206,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form66.resx">
       <DependentUpon>Form66.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistoryMap.resx">
+      <DependentUpon>HistoryMap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogCheck.resx">
       <DependentUpon>LogCheck.cs</DependentUpon>

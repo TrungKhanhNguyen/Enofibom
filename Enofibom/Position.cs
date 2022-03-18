@@ -23,9 +23,10 @@ namespace Enofibom
         public string Lon { get; set; }
         public string Radius { get; set; }
         public string PlanName { get; set; }
-        public Nullable<System.DateTime> RequestTime { get; set; }
+        public Nullable<System.DateTime> locStamp { get; set; }
         public string AngleStart { get; set; }
         public string AngleEnd { get; set; }
         public string IMEI { get; set; }
+        public Nullable<System.DateTime> eventStamp { get; set; }
     }
 }

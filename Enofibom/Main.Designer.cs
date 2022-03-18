@@ -40,15 +40,15 @@ namespace Enofibom
             this.guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnHistoryCheck = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnLogOut = new System.Windows.Forms.Label();
             this.lblUserLoggedIn = new System.Windows.Forms.Label();
-            this.btnTargetManage = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnLogCheck = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnUserManage = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnDataOnline = new Guna.UI2.WinForms.Guna2TileButton();
+            this.historyMap1 = new Enofibom.HistoryMap();
             this.changePasswordControl1 = new Enofibom.PageControls.ChangePasswordControl();
             this.userManage1 = new Enofibom.UserManage();
-          
             this.mapUserControl2 = new Enofibom.MapUserControl();
             this.logCheck2 = new Enofibom.LogCheck();
             this.topDockPanel.SuspendLayout();
@@ -148,9 +148,9 @@ namespace Enofibom
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
+            this.panel2.Controls.Add(this.btnHistoryCheck);
             this.panel2.Controls.Add(this.btnLogOut);
             this.panel2.Controls.Add(this.lblUserLoggedIn);
-            this.panel2.Controls.Add(this.btnTargetManage);
             this.panel2.Controls.Add(this.btnLogCheck);
             this.panel2.Controls.Add(this.btnUserManage);
             this.panel2.Controls.Add(this.btnDataOnline);
@@ -159,6 +159,27 @@ namespace Enofibom
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1144, 66);
             this.panel2.TabIndex = 4;
+            // 
+            // btnHistoryCheck
+            // 
+            this.btnHistoryCheck.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnHistoryCheck.CheckedState.Parent = this.btnHistoryCheck;
+            this.btnHistoryCheck.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHistoryCheck.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
+            this.btnHistoryCheck.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.btnHistoryCheck.CustomImages.Parent = this.btnHistoryCheck;
+            this.btnHistoryCheck.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
+            this.btnHistoryCheck.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHistoryCheck.ForeColor = System.Drawing.Color.White;
+            this.btnHistoryCheck.HoverState.Parent = this.btnHistoryCheck;
+            this.btnHistoryCheck.Location = new System.Drawing.Point(132, 0);
+            this.btnHistoryCheck.Name = "btnHistoryCheck";
+            this.btnHistoryCheck.ShadowDecoration.Parent = this.btnHistoryCheck;
+            this.btnHistoryCheck.Size = new System.Drawing.Size(131, 66);
+            this.btnHistoryCheck.TabIndex = 7;
+            this.btnHistoryCheck.Text = "History Check";
+            this.btnHistoryCheck.Click += new System.EventHandler(this.btnHistoryCheck_Click);
             // 
             // btnLogOut
             // 
@@ -189,27 +210,6 @@ namespace Enofibom
             this.lblUserLoggedIn.Text = "root";
             this.lblUserLoggedIn.Click += new System.EventHandler(this.lblUserLoggedIn_Click);
             // 
-            // btnTargetManage
-            // 
-            this.btnTargetManage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnTargetManage.CheckedState.Parent = this.btnTargetManage;
-            this.btnTargetManage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTargetManage.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
-            this.btnTargetManage.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
-            this.btnTargetManage.CustomImages.Parent = this.btnTargetManage;
-            this.btnTargetManage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
-            this.btnTargetManage.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTargetManage.ForeColor = System.Drawing.Color.White;
-            this.btnTargetManage.HoverState.Parent = this.btnTargetManage;
-            this.btnTargetManage.Location = new System.Drawing.Point(395, 0);
-            this.btnTargetManage.Name = "btnTargetManage";
-            this.btnTargetManage.ShadowDecoration.Parent = this.btnTargetManage;
-            this.btnTargetManage.Size = new System.Drawing.Size(131, 66);
-            this.btnTargetManage.TabIndex = 4;
-            this.btnTargetManage.Text = "Target Management";
-            this.btnTargetManage.Click += new System.EventHandler(this.guna2TileButton1_Click);
-            // 
             // btnLogCheck
             // 
             this.btnLogCheck.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -223,7 +223,7 @@ namespace Enofibom
             this.btnLogCheck.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogCheck.ForeColor = System.Drawing.Color.White;
             this.btnLogCheck.HoverState.Parent = this.btnLogCheck;
-            this.btnLogCheck.Location = new System.Drawing.Point(264, 0);
+            this.btnLogCheck.Location = new System.Drawing.Point(397, 0);
             this.btnLogCheck.Name = "btnLogCheck";
             this.btnLogCheck.ShadowDecoration.Parent = this.btnLogCheck;
             this.btnLogCheck.Size = new System.Drawing.Size(131, 66);
@@ -244,7 +244,7 @@ namespace Enofibom
             this.btnUserManage.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUserManage.ForeColor = System.Drawing.Color.White;
             this.btnUserManage.HoverState.Parent = this.btnUserManage;
-            this.btnUserManage.Location = new System.Drawing.Point(131, 0);
+            this.btnUserManage.Location = new System.Drawing.Point(264, 0);
             this.btnUserManage.Name = "btnUserManage";
             this.btnUserManage.ShadowDecoration.Parent = this.btnUserManage;
             this.btnUserManage.Size = new System.Drawing.Size(131, 66);
@@ -273,15 +273,25 @@ namespace Enofibom
             this.btnDataOnline.Text = "Data Online";
             this.btnDataOnline.Click += new System.EventHandler(this.btnDataOnline_Click);
             // 
+            // historyMap1
+            // 
+            this.historyMap1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.historyMap1.Location = new System.Drawing.Point(0, 107);
+            this.historyMap1.Name = "historyMap1";
+            this.historyMap1.Size = new System.Drawing.Size(1144, 618);
+            this.historyMap1.TabIndex = 12;
+            // 
             // changePasswordControl1
             // 
             this.changePasswordControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.changePasswordControl1.Location = new System.Drawing.Point(12, 107);
+            this.changePasswordControl1.Location = new System.Drawing.Point(0, 109);
             this.changePasswordControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.changePasswordControl1.Name = "changePasswordControl1";
-            this.changePasswordControl1.Size = new System.Drawing.Size(1119, 618);
+            this.changePasswordControl1.Size = new System.Drawing.Size(1141, 616);
             this.changePasswordControl1.TabIndex = 11;
             // 
             // userManage1
@@ -289,13 +299,11 @@ namespace Enofibom
             this.userManage1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.userManage1.Location = new System.Drawing.Point(12, 107);
+            this.userManage1.Location = new System.Drawing.Point(0, 109);
             this.userManage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userManage1.Name = "userManage1";
-            this.userManage1.Size = new System.Drawing.Size(1120, 677);
+            this.userManage1.Size = new System.Drawing.Size(1141, 675);
             this.userManage1.TabIndex = 10;
-            // 
-           
             // 
             // mapUserControl2
             // 
@@ -303,10 +311,10 @@ namespace Enofibom
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mapUserControl2.BackColor = System.Drawing.SystemColors.Control;
-            this.mapUserControl2.Location = new System.Drawing.Point(12, 107);
+            this.mapUserControl2.Location = new System.Drawing.Point(0, 107);
             this.mapUserControl2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.mapUserControl2.Name = "mapUserControl2";
-            this.mapUserControl2.Size = new System.Drawing.Size(1120, 677);
+            this.mapUserControl2.Size = new System.Drawing.Size(1141, 677);
             this.mapUserControl2.TabIndex = 8;
             // 
             // logCheck2
@@ -325,9 +333,9 @@ namespace Enofibom
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 725);
+            this.Controls.Add(this.historyMap1);
             this.Controls.Add(this.changePasswordControl1);
             this.Controls.Add(this.userManage1);
-            
             this.Controls.Add(this.mapUserControl2);
             this.Controls.Add(this.logCheck2);
             this.Controls.Add(this.topDockPanel);
@@ -359,8 +367,6 @@ namespace Enofibom
         private System.Windows.Forms.Panel topDockPanel;
         private Guna.UI2.WinForms.Guna2TileButton btnUserManage;
         private Guna.UI2.WinForms.Guna2TileButton btnLogCheck;
-  
-        private Guna.UI2.WinForms.Guna2TileButton btnTargetManage;
         private LogCheck logCheck2;
         private MapUserControl mapUserControl2;
         //private TargetManage targetManage1;
@@ -368,5 +374,7 @@ namespace Enofibom
         private System.Windows.Forms.Label btnLogOut;
         private System.Windows.Forms.Label lblUserLoggedIn;
         private PageControls.ChangePasswordControl changePasswordControl1;
+        private HistoryMap historyMap1;
+        private Guna.UI2.WinForms.Guna2TileButton btnHistoryCheck;
     }
 }
