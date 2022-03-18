@@ -117,42 +117,7 @@ namespace Enofibom.Helper
             return listEvent;
         }
 
-        public void InsertUser(Member member)
-        {
-            using (MapOfflineEntities db = new MapOfflineEntities())
-            {
-                db.Members.Add(member);
-                db.SaveChanges();
-            }
-        }
-
-        public void UpdateUser(Member member,bool isActive, bool isAdmin)
-        {
-            using (MapOfflineEntities db = new MapOfflineEntities())
-            {
-                db.Entry(member).State = EntityState.Modified;
-                member.IsAdmin = isAdmin;
-                member.Active = isActive;
-                db.SaveChanges();
-            }
-        }
-
         
-
-        public void UpdatePassword(int id,string newpassword)
-        {
-            using (MapOfflineEntities db = new MapOfflineEntities())
-            {
-                var tempTarget = db.Members.Where(m => m.Id == id).FirstOrDefault();
-                if (tempTarget != null)
-                {
-                   
-                    tempTarget.Password = newpassword;
-                    db.SaveChanges();
-                }
-            }
-        }
-
         
         public static async Task InsertToLog(LogEvent eventLog)
         {
@@ -208,63 +173,6 @@ namespace Enofibom.Helper
         }
 
 
-        #region[Target]
-        public List<Target> GetAllTarget()
-        {
-            var listTarget = new List<Target>();
-            using (MapOfflineEntities db = new MapOfflineEntities())
-            {
-                listTarget = db.Targets.ToList();
-            }
-            return listTarget;
-        }
-
-        public List<Target> GetAllActiveTarget()
-        {
-            var listTarget = new List<Target>();
-            using (MapOfflineEntities db = new MapOfflineEntities())
-            {
-                listTarget = db.Targets.Where(m=>m.IsActive == true).ToList();
-            }
-            return listTarget;
-        }
-
-        public void InsertTarget(Target target)
-        {
-            using (MapOfflineEntities db = new MapOfflineEntities())
-            {
-                db.Targets.Add(target);
-                db.SaveChanges();
-            }
-        }
-        public void UpdateTarget(Target target, string targetName, string IMSI, string IMEI, bool isActive)
-        {
-            using (MapOfflineEntities db = new MapOfflineEntities())
-            {
-                var tempTarget = db.Targets.Where(m => m.Id == target.Id).FirstOrDefault();
-                if (tempTarget != null)
-                {
-                    tempTarget.IsActive = isActive;
-                    tempTarget.IMEI = IMEI;
-                    tempTarget.IMSI = IMSI;
-                    tempTarget.TargetName = targetName;
-                    db.SaveChanges();
-                }
-                
-               
-                
-            }
-        }
-
-        public void DeleteTarget(Target target)
-        {
-            using (MapOfflineEntities db = new MapOfflineEntities())
-            {
-                db.Targets.Remove(target);
-                db.SaveChanges();
-            }
-        }
-
-        #endregion
+        
     }
 }

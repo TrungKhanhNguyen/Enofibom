@@ -12,6 +12,48 @@ namespace Enofibom.ApiHelper
 {
     public class MemberHelper
     {
+        public async void AddUser(string username, bool isActive, bool isAdmin, string userLoggedIn)
+        {
+            Member _mem = null;
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    var password = StaticKey.CreateMD5("123456");
+                    httpClient.DefaultRequestHeaders.Accept.Clear();
+                    httpClient.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    var mem = new Member { Username = username, Password = password,IsAdmin = isAdmin, Active = isActive };
+                    var content = new StringContent(JsonConvert.SerializeObject(mem), Encoding.UTF8, "application/json");
+                    var response = httpClient.PostAsync(StaticKey.API_ADDMEMBER, content);
+                    var responseObj = await response.Result.Content.ReadAsStringAsync();
+                    _mem = JsonConvert.DeserializeObject<Member>(responseObj);
+                }
+                catch { }
+
+            }
+           
+        }
+
+        public void UpdateUser(bool isActive, bool isAdmin, int id)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    httpClient.DefaultRequestHeaders.Accept.Clear();
+                    httpClient.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    var mem = new Member { Username = "", Password = "", IsAdmin = isAdmin, Active = isActive,Id = id };
+                    var content = new StringContent(JsonConvert.SerializeObject(mem), Encoding.UTF8, "application/json");
+                    var response = httpClient.PostAsync(StaticKey.API_UPDATEMEMBER, content);
+                    //_mem = JsonConvert.DeserializeObject<Member>(responseObj);
+                }
+                catch { }
+
+            }
+        }
+
         public async Task<Member> getMemberByUsernameAndPass(string username, string password)
         {
             Member _mem = null;

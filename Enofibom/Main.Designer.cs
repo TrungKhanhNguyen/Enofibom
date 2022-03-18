@@ -48,7 +48,7 @@ namespace Enofibom
             this.btnDataOnline = new Guna.UI2.WinForms.Guna2TileButton();
             this.changePasswordControl1 = new Enofibom.PageControls.ChangePasswordControl();
             this.userManage1 = new Enofibom.UserManage();
-            this.targetManage1 = new Enofibom.TargetManage();
+          
             this.mapUserControl2 = new Enofibom.MapUserControl();
             this.logCheck2 = new Enofibom.LogCheck();
             this.topDockPanel.SuspendLayout();
@@ -295,16 +295,7 @@ namespace Enofibom
             this.userManage1.Size = new System.Drawing.Size(1120, 677);
             this.userManage1.TabIndex = 10;
             // 
-            // targetManage1
-            // 
-            this.targetManage1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.targetManage1.Location = new System.Drawing.Point(12, 107);
-            this.targetManage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.targetManage1.Name = "targetManage1";
-            this.targetManage1.Size = new System.Drawing.Size(1120, 677);
-            this.targetManage1.TabIndex = 9;
+           
             // 
             // mapUserControl2
             // 
@@ -336,7 +327,7 @@ namespace Enofibom
             this.ClientSize = new System.Drawing.Size(1144, 725);
             this.Controls.Add(this.changePasswordControl1);
             this.Controls.Add(this.userManage1);
-            this.Controls.Add(this.targetManage1);
+            
             this.Controls.Add(this.mapUserControl2);
             this.Controls.Add(this.logCheck2);
             this.Controls.Add(this.topDockPanel);
@@ -372,7 +363,7 @@ namespace Enofibom
         private Guna.UI2.WinForms.Guna2TileButton btnTargetManage;
         private LogCheck logCheck2;
         private MapUserControl mapUserControl2;
-        private TargetManage targetManage1;
+        //private TargetManage targetManage1;
         private UserManage userManage1;
         private System.Windows.Forms.Label btnLogOut;
         private System.Windows.Forms.Label lblUserLoggedIn;

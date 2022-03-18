@@ -119,12 +119,6 @@
     <Compile Include="AutoRequest.Designer.cs">
       <DependentUpon>AutoRequest.cs</DependentUpon>
     </Compile>
-    <Compile Include="AutoRequestPosition.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoRequestPosition.Designer.cs">
-      <DependentUpon>AutoRequestPosition.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form66.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,7 +129,6 @@
     <Compile Include="Helper\DBHelper.cs" />
     <Compile Include="Helper\Maper.cs" />
     <Compile Include="Helper\StaticKey.cs" />
-    <Compile Include="Helper\TargetHelper.cs" />
     <Compile Include="Helper\UserHelper.cs" />
     <Compile Include="IMEIObject.cs" />
     <Compile Include="LogCheck.cs">
@@ -202,12 +195,6 @@
     <Compile Include="Target.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="TargetManage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TargetManage.Designer.cs">
-      <DependentUpon>TargetManage.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -216,9 +203,6 @@
     </Compile>
     <EmbeddedResource Include="AutoRequest.resx">
       <DependentUpon>AutoRequest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoRequestPosition.resx">
-      <DependentUpon>AutoRequestPosition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form66.resx">
       <DependentUpon>Form66.cs</DependentUpon>
@@ -249,9 +233,6 @@
     <EmbeddedResource Include="SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TargetManage.resx">
-      <DependentUpon>TargetManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManage.resx">
       <DependentUpon>UserManage.cs</DependentUpon>

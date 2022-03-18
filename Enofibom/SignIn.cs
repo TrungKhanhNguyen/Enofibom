@@ -15,7 +15,7 @@ namespace Enofibom
 {
     public partial class SignIn : Form
     {
-        MemberHelper helper = new MemberHelper();
+        UserHelper helper = new UserHelper();
         public SignIn()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace Enofibom
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             try
             {
-                var user = await helper.getMemberByUsernameAndPass(username, password);
+                var user = helper.GetUser(username, password);
                 if (user != null)
                 {
                     configuration.AppSettings.Settings["IsAdmin"].Value = user.IsAdmin.ToString();

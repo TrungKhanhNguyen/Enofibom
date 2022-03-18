@@ -12,8 +12,12 @@ namespace Enofibom.Helper
         public static string UserLoggedIn = "UserLoggedIn";
         public static string requestPositionUrl = "https://10.3.64.246/mbfn/sb/lbs/sdk";
         public static string requestIMEIUrl = "https://10.3.64.246/mbfn/sb/adc/sendMessage?msisdn=";
-        public static string API_GETLOGINMEMBER = "http://localhost:8088/api/Members";
-        
+
+        public static string API_MAIN = "http://localhost:8088/api/Members";
+        public static string API_GETLOGINMEMBER = API_MAIN + "/GetAllMembers";
+        public static string API_GETMEMBER = API_MAIN + "/GetMember";
+        public static string API_ADDMEMBER = API_MAIN + "/AddMember";
+        public static string API_UPDATEMEMBER = API_MAIN + "/UpdateMember";
         public static string CreateMD5(string input)
         {
             // Use input string to calculate MD5 hash

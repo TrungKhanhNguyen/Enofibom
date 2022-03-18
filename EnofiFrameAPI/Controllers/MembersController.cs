@@ -16,62 +16,16 @@ namespace EnofiFrameAPI.Controllers
     {
         private MapOfflineEntities db = new MapOfflineEntities();
 
-        // GET: api/Members
-        public IQueryable<Member> GetMembers()
+        // GET: api/Members/GetMembers
+        [ActionName("GetAllMembers")]
+        public IQueryable<Member> GetAllMembers()
         {
             return db.Members;
         }
 
-        // GET: api/Members/5
+        // POST: api/Members/PostMember
         [ResponseType(typeof(Member))]
-        public IHttpActionResult GetMember(int id)
-        {
-            Member member = db.Members.Find(id);
-            if (member == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(member);
-        }
-
-        // PUT: api/Members/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutMember(int id, Member member)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != member.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(member).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MemberExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Members
-        [ResponseType(typeof(Member))]
+        [ActionName("GetMember")]
         public IHttpActionResult PostMember(Member member)
         {
             if (!ModelState.IsValid)
@@ -80,10 +34,45 @@ namespace EnofiFrameAPI.Controllers
             }
 
             var mem = db.Members.Where(m => m.Username == member.Username && m.Password == member.Password).FirstOrDefault();
-            //db.SaveChanges();
-
+          
             return Ok(mem);
         }
+        [ActionName("AddMember")]
+        public void AddMember(Member _mem)
+        {
+            if (!ModelState.IsValid)
+            {
+                return;
+            }
+            db.Members.Add(_mem);
+            db.SaveChanges();
+        }
+
+        // PUT: api/Members/5
+        [ResponseType(typeof(void))]
+        [ActionName("UpdateMember")]
+        public IHttpActionResult UpdateMember(Member _mem)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                var member = db.Members.Where(m => m.Id == _mem.Id).FirstOrDefault();
+                db.Entry(member).State = EntityState.Modified;
+                member.Active = _mem.Active;
+                member.IsAdmin = _mem.IsAdmin;
+                db.SaveChanges();
+            }
+            catch
+            {
+                return NotFound();
+            }
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+      
 
         // DELETE: api/Members/5
         [ResponseType(typeof(Member))]

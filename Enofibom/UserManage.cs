@@ -8,7 +8,7 @@ namespace Enofibom
 {
     public partial class UserManage : UserControl
     {
-        MemberHelper helper = new MemberHelper();
+        UserHelper helper = new UserHelper();
         List<Member> listMember = new List<Member>();
         string userLoggedIn = "";
         //UserHelper userHelper = new UserHelper();
@@ -19,20 +19,20 @@ namespace Enofibom
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            userHelper.AddUser(txtUsername.Text, chkIsActive.Checked, chkIsAdmin.Checked, userLoggedIn);
+            helper.AddUser(txtUsername.Text, chkIsActive.Checked, chkIsAdmin.Checked, userLoggedIn);
             ReloadData();
         }
 
-        private async void ReloadData()
+        private void ReloadData()
         {
-            listMember = await helper.GetAllMember();
+            listMember = helper.GetAllMembers();
             dataGridView1.DataSource = listMember;
             dataGridView1.Refresh();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            userHelper.UpdateUser(listMember, lblID.Text, chkIsActive.Checked, chkIsAdmin.Checked, userLoggedIn);
+            helper.UpdateUser(listMember, lblID.Text, chkIsActive.Checked, chkIsAdmin.Checked, userLoggedIn);
             ReloadData();
         }
 

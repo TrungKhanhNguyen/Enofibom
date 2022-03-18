@@ -264,7 +264,7 @@ namespace Enofibom
                     User = userLoggedIn,
                     Task = "Search number: " + txtSearchMSISDN.Text
                 };
-                await helper.InsertToLog(tempLog);
+                await DBHelper.InsertToLog(tempLog);
             }
             catch
             {

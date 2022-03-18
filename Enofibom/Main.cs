@@ -24,7 +24,7 @@ namespace Enofibom
             mapUserControl2.Show();
             mapUserControl2.BringToFront();
             logCheck2.Hide();
-            targetManage1.Hide();
+            
             userManage1.Hide();
             changePasswordControl1.Hide();
             btnLogCheck.Visible = false;
@@ -55,7 +55,7 @@ namespace Enofibom
             changePasswordControl1.Hide();
             logCheck2.Show();
             logCheck2.BringToFront();
-            targetManage1.Hide();
+            
         }
 
         private void btnUserManage_Click(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace Enofibom
             logCheck2.Hide();
             userManage1.Show();
             userManage1.BringToFront();
-            targetManage1.Hide();
+            
             changePasswordControl1.Hide();
         }
 
@@ -74,7 +74,7 @@ namespace Enofibom
             mapUserControl2.Show();
             mapUserControl2.BringToFront();
             logCheck2.Hide();
-            targetManage1.Hide();
+            
             userManage1.Hide();
             changePasswordControl1.Hide();
         }
@@ -85,8 +85,7 @@ namespace Enofibom
 
             logCheck2.Hide();
             changePasswordControl1.Hide();
-            targetManage1.Show();
-            targetManage1.BringToFront();
+            
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -101,7 +100,7 @@ namespace Enofibom
         {
             mapUserControl2.Hide();
             logCheck2.Hide();
-            targetManage1.Hide();
+            
             changePasswordControl1.Show();
             changePasswordControl1.BringToFront();
         }

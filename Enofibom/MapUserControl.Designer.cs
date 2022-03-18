@@ -29,7 +29,7 @@ namespace Enofibom
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mapControl = new GMap.NET.WindowsForms.GMapControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblCountLeft = new System.Windows.Forms.Label();
@@ -111,7 +111,7 @@ namespace Enofibom
             this.mapControl.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.mapControl.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.mapControl.ShowTileGridLines = false;
-            this.mapControl.Size = new System.Drawing.Size(610, 782);
+            this.mapControl.Size = new System.Drawing.Size(540, 782);
             this.mapControl.TabIndex = 1;
             this.mapControl.Zoom = 0D;
             // 
@@ -128,7 +128,7 @@ namespace Enofibom
             this.groupBox1.Controls.Add(this.btnSearch);
             this.groupBox1.Controls.Add(this.txtSearchMSISDN);
             this.groupBox1.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(38, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(435, 285);
             this.groupBox1.TabIndex = 2;
@@ -210,7 +210,6 @@ namespace Enofibom
             this.checkAuto.ShadowDecoration.Parent = this.checkAuto;
             this.checkAuto.Size = new System.Drawing.Size(22, 20);
             this.checkAuto.TabIndex = 21;
-            this.checkAuto.Text = "ACb";
             this.checkAuto.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.checkAuto.UncheckedState.BorderRadius = 2;
             this.checkAuto.UncheckedState.BorderThickness = 0;
@@ -243,8 +242,8 @@ namespace Enofibom
             // MSISDN
             // 
             this.MSISDN.DataPropertyName = "MSISDN";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MSISDN.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MSISDN.DefaultCellStyle = dataGridViewCellStyle1;
             this.MSISDN.FillWeight = 120F;
             this.MSISDN.HeaderText = "MSISDN";
             this.MSISDN.MinimumWidth = 100;
@@ -275,7 +274,6 @@ namespace Enofibom
             this.btnClear.CheckedState.Parent = this.btnClear;
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClear.CustomImages.Parent = this.btnClear;
-            
             this.btnClear.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnClear.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
@@ -297,7 +295,6 @@ namespace Enofibom
             this.btnSearch.CheckedState.Parent = this.btnSearch;
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.CustomImages.Parent = this.btnSearch;
-            
             this.btnSearch.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
@@ -362,7 +359,7 @@ namespace Enofibom
             this.groupBox2.Controls.Add(this.lblCGI);
             this.groupBox2.Controls.Add(this.lblIMSI);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(3, 294);
+            this.groupBox2.Location = new System.Drawing.Point(38, 294);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(435, 199);
             this.groupBox2.TabIndex = 15;
@@ -590,9 +587,9 @@ namespace Enofibom
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(619, 0);
+            this.panel1.Location = new System.Drawing.Point(549, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(444, 788);
+            this.panel1.Size = new System.Drawing.Size(514, 788);
             this.panel1.TabIndex = 17;
             // 
             // groupBox3
@@ -624,7 +621,6 @@ namespace Enofibom
             this.btnClearHistory.CheckedState.Parent = this.btnClearHistory;
             this.btnClearHistory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClearHistory.CustomImages.Parent = this.btnClearHistory;
-            
             this.btnClearHistory.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnClearHistory.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearHistory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
@@ -646,7 +642,6 @@ namespace Enofibom
             this.btnSearchHistory.CheckedState.Parent = this.btnSearchHistory;
             this.btnSearchHistory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearchHistory.CustomImages.Parent = this.btnSearchHistory;
-           
             this.btnSearchHistory.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
             this.btnSearchHistory.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearchHistory.ForeColor = System.Drawing.Color.White;

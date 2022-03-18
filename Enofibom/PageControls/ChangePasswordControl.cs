@@ -13,7 +13,7 @@ namespace Enofibom.PageControls
 {
     public partial class ChangePasswordControl : UserControl
     {
-        DBHelper helper = new DBHelper();
+        UserHelper helper = new UserHelper();
         string userLoggedIn = "";
         public ChangePasswordControl()
         {
@@ -39,7 +39,7 @@ namespace Enofibom.PageControls
             var currentpassword = StaticKey.CreateMD5(txtOldpassword.Text);
             var newpassword = StaticKey.CreateMD5(txtNewpassword.Text);
             var retypePass = StaticKey.CreateMD5(txtRetypenewpassword.Text);
-            var currUser = helper.GetUserLogin(userLoggedIn,currentpassword);
+            var currUser = helper.GetUser(userLoggedIn,currentpassword);
             if(currUser != null)
             {
                 if (newpassword != currentpassword)
