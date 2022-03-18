@@ -28,11 +28,11 @@ namespace Enofibom
         {
             
         }
-        SerialPort _serialPort;
+        
         private async void button1_Click(object sender, EventArgs e)
          {
 
-
+            //SerialPort _serialPort;
             //_serialPort = new SerialPort("COM4", 9600, Parity.None, 8, StopBits.One);
             //_serialPort.Handshake = Handshake.None;
             //_serialPort.ReadTimeout = 400;

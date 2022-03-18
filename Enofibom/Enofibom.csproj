@@ -325,9 +325,7 @@
     <None Include="Resources\password_reset_48px.png" />
     <None Include="Resources\oldpassword.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GSMHelper\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

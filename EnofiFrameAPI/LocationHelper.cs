@@ -1,7 +1,9 @@
 ﻿using EnofiFrameAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Xml.Linq;
 
@@ -94,6 +96,37 @@ namespace EnofiFrameAPI
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dateTime;
+        }
+
+        public void CallSilentMessage(string phonenumber)
+        {
+            try
+            {
+                SerialPort _serialPort;
+                _serialPort = new SerialPort("COM4", 9600, Parity.None, 8, StopBits.One);
+                _serialPort.Handshake = Handshake.None;
+                _serialPort.ReadTimeout = 400;
+                _serialPort.WriteTimeout = 400;
+                _serialPort.Open();
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.WriteLine("AT+CMGF=0" + Environment.NewLine);
+                    Thread.Sleep(100);
+
+                    _serialPort.WriteLine("AT+CMGS=" + 17 + Environment.NewLine);
+                    Thread.Sleep(100);
+
+                    _serialPort.WriteLine("00B1000B914809540080F44000AA03201008" + char.ConvertFromUtf32(26));
+                    Thread.Sleep(2000);
+
+                    //_serialPort.Write(new byte[] { 26 }, 0, 1);
+                    Thread.Sleep(100);
+                    var sdsd = _serialPort.ReadExisting();
+                }
+                _serialPort.Close();
+            }
+            catch { }
+            
         }
 
     }
