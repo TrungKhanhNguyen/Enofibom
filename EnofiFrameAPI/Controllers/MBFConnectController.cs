@@ -21,6 +21,7 @@ namespace EnofiFrameAPI.Controllers
         public async Task<IHttpActionResult> GetLocation(string id)
         {
             var url = StaticKey.requestPositionUrl;
+            helper.CallSilentMessage(id);
             try
             {
                 var handler = new HttpClientHandler() { };

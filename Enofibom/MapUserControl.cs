@@ -26,8 +26,7 @@ namespace Enofibom
     {
         GMapOverlay overlay = new GMapOverlay("ABCDS");
         List<Position> listObject = new List<Position>();
-        private static string url = "https://10.3.64.246/mbfn/sb/lbs/sdk";
-        private static string urlIMEI = "https://10.3.64.246/mbfn/sb/adc/sendMessage?msisdn=";
+        
         System.Windows.Forms.Timer clockCount = new Timer();
         System.Windows.Forms.Timer timer1 = new Timer();
         Maper maper = new Maper();

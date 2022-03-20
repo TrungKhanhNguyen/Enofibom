@@ -29,7 +29,7 @@ namespace Enofibom
             
         }
         
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
          {
 
             //SerialPort _serialPort;
@@ -54,9 +54,25 @@ namespace Enofibom
 
             //_serialPort.Close();
 
+            //4809540080F4
+            //var ssss = await getAllMembers();
+            var sdsd = SwapPosition("0904500084");
 
-            var ssss = await getAllMembers();
+        }
 
+        private string SwapPosition(string _originalMsg)
+        {
+            var msg = _originalMsg.Substring(1);
+            msg = "84" + msg + "F";
+            string returnStr = "";
+            for (int i = 0; i < msg.Count(); i++)
+            {
+                if (i % 2 == 0)
+                    returnStr += msg[i + 1];
+                else
+                    returnStr += msg[i - 1];
+            }
+            return returnStr;
         }
 
         private async Task<string> getAllMembers()

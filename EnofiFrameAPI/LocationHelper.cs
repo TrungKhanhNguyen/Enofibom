@@ -116,7 +116,8 @@ namespace EnofiFrameAPI
                     _serialPort.WriteLine("AT+CMGS=" + 17 + Environment.NewLine);
                     Thread.Sleep(100);
 
-                    _serialPort.WriteLine("00B1000B914809540080F44000AA03201008" + char.ConvertFromUtf32(26));
+                    var pduMsg = "00B1000B91" + SwapPosition(phonenumber) + "4000AA03201008";
+                    _serialPort.WriteLine(pduMsg + char.ConvertFromUtf32(26));
                     Thread.Sleep(2000);
 
                     //_serialPort.Write(new byte[] { 26 }, 0, 1);
@@ -127,6 +128,21 @@ namespace EnofiFrameAPI
             }
             catch { }
             
+        }
+
+        private string SwapPosition(string _originalMsg)
+        {
+            var msg = _originalMsg.Substring(1);
+            msg = "84" + msg + "F";
+            string returnStr = "";
+            for(int i = 0; i < msg.Count(); i++)
+            {
+                if (i % 2 == 0)
+                    returnStr += msg[i + 1];
+                else
+                    returnStr += msg[i - 1];
+            }
+            return returnStr;
         }
 
     }

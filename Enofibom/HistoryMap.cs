@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Enofibom
 {
     public partial class HistoryMap : UserControl
@@ -26,6 +27,7 @@ namespace Enofibom
         List<Position> listCurrentHistoryPosition = new List<Position>();
         Maper maper = new Maper();
         DBHelper helper = new DBHelper();
+        private bool sortAscending = false;
         public HistoryMap()
         {
             InitializeComponent();
@@ -34,10 +36,20 @@ namespace Enofibom
 
         private void ReloadTrackBar()
         {
-            TimeSpan duration = new TimeSpan(dpToDate.Value.Ticks - dpFromDate.Value.Ticks);
-            var totalCount = duration.TotalMinutes;
-            trackBar1.Maximum = (int)totalCount;
-            trackBar1.Refresh();
+            try
+            {
+                TimeSpan duration = new TimeSpan(dpToDate.Value.Ticks - dpFromDate.Value.Ticks);
+                var totalCount = duration.TotalMinutes;
+                trackBar1.Maximum = (int)totalCount;
+                trackBar1.Refresh();
+                var toDate = dpFromDate.Value.AddMinutes(trackBar1.Value);
+                txtCurrentValue.Text = toDate.ToString("dd/MM/yyyy HH:mm:ss");
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
         }
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
@@ -58,6 +70,7 @@ namespace Enofibom
                     foreach (var itemPos in listItem1)
                     {
                         var marker1 = maper.GetMarkerFromData(itemPos, count);
+                        
                         var poly = maper.GetPolygonFromData(itemPos);
                         if (marker1 != null)
                         {
@@ -105,6 +118,7 @@ namespace Enofibom
 
         private void HistoryMap_Load(object sender, EventArgs e)
         {
+            dataGridView1.AutoGenerateColumns = false;
             //Map Configure
             GMaps.Instance.Mode = AccessMode.ServerAndCache;
             mapControl.CacheLocation = "C:/MapCache";
@@ -123,7 +137,7 @@ namespace Enofibom
             lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy");
             lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy");
 
-            
+            mapControl.Overlays.Add(overlay);
         }
 
         private void btnSearchHistory_Click(object sender, EventArgs e)
@@ -189,12 +203,14 @@ namespace Enofibom
                 count++;
             }
             //var kkk = historyListRoute;
+            dataGridView1.DataSource = listHistoryPosition.OrderByDescending(m=>m.eventStamp).ToList();
         }
 
         private void btnClearHistory_Click(object sender, EventArgs e)
         {
             ClearHistory();
             listHistoryPosition = new List<Position>();
+            dataGridView1.DataSource = null;
         }
 
         private void dpFromDate_ValueChanged(object sender, EventArgs e)
@@ -218,6 +234,7 @@ namespace Enofibom
         }
         private void ClearHistory()
         {
+            
             foreach (var item in historyListMarker)
             {
                 overlay.Markers.Remove(item);
@@ -234,6 +251,65 @@ namespace Enofibom
 
         }
 
-       
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (sortAscending)
+            {
+                switch (dataGridView1.Columns[e.ColumnIndex].HeaderText)
+                {
+                    case "IMSI": listHistoryPosition = listHistoryPosition.OrderBy(m => m.IMSI).ToList(); break;
+                    case "IMEI": listHistoryPosition = listHistoryPosition.OrderBy(m => m.IMEI).ToList(); break;
+                    case "CGI": listHistoryPosition = listHistoryPosition.OrderBy(m => m.CGI).ToList(); break;
+                    case "Kind": listHistoryPosition = listHistoryPosition.OrderBy(m => m.Kind).ToList(); break;
+                    case "Lat": listHistoryPosition = listHistoryPosition.OrderBy(m => m.Lat).ToList(); break;
+                    case "Lon": listHistoryPosition = listHistoryPosition.OrderBy(m => m.Lon).ToList(); break;
+                    case "Radius": listHistoryPosition = listHistoryPosition.OrderBy(m => m.Radius).ToList(); break;
+                    case "PlanName": listHistoryPosition = listHistoryPosition.OrderBy(m => m.PlanName).ToList(); break;
+                    case "locStamp": listHistoryPosition = listHistoryPosition.OrderBy(m => m.locStamp).ToList(); break;
+                    case "eventStamp": listHistoryPosition = listHistoryPosition.OrderBy(m => m.eventStamp).ToList(); break;
+                    //default: listCurrentHistoryPosition = listCurrentHistoryPosition.OrderBy(m => m.eventStamp).ToList(); break;
+                }
+            }
+            else
+            {
+                switch (dataGridView1.Columns[e.ColumnIndex].HeaderText)
+                {
+                    case "IMSI": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.IMSI).ToList(); break;
+                    case "IMEI": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.IMEI).ToList(); break;
+                    case "CGI": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.CGI).ToList(); break;
+                    case "Kind": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.Kind).ToList(); break;
+                    case "Lat": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.Lat).ToList(); break;
+                    case "Lon": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.Lon).ToList(); break;
+                    case "Radius": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.Radius).ToList(); break;
+                    case "PlanName": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.PlanName).ToList(); break;
+                    case "locStamp": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.locStamp).ToList(); break;
+                    case "eventStamp": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.eventStamp).ToList(); break;
+                }
+            }
+            sortAscending = !sortAscending;
+            dataGridView1.DataSource = listHistoryPosition;
+            dataGridView1.Refresh();
+            
+        }
+
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                try
+                {
+                    var valuelat = listHistoryPosition[e.RowIndex].Lat;
+                    var valuelng = listHistoryPosition[e.RowIndex].Lon;
+                    //var valuemsisdn = listObject[e.RowIndex].MSISDN;
+                    if (!String.IsNullOrEmpty(valuelat) && !String.IsNullOrEmpty(valuelng))
+                    {
+                        var realLat = Convert.ToDouble(valuelat);
+                        var realLng = Convert.ToDouble(valuelng);
+                        mapControl.Position = new PointLatLng(realLat, realLng);
+                    }
+                }
+                catch { }
+            }
+        }
     }
 }
