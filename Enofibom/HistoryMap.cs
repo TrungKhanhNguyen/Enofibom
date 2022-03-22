@@ -138,6 +138,7 @@ namespace Enofibom
             lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy");
 
             mapControl.Overlays.Add(overlay);
+            lblCurrentValue.Visible = false;
         }
 
         private void btnSearchHistory_Click(object sender, EventArgs e)

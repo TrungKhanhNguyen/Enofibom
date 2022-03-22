@@ -27,6 +27,7 @@ namespace Enofibom
             userManage1.Hide();
             changePasswordControl1.Hide();
             historyMap1.Hide();
+            autoRequestControl1.Hide();
 
             btnLogCheck.Visible = false;
             btnUserManage.Visible = false;
@@ -52,9 +53,11 @@ namespace Enofibom
         {
             mapUserControl2.Hide();
             changePasswordControl1.Hide();
+            historyMap1.Hide();
             logCheck2.Show();
             logCheck2.BringToFront();
-            
+            autoRequestControl1.Hide();
+
         }
 
         private void btnUserManage_Click(object sender, EventArgs e)
@@ -63,8 +66,9 @@ namespace Enofibom
             logCheck2.Hide();
             userManage1.Show();
             userManage1.BringToFront();
-            
+            historyMap1.Hide();
             changePasswordControl1.Hide();
+            autoRequestControl1.Hide();
         }
 
 
@@ -73,9 +77,10 @@ namespace Enofibom
             mapUserControl2.Show();
             mapUserControl2.BringToFront();
             logCheck2.Hide();
-            
+            historyMap1.Hide();
             userManage1.Hide();
             changePasswordControl1.Hide();
+            autoRequestControl1.Hide();
         }
 
 
@@ -94,6 +99,7 @@ namespace Enofibom
             
             changePasswordControl1.Show();
             changePasswordControl1.BringToFront();
+            autoRequestControl1.Hide();
         }
 
         private void btnHistoryCheck_Click(object sender, EventArgs e)
@@ -101,8 +107,19 @@ namespace Enofibom
             mapUserControl2.Hide();
             logCheck2.Hide();
             changePasswordControl1.Hide();
+            autoRequestControl1.Hide();
             historyMap1.Show();
             historyMap1.BringToFront();
+        }
+
+        private void btnAutoRequest_Click(object sender, EventArgs e)
+        {
+            mapUserControl2.Hide();
+            logCheck2.Hide();
+            changePasswordControl1.Hide();
+            historyMap1.Hide();
+            autoRequestControl1.Show();
+            autoRequestControl1.BringToFront();
         }
     }
 }

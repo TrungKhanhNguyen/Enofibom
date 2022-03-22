@@ -51,6 +51,8 @@ namespace Enofibom
             this.userManage1 = new Enofibom.UserManage();
             this.mapUserControl2 = new Enofibom.MapUserControl();
             this.logCheck2 = new Enofibom.LogCheck();
+            this.autoRequestControl1 = new Enofibom.AutoRequestControl();
+            this.btnAutoRequest = new Guna.UI2.WinForms.Guna2TileButton();
             this.topDockPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -148,6 +150,7 @@ namespace Enofibom
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
+            this.panel2.Controls.Add(this.btnAutoRequest);
             this.panel2.Controls.Add(this.btnHistoryCheck);
             this.panel2.Controls.Add(this.btnLogOut);
             this.panel2.Controls.Add(this.lblUserLoggedIn);
@@ -223,7 +226,7 @@ namespace Enofibom
             this.btnLogCheck.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogCheck.ForeColor = System.Drawing.Color.White;
             this.btnLogCheck.HoverState.Parent = this.btnLogCheck;
-            this.btnLogCheck.Location = new System.Drawing.Point(397, 0);
+            this.btnLogCheck.Location = new System.Drawing.Point(528, 0);
             this.btnLogCheck.Name = "btnLogCheck";
             this.btnLogCheck.ShadowDecoration.Parent = this.btnLogCheck;
             this.btnLogCheck.Size = new System.Drawing.Size(131, 66);
@@ -244,7 +247,7 @@ namespace Enofibom
             this.btnUserManage.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUserManage.ForeColor = System.Drawing.Color.White;
             this.btnUserManage.HoverState.Parent = this.btnUserManage;
-            this.btnUserManage.Location = new System.Drawing.Point(264, 0);
+            this.btnUserManage.Location = new System.Drawing.Point(395, 0);
             this.btnUserManage.Name = "btnUserManage";
             this.btnUserManage.ShadowDecoration.Parent = this.btnUserManage;
             this.btnUserManage.Size = new System.Drawing.Size(131, 66);
@@ -328,11 +331,43 @@ namespace Enofibom
             this.logCheck2.Size = new System.Drawing.Size(1120, 677);
             this.logCheck2.TabIndex = 7;
             // 
+            // autoRequestControl1
+            // 
+            this.autoRequestControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.autoRequestControl1.Location = new System.Drawing.Point(0, 109);
+            this.autoRequestControl1.Name = "autoRequestControl1";
+            this.autoRequestControl1.Size = new System.Drawing.Size(1141, 616);
+            this.autoRequestControl1.TabIndex = 13;
+            // 
+            // btnAutoRequest
+            // 
+            this.btnAutoRequest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAutoRequest.CheckedState.Parent = this.btnAutoRequest;
+            this.btnAutoRequest.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAutoRequest.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(98)))));
+            this.btnAutoRequest.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.btnAutoRequest.CustomImages.Parent = this.btnAutoRequest;
+            this.btnAutoRequest.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
+            this.btnAutoRequest.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAutoRequest.ForeColor = System.Drawing.Color.White;
+            this.btnAutoRequest.HoverState.Parent = this.btnAutoRequest;
+            this.btnAutoRequest.Location = new System.Drawing.Point(263, 0);
+            this.btnAutoRequest.Name = "btnAutoRequest";
+            this.btnAutoRequest.ShadowDecoration.Parent = this.btnAutoRequest;
+            this.btnAutoRequest.Size = new System.Drawing.Size(131, 66);
+            this.btnAutoRequest.TabIndex = 8;
+            this.btnAutoRequest.Text = "Auto Request";
+            this.btnAutoRequest.Click += new System.EventHandler(this.btnAutoRequest_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 725);
+            this.Controls.Add(this.autoRequestControl1);
             this.Controls.Add(this.historyMap1);
             this.Controls.Add(this.changePasswordControl1);
             this.Controls.Add(this.userManage1);
@@ -376,5 +411,7 @@ namespace Enofibom
         private PageControls.ChangePasswordControl changePasswordControl1;
         private HistoryMap historyMap1;
         private Guna.UI2.WinForms.Guna2TileButton btnHistoryCheck;
+        private AutoRequestControl autoRequestControl1;
+        private Guna.UI2.WinForms.Guna2TileButton btnAutoRequest;
     }
 }

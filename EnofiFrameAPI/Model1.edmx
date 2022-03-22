@@ -4,26 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MapOfflineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="LogEvent">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EventDate" Type="datetime" />
-          <Property Name="User" Type="nvarchar" MaxLength="50" />
-          <Property Name="Task" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="Member">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar" MaxLength="200" />
-          <Property Name="Active" Type="bit" />
-          <Property Name="IsAdmin" Type="bit" />
-        </EntityType>
+      <Schema Namespace="MapOfflineModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="OperatorCell">
           <Key>
             <PropertyRef Name="Id" />
@@ -57,49 +38,15 @@
           <Property Name="eventStamp" Type="datetime" />
           <Property Name="TAC" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Target">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MSISDN" Type="nvarchar" MaxLength="50" />
-          <Property Name="IMEI" Type="nvarchar" MaxLength="50" />
-          <Property Name="IMSI" Type="nvarchar" MaxLength="50" />
-          <Property Name="IsRequest" Type="bit" />
-          <Property Name="IsActive" Type="bit" />
-          <Property Name="TargetName" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityContainer Name="MapOfflineModelStoreContainer">
-          <EntitySet Name="LogEvent" EntityType="Self.LogEvent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="MapOfflineModel1StoreContainer">
           <EntitySet Name="OperatorCell" EntityType="Self.OperatorCell" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Target" EntityType="Self.Target" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MapOfflineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="LogEvent">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EventDate" Type="DateTime" Precision="3" />
-          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Task" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Member">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="IsAdmin" Type="Boolean" />
-        </EntityType>
+      <Schema Namespace="MapOfflineModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="OperatorCell">
           <Key>
             <PropertyRef Name="Id" />
@@ -133,54 +80,18 @@
           <Property Name="eventStamp" Type="DateTime" Precision="3" />
           <Property Name="TAC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Target">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MSISDN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IMEI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IMSI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsRequest" Type="Boolean" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="TargetName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="MapOfflineEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="LogEvents" EntityType="Self.LogEvent" />
-          <EntitySet Name="Members" EntityType="Self.Member" />
           <EntitySet Name="OperatorCells" EntityType="Self.OperatorCell" />
           <EntitySet Name="Positions" EntityType="Self.Position" />
-          <EntitySet Name="Targets" EntityType="Self.Target" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MapOfflineModelStoreContainer" CdmEntityContainer="MapOfflineEntities">
-          <EntitySetMapping Name="LogEvents">
-            <EntityTypeMapping TypeName="MapOfflineModel.LogEvent">
-              <MappingFragment StoreEntitySet="LogEvent">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
-                <ScalarProperty Name="User" ColumnName="User" />
-                <ScalarProperty Name="Task" ColumnName="Task" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Members">
-            <EntityTypeMapping TypeName="MapOfflineModel.Member">
-              <MappingFragment StoreEntitySet="Member">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="MapOfflineModel1StoreContainer" CdmEntityContainer="MapOfflineEntities">
           <EntitySetMapping Name="OperatorCells">
-            <EntityTypeMapping TypeName="MapOfflineModel.OperatorCell">
+            <EntityTypeMapping TypeName="MapOfflineModel1.OperatorCell">
               <MappingFragment StoreEntitySet="OperatorCell">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CellName" ColumnName="CellName" />
@@ -194,7 +105,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Positions">
-            <EntityTypeMapping TypeName="MapOfflineModel.Position">
+            <EntityTypeMapping TypeName="MapOfflineModel1.Position">
               <MappingFragment StoreEntitySet="Position">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IMSI" ColumnName="IMSI" />
@@ -211,19 +122,6 @@
                 <ScalarProperty Name="IMEI" ColumnName="IMEI" />
                 <ScalarProperty Name="eventStamp" ColumnName="eventStamp" />
                 <ScalarProperty Name="TAC" ColumnName="TAC" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Targets">
-            <EntityTypeMapping TypeName="MapOfflineModel.Target">
-              <MappingFragment StoreEntitySet="Target">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
-                <ScalarProperty Name="IMEI" ColumnName="IMEI" />
-                <ScalarProperty Name="IMSI" ColumnName="IMSI" />
-                <ScalarProperty Name="IsRequest" ColumnName="IsRequest" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="TargetName" ColumnName="TargetName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

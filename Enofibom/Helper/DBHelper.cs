@@ -11,22 +11,7 @@ namespace Enofibom.Helper
     public class DBHelper
     {
         public MapOfflineEntities db = new MapOfflineEntities();
-        public List<Position> ConvertToListPosition(List<MobiObject> listObject)
-        {
-            var listPos = new List<Position>();
-            foreach(var item in listObject)
-            {
-                var pos = new Position
-                {
-                    CGI = item.CGI,
-                    IMSI = item.IMSI,
-                    Kind = item.Kind,
-                    Lat = item.Lat, Lon = item.Lng, MSISDN = item.MSISDN, PlanName = item.PlanName,Radius = item.Radius
-                };
-                listPos.Add(pos);
-            }
-            return listPos;
-        }
+        
         public List<LogEvent> GetLogByDate(DateTime frDate, DateTime toDate)
         {
             var listEvent = new List<LogEvent>();
@@ -92,7 +77,7 @@ namespace Enofibom.Helper
             return listObject;
         }
 
+       
 
-        
     }
 }

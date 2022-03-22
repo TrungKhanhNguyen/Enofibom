@@ -40,7 +40,7 @@
             this.btnSearchHistory = new Guna.UI2.WinForms.Guna2Button();
             this.txtCurrentValue = new System.Windows.Forms.Label();
             this.dpToDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblCurrentValue = new System.Windows.Forms.Label();
             this.dpFromDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.lblToDate = new System.Windows.Forms.Label();
             this.lblFromDate = new System.Windows.Forms.Label();
@@ -51,6 +51,7 @@
             this.IMSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MSISDN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CGI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Kind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lon = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,7 +102,7 @@
             this.groupBox3.Controls.Add(this.btnSearchHistory);
             this.groupBox3.Controls.Add(this.txtCurrentValue);
             this.groupBox3.Controls.Add(this.dpToDate);
-            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.lblCurrentValue);
             this.groupBox3.Controls.Add(this.dpFromDate);
             this.groupBox3.Controls.Add(this.lblToDate);
             this.groupBox3.Controls.Add(this.lblFromDate);
@@ -202,15 +203,15 @@
             this.dpToDate.Value = new System.DateTime(2022, 1, 5, 23, 6, 47, 450);
             this.dpToDate.ValueChanged += new System.EventHandler(this.dpToDate_ValueChanged);
             // 
-            // label3
+            // lblCurrentValue
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(7, 211);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 15);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "Current Value:";
+            this.lblCurrentValue.AutoSize = true;
+            this.lblCurrentValue.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentValue.Location = new System.Drawing.Point(7, 211);
+            this.lblCurrentValue.Name = "lblCurrentValue";
+            this.lblCurrentValue.Size = new System.Drawing.Size(84, 15);
+            this.lblCurrentValue.TabIndex = 19;
+            this.lblCurrentValue.Text = "Current Value:";
             // 
             // dpFromDate
             // 
@@ -304,6 +305,7 @@
             this.IMSI,
             this.MSISDN,
             this.CGI,
+            this.TAC,
             this.Kind,
             this.Lat,
             this.Lon,
@@ -369,6 +371,13 @@
             this.CGI.HeaderText = "CGI";
             this.CGI.Name = "CGI";
             this.CGI.ReadOnly = true;
+            // 
+            // TAC
+            // 
+            this.TAC.DataPropertyName = "TAC";
+            this.TAC.HeaderText = "TAC";
+            this.TAC.Name = "TAC";
+            this.TAC.ReadOnly = true;
             // 
             // Kind
             // 
@@ -458,7 +467,7 @@
         private Guna.UI2.WinForms.Guna2Button btnSearchHistory;
         private System.Windows.Forms.Label txtCurrentValue;
         private Guna.UI2.WinForms.Guna2DateTimePicker dpToDate;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCurrentValue;
         private Guna.UI2.WinForms.Guna2DateTimePicker dpFromDate;
         private System.Windows.Forms.Label lblToDate;
         private System.Windows.Forms.Label lblFromDate;
@@ -469,6 +478,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IMSI;
         private System.Windows.Forms.DataGridViewTextBoxColumn MSISDN;
         private System.Windows.Forms.DataGridViewTextBoxColumn CGI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TAC;
         private System.Windows.Forms.DataGridViewTextBoxColumn Kind;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lat;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lon;

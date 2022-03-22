@@ -119,6 +119,12 @@
     <Compile Include="AutoRequest.Designer.cs">
       <DependentUpon>AutoRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="AutoRequestControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AutoRequestControl.Designer.cs">
+      <DependentUpon>AutoRequestControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form66.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +185,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="OperatorCell.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="PageControls\ChangePasswordControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -209,6 +218,9 @@
     </Compile>
     <EmbeddedResource Include="AutoRequest.resx">
       <DependentUpon>AutoRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoRequestControl.resx">
+      <DependentUpon>AutoRequestControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form66.resx">
       <DependentUpon>Form66.cs</DependentUpon>

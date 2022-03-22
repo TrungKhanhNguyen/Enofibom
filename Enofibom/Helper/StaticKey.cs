@@ -12,7 +12,7 @@ namespace Enofibom.Helper
         public static string UserLoggedIn = "UserLoggedIn";
         
 
-        public static string API_MAIN = "http://localhost:8088/api";
+        public static string API_MAIN = "http://10.0.0.235:8088/api";
         //public static string API_GETLOGINMEMBER = API_MAIN + "/GetAllMembers";
         //public static string API_GETMEMBER = API_MAIN + "/GetMember";
         //public static string API_ADDMEMBER = API_MAIN + "/AddMember";

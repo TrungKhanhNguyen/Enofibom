@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -21,7 +22,9 @@ namespace EnofiFrameAPI.Controllers
         public async Task<IHttpActionResult> GetLocation(string id)
         {
             var url = StaticKey.requestPositionUrl;
+            var tempPhone = "84" + id.Substring(1);
             helper.CallSilentMessage(id);
+            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate { return true; });
             try
             {
                 var handler = new HttpClientHandler() { };
@@ -61,6 +64,24 @@ namespace EnofiFrameAPI.Controllers
                     if (!String.IsNullOrEmpty(contentReponse))
                     {
                         var mobi = helper.GetPositionObjectByContentReponse(contentReponse);
+                        if (mobi.Kind.Trim().Contains("C4G") == true)
+                        {
+                            try
+                            {
+                                var result = mobi.CGI.Split('-');
+                                string lcrId = result[result.Length - 1];
+                                string btsId = result[result.Length - 2];
+                                using (MapOfflineEntities db = new MapOfflineEntities())
+                                {
+                                    var cell = db.OperatorCells.Where(m => m.lcrId.ToLower() == lcrId && m.btsId.ToLower() == btsId.ToLower()).FirstOrDefault();
+                                    if (cell != null)
+                                        if (!String.IsNullOrEmpty(cell.TAC))
+                                            mobi.TAC = cell.TAC;
+                                }
+                            }
+                            catch { }
+                            //var cell = 
+                        }
                         return Ok(mobi);
                     }
                     return null;

@@ -45,6 +45,10 @@ namespace Enofibom
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.txtSearchMSISDN = new Guna.UI2.WinForms.Guna2TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtTAC = new System.Windows.Forms.Label();
+            this.lblTAC = new System.Windows.Forms.Label();
+            this.txtLocationStamp = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtIMEI = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtEventStamp = new System.Windows.Forms.Label();
@@ -66,8 +70,6 @@ namespace Enofibom
             this.lblCGI = new System.Windows.Forms.Label();
             this.lblIMSI = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtLocationStamp = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
@@ -284,9 +286,10 @@ namespace Enofibom
             this.btnSearch.CheckedState.Parent = this.btnSearch;
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.CustomImages.Parent = this.btnSearch;
-            this.btnSearch.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
+            this.btnSearch.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(91)))), ((int)(((byte)(121)))));
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
             this.btnSearch.HoverState.Parent = this.btnSearch;
             this.btnSearch.Image = global::Enofibom.Properties.Resources.search_48px;
             this.btnSearch.Location = new System.Drawing.Point(141, 86);
@@ -327,6 +330,8 @@ namespace Enofibom
             // groupBox2
             // 
             this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox2.Controls.Add(this.txtTAC);
+            this.groupBox2.Controls.Add(this.lblTAC);
             this.groupBox2.Controls.Add(this.txtLocationStamp);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.txtIMEI);
@@ -356,6 +361,46 @@ namespace Enofibom
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Location Detail";
+            // 
+            // txtTAC
+            // 
+            this.txtTAC.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtTAC.AutoSize = true;
+            this.txtTAC.Location = new System.Drawing.Point(345, 207);
+            this.txtTAC.Name = "txtTAC";
+            this.txtTAC.Size = new System.Drawing.Size(0, 17);
+            this.txtTAC.TabIndex = 23;
+            // 
+            // lblTAC
+            // 
+            this.lblTAC.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblTAC.AutoSize = true;
+            this.lblTAC.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTAC.Location = new System.Drawing.Point(303, 207);
+            this.lblTAC.Name = "lblTAC";
+            this.lblTAC.Size = new System.Drawing.Size(34, 17);
+            this.lblTAC.TabIndex = 22;
+            this.lblTAC.Text = "TAC:";
+            // 
+            // txtLocationStamp
+            // 
+            this.txtLocationStamp.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtLocationStamp.AutoSize = true;
+            this.txtLocationStamp.Location = new System.Drawing.Point(345, 172);
+            this.txtLocationStamp.Name = "txtLocationStamp";
+            this.txtLocationStamp.Size = new System.Drawing.Size(0, 17);
+            this.txtLocationStamp.TabIndex = 21;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(238, 172);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(101, 17);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "LocationStamp:";
             // 
             // txtIMEI
             // 
@@ -567,26 +612,6 @@ namespace Enofibom
             this.panel1.Size = new System.Drawing.Size(470, 788);
             this.panel1.TabIndex = 17;
             // 
-            // txtLocationStamp
-            // 
-            this.txtLocationStamp.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtLocationStamp.AutoSize = true;
-            this.txtLocationStamp.Location = new System.Drawing.Point(345, 172);
-            this.txtLocationStamp.Name = "txtLocationStamp";
-            this.txtLocationStamp.Size = new System.Drawing.Size(0, 17);
-            this.txtLocationStamp.TabIndex = 21;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(238, 172);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 17);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "LocationStamp:";
-            // 
             // MapUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -648,5 +673,7 @@ namespace Enofibom
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label txtLocationStamp;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label txtTAC;
+        private System.Windows.Forms.Label lblTAC;
     }
 }

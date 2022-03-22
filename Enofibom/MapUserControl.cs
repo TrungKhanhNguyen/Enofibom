@@ -79,6 +79,7 @@ namespace Enofibom
         {
             isIMEILoaded = isLocationLoaded = false;
             GetIMEI();
+            Thread.Sleep(500);
             GetLocation();
         }
 
@@ -201,6 +202,7 @@ namespace Enofibom
         {
             txtCGI.Text = txtIMSI.Text = txtKind.Text = txtLat.Text = txtLon.Text = txtMSISDN.Text = txtPlanName.Text = txtRadius.Text = "";
             txtLocationStamp.Text = txtEventStamp.Text = "";
+            txtTAC.Text = "";
             dataGrid1.DataSource = null;
             dataGrid1.Refresh();
         }
@@ -223,6 +225,7 @@ namespace Enofibom
                     txtLocationStamp.Text = listObject[e.RowIndex].locStamp?.ToString("dd/MM/yyyy HH:mm");
                     txtEventStamp.Text = listObject[e.RowIndex].eventStamp?.ToString("dd/MM/yyyy HH:mm");
                     txtIMEI.Text = listObject[e.RowIndex].IMEI;
+                    txtTAC.Text = listObject[e.RowIndex].TAC;
                 }
                 catch
                 {

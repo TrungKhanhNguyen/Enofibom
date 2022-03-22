@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Enofibom
+namespace EnofiFrameAPI
 {
     using System;
     using System.Collections.Generic;

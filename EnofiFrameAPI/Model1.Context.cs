@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Enofibom
+namespace EnofiFrameAPI
 {
     using System;
     using System.Data.Entity;
@@ -25,10 +25,7 @@ namespace Enofibom
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<LogEvent> LogEvents { get; set; }
-        public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<OperatorCell> OperatorCells { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
-        public virtual DbSet<Target> Targets { get; set; }
     }
 }
