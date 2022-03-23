@@ -35,6 +35,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mapControl = new GMap.NET.WindowsForms.GMapControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.chkShowMap = new System.Windows.Forms.CheckBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.btnClearHistory = new Guna.UI2.WinForms.Guna2Button();
             this.btnSearchHistory = new Guna.UI2.WinForms.Guna2Button();
@@ -46,7 +48,6 @@
             this.lblFromDate = new System.Windows.Forms.Label();
             this.txtSearchHistory = new Guna.UI2.WinForms.Guna2TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IMSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MSISDN = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,7 +61,11 @@
             this.IMEI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.locStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eventStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtRecords = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -97,6 +102,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.pictureBox1);
+            this.groupBox3.Controls.Add(this.chkShowMap);
             this.groupBox3.Controls.Add(this.trackBar1);
             this.groupBox3.Controls.Add(this.btnClearHistory);
             this.groupBox3.Controls.Add(this.btnSearchHistory);
@@ -107,19 +114,41 @@
             this.groupBox3.Controls.Add(this.lblToDate);
             this.groupBox3.Controls.Add(this.lblFromDate);
             this.groupBox3.Controls.Add(this.txtSearchHistory);
-            this.groupBox3.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(464, 241);
+            this.groupBox3.Size = new System.Drawing.Size(464, 266);
             this.groupBox3.TabIndex = 22;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "History Check";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::Enofibom.Properties.Resources.icons8_help_16;
+            this.pictureBox1.Location = new System.Drawing.Point(439, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox1.TabIndex = 30;
+            this.pictureBox1.TabStop = false;
+            // 
+            // chkShowMap
+            // 
+            this.chkShowMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkShowMap.AutoSize = true;
+            this.chkShowMap.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkShowMap.Location = new System.Drawing.Point(341, 22);
+            this.chkShowMap.Name = "chkShowMap";
+            this.chkShowMap.Size = new System.Drawing.Size(92, 21);
+            this.chkShowMap.TabIndex = 29;
+            this.chkShowMap.Text = "Show map";
+            this.chkShowMap.UseVisualStyleBackColor = true;
             // 
             // trackBar1
             // 
             this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar1.Location = new System.Drawing.Point(10, 156);
+            this.trackBar1.Location = new System.Drawing.Point(10, 184);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(448, 45);
             this.trackBar1.TabIndex = 28;
@@ -141,7 +170,7 @@
             this.btnClearHistory.HoverState.Parent = this.btnClearHistory;
             this.btnClearHistory.Image = global::Enofibom.Properties.Resources.broom_48px_102;
             this.btnClearHistory.ImageSize = new System.Drawing.Size(16, 16);
-            this.btnClearHistory.Location = new System.Drawing.Point(239, 96);
+            this.btnClearHistory.Location = new System.Drawing.Point(239, 124);
             this.btnClearHistory.Name = "btnClearHistory";
             this.btnClearHistory.ShadowDecoration.Parent = this.btnClearHistory;
             this.btnClearHistory.Size = new System.Drawing.Size(101, 30);
@@ -162,7 +191,7 @@
             this.btnSearchHistory.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
             this.btnSearchHistory.HoverState.Parent = this.btnSearchHistory;
             this.btnSearchHistory.Image = global::Enofibom.Properties.Resources.search_48px;
-            this.btnSearchHistory.Location = new System.Drawing.Point(128, 96);
+            this.btnSearchHistory.Location = new System.Drawing.Point(128, 124);
             this.btnSearchHistory.Name = "btnSearchHistory";
             this.btnSearchHistory.ShadowDecoration.Parent = this.btnSearchHistory;
             this.btnSearchHistory.Size = new System.Drawing.Size(101, 30);
@@ -173,10 +202,10 @@
             // txtCurrentValue
             // 
             this.txtCurrentValue.AutoSize = true;
-            this.txtCurrentValue.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCurrentValue.Location = new System.Drawing.Point(97, 211);
+            this.txtCurrentValue.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCurrentValue.Location = new System.Drawing.Point(110, 239);
             this.txtCurrentValue.Name = "txtCurrentValue";
-            this.txtCurrentValue.Size = new System.Drawing.Size(109, 15);
+            this.txtCurrentValue.Size = new System.Drawing.Size(125, 17);
             this.txtCurrentValue.TabIndex = 20;
             this.txtCurrentValue.Text = "12/12/2021 08:20";
             // 
@@ -192,7 +221,7 @@
             this.dpToDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dpToDate.HoverState.Parent = this.dpToDate;
-            this.dpToDate.Location = new System.Drawing.Point(239, 60);
+            this.dpToDate.Location = new System.Drawing.Point(239, 88);
             this.dpToDate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dpToDate.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dpToDate.Name = "dpToDate";
@@ -206,10 +235,10 @@
             // lblCurrentValue
             // 
             this.lblCurrentValue.AutoSize = true;
-            this.lblCurrentValue.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentValue.Location = new System.Drawing.Point(7, 211);
+            this.lblCurrentValue.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentValue.Location = new System.Drawing.Point(7, 239);
             this.lblCurrentValue.Name = "lblCurrentValue";
-            this.lblCurrentValue.Size = new System.Drawing.Size(84, 15);
+            this.lblCurrentValue.Size = new System.Drawing.Size(97, 17);
             this.lblCurrentValue.TabIndex = 19;
             this.lblCurrentValue.Text = "Current Value:";
             // 
@@ -225,7 +254,7 @@
             this.dpFromDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dpFromDate.HoverState.Parent = this.dpFromDate;
-            this.dpFromDate.Location = new System.Drawing.Point(10, 60);
+            this.dpFromDate.Location = new System.Drawing.Point(10, 88);
             this.dpFromDate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dpFromDate.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dpFromDate.Name = "dpFromDate";
@@ -240,22 +269,22 @@
             // 
             this.lblToDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblToDate.AutoSize = true;
-            this.lblToDate.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblToDate.Location = new System.Drawing.Point(383, 138);
+            this.lblToDate.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblToDate.Location = new System.Drawing.Point(330, 164);
             this.lblToDate.Name = "lblToDate";
-            this.lblToDate.Size = new System.Drawing.Size(75, 15);
+            this.lblToDate.Size = new System.Drawing.Size(125, 17);
             this.lblToDate.TabIndex = 18;
-            this.lblToDate.Text = "12/01/2022";
+            this.lblToDate.Text = "12/01/2022 14:00";
             // 
             // lblFromDate
             // 
             this.lblFromDate.AutoSize = true;
-            this.lblFromDate.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFromDate.Location = new System.Drawing.Point(7, 137);
+            this.lblFromDate.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFromDate.Location = new System.Drawing.Point(7, 164);
             this.lblFromDate.Name = "lblFromDate";
-            this.lblFromDate.Size = new System.Drawing.Size(75, 15);
+            this.lblFromDate.Size = new System.Drawing.Size(125, 17);
             this.lblFromDate.TabIndex = 17;
-            this.lblFromDate.Text = "12/12/2021";
+            this.lblFromDate.Text = "12/12/2021 12:00";
             // 
             // txtSearchHistory
             // 
@@ -274,7 +303,7 @@
             this.txtSearchHistory.ForeColor = System.Drawing.Color.Black;
             this.txtSearchHistory.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtSearchHistory.HoverState.Parent = this.txtSearchHistory;
-            this.txtSearchHistory.Location = new System.Drawing.Point(10, 24);
+            this.txtSearchHistory.Location = new System.Drawing.Point(10, 49);
             this.txtSearchHistory.Name = "txtSearchHistory";
             this.txtSearchHistory.PasswordChar = '\0';
             this.txtSearchHistory.PlaceholderText = "List phone numbers: 0924998787;748374847";
@@ -333,15 +362,6 @@
             this.dataGridView1.TabIndex = 28;
             this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.groupBox3);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(723, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(470, 506);
-            this.panel1.TabIndex = 29;
             // 
             // Id
             // 
@@ -439,6 +459,40 @@
             this.eventStamp.Name = "eventStamp";
             this.eventStamp.ReadOnly = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.txtRecords);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.groupBox3);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(723, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(470, 506);
+            this.panel1.TabIndex = 29;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(10, 280);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 17);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Records:";
+            // 
+            // txtRecords
+            // 
+            this.txtRecords.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtRecords.AutoSize = true;
+            this.txtRecords.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRecords.Location = new System.Drawing.Point(79, 280);
+            this.txtRecords.Name = "txtRecords";
+            this.txtRecords.Size = new System.Drawing.Size(16, 17);
+            this.txtRecords.TabIndex = 24;
+            this.txtRecords.Text = "0";
+            this.txtRecords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // HistoryMap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -451,9 +505,11 @@
             this.Load += new System.EventHandler(this.HistoryMap_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -487,5 +543,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IMEI;
         private System.Windows.Forms.DataGridViewTextBoxColumn locStamp;
         private System.Windows.Forms.DataGridViewTextBoxColumn eventStamp;
+        private System.Windows.Forms.CheckBox chkShowMap;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label txtRecords;
+        private System.Windows.Forms.Label label1;
     }
 }

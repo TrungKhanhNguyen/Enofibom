@@ -10,7 +10,9 @@ namespace Enofibom.Helper
     {
         public static string IsAdmin = "IsAdmin";
         public static string UserLoggedIn = "UserLoggedIn";
-        
+
+        public static string requestPositionUrl = "https://10.3.64.246/mbfn/sb/lbs/sdk";
+        public static string requestIMEIUrl = "https://10.3.64.246/mbfn/sb/adc/sendMessage?msisdn=";
 
         public static string API_MAIN = "http://10.0.0.235:8088/api";
         //public static string API_GETLOGINMEMBER = API_MAIN + "/GetAllMembers";

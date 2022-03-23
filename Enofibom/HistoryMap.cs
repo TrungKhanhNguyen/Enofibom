@@ -28,10 +28,13 @@ namespace Enofibom
         Maper maper = new Maper();
         DBHelper helper = new DBHelper();
         private bool sortAscending = false;
+
+        List<string> listArraySDT = new List<string>();
         public HistoryMap()
         {
             InitializeComponent();
             dataGridView1.BringToFront();
+            new ToolTip().SetToolTip(pictureBox1, "Display maximum 7 targets path.");
         }
 
         private void ReloadTrackBar()
@@ -43,7 +46,7 @@ namespace Enofibom
                 trackBar1.Maximum = (int)totalCount;
                 trackBar1.Refresh();
                 var toDate = dpFromDate.Value.AddMinutes(trackBar1.Value);
-                txtCurrentValue.Text = toDate.ToString("dd/MM/yyyy HH:mm:ss");
+                txtCurrentValue.Text = toDate.ToString("dd/MM/yyyy HH:mm");
             }
             catch (Exception ex)
             {
@@ -59,61 +62,13 @@ namespace Enofibom
             var frDate = dpFromDate.Value;
             var toDate = frDate.AddMinutes(trackValue);
             listCurrentHistoryPosition = listHistoryPosition.Where(m => m.eventStamp >= frDate && m.eventStamp <= toDate).ToList();
-            var listSDT = txtSearchHistory.Text.Split(';');
-            txtCurrentValue.Text = toDate.ToString("dd/MM/yyyy HH:mm:ss");
-            var count = 1;
-            foreach (var item in listSDT)
+            txtCurrentValue.Text = toDate.ToString("dd/MM/yyyy HH:mm");
+            if (chkShowMap.Checked)
             {
-                var listItem1 = listCurrentHistoryPosition.Where(m => m.MSISDN == item.Trim()).ToList();
-                if (listItem1.Count > 0)
-                {
-                    foreach (var itemPos in listItem1)
-                    {
-                        var marker1 = maper.GetMarkerFromData(itemPos, count);
-                        
-                        var poly = maper.GetPolygonFromData(itemPos);
-                        if (marker1 != null)
-                        {
-                            overlay.Markers.Add(marker1);
-                            historyListMarker.Add(marker1);
-                        }
-                        if (poly != null)
-                        {
-                            overlay.Polygons.Add(poly);
-                            historyListPolygon.Add(poly);
-                        }
-                    }
-
-                    if (listItem1.Count > 1)
-                    {
-                        for (int i = 0; i < listItem1.Count - 1; i++)
-                        {
-                            GMapRoute line_layer;
-                            line_layer = new GMapRoute("single_line");
-                            line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
-
-                            overlay.Routes.Add(line_layer);
-
-                            var lat1 = Convert.ToDouble(listItem1[i].Lat);
-                            var lon1 = Convert.ToDouble(listItem1[i].Lon);
-
-                            var lat2 = Convert.ToDouble(listItem1[i + 1].Lat);
-                            var lon2 = Convert.ToDouble(listItem1[i + 1].Lon);
-
-                            var point1 = new PointLatLng(lat1, lon1);
-                            var point2 = new PointLatLng(lat2, lon2);
-
-                            line_layer.Points.Add(point1);
-                            line_layer.Points.Add(point2);
-                            historyListRoute.Add(line_layer);
-                            //To force the draw, you need to update the route
-                            mapControl.UpdateRouteLocalPosition(line_layer);
-                        }
-                        //mapControl.Refresh();
-                    }
-                }
-                count++;
+                ShowPointsAndLines(listCurrentHistoryPosition);
             }
+            txtRecords.Text = listCurrentHistoryPosition.Count().ToString();
+            dataGridView1.DataSource = listCurrentHistoryPosition;
         }
 
         private void HistoryMap_Load(object sender, EventArgs e)
@@ -133,12 +88,12 @@ namespace Enofibom
 
             dpToDate.Value = DateTime.Now;
             dpFromDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-            txtCurrentValue.Text = dpFromDate.Value.ToString("dd/MM/yyyy HH:mm:ss");
-            lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy");
-            lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy");
+            txtCurrentValue.Text = dpFromDate.Value.ToString("dd/MM/yyyy HH:mm");
+            lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy HH:mm");
+            lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy HH:mm");
 
             mapControl.Overlays.Add(overlay);
-            lblCurrentValue.Visible = false;
+            chkShowMap.Checked = false;
         }
         private string ConvertPhoneNumber(string phone)
         {
@@ -152,68 +107,94 @@ namespace Enofibom
         }
         private void btnSearchHistory_Click(object sender, EventArgs e)
         {
-            ClearHistory();
-
-            historyListMarker = new List<GMapMarker>(); historyListPolygon = new List<GMapPolygon>();
-            historyListRoute = new List<GMapRoute>();
-            var listSDT = txtSearchHistory.Text.Split(';');
-            List<string> listArraySDT = new List<string>();
-            foreach (var item in listSDT)
+            try
             {
-                listArraySDT.Add(ConvertPhoneNumber(item.Trim()));
-            }
-            listHistoryPosition = helper.GetListPositionByDate(listArraySDT.ToArray(), dpFromDate.Value, dpToDate.Value);
-            var count = 1;
-            foreach (var item in listArraySDT)
-            {
-                var listItem1 = listHistoryPosition.Where(m => m.MSISDN == item).ToList();
-                if (listItem1.Count > 0)
+                ClearHistory();
+                trackBar1.Value = 0;
+                listArraySDT = new List<string>();
+                historyListMarker = new List<GMapMarker>(); historyListPolygon = new List<GMapPolygon>();
+                historyListRoute = new List<GMapRoute>();
+                var listSDT = txtSearchHistory.Text.Split(';');
+                if (string.IsNullOrEmpty(txtSearchHistory.Text))
                 {
-                    foreach (var itemPos in listItem1)
-                    {
-                        var marker1 = maper.GetMarkerFromData(itemPos, count);
-                        var poly = maper.GetPolygonFromData(itemPos);
-                        if (marker1 != null)
-                        {
-                            overlay.Markers.Add(marker1);
-                            historyListMarker.Add(marker1);
-                        }
-                        if (poly != null)
-                        {
-
-                            overlay.Polygons.Add(poly);
-                            historyListPolygon.Add(poly);
-                        }
-                    }
-                    if (listItem1.Count > 1)
-                    {
-                        for (int i = 0; i < listItem1.Count - 1; i++)
-                        {
-                            GMapRoute line_layer = new GMapRoute("single_line");
-                            line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
-
-                            var lat1 = Convert.ToDouble(listItem1[i].Lat);
-                            var lon1 = Convert.ToDouble(listItem1[i].Lon);
-
-                            var lat2 = Convert.ToDouble(listItem1[i + 1].Lat);
-                            var lon2 = Convert.ToDouble(listItem1[i + 1].Lon);
-
-                            var point1 = new PointLatLng(lat1, lon1);
-                            var point2 = new PointLatLng(lat2, lon2);
-
-                            line_layer.Points.Add(point1);
-                            line_layer.Points.Add(point2);
-                            overlay.Routes.Add(line_layer);
-                            historyListRoute.Add(line_layer);
-                           
-                        }
-                    }
-                    mapControl.Refresh();
+                    listHistoryPosition = helper.GetListPositionByDate(dpFromDate.Value, dpToDate.Value);
                 }
-                count++;
+                else {
+                    foreach (var item in listSDT)
+                    {
+                        listArraySDT.Add(ConvertPhoneNumber(item.Trim()));
+                    }
+                    listHistoryPosition = helper.GetListPositionByDate(listArraySDT.ToArray(), dpFromDate.Value, dpToDate.Value);
+                }
+
+                if (chkShowMap.Checked)
+                {
+                    ShowPointsAndLines(listHistoryPosition);
+                }
+
+                //var kkk = historyListRoute;
+                txtRecords.Text = listHistoryPosition.Count().ToString();
+                dataGridView1.DataSource = listHistoryPosition.OrderByDescending(m => m.eventStamp).ToList();
             }
-            //var kkk = historyListRoute;
-            dataGridView1.DataSource = listHistoryPosition.OrderByDescending(m=>m.eventStamp).ToList();
+            catch { }
+            
+        }
+
+        private void ShowPointsAndLines(List<Position> listPos)
+        {
+            var count = 1;
+            if (!String.IsNullOrEmpty(txtSearchHistory.Text))
+            {
+                foreach (var item in listArraySDT)
+                {
+                    var listItem1 = listPos.Where(m => m.MSISDN == item).ToList();
+                    if (listItem1.Count > 0)
+                    {
+                        foreach (var itemPos in listItem1)
+                        {
+                            var marker1 = maper.GetMarkerFromData(itemPos, count);
+                            var poly = maper.GetPolygonFromData(itemPos);
+                            if (marker1 != null)
+                            {
+                                overlay.Markers.Add(marker1);
+                                historyListMarker.Add(marker1);
+                            }
+                            if (poly != null)
+                            {
+
+                                overlay.Polygons.Add(poly);
+                                historyListPolygon.Add(poly);
+                            }
+                        }
+                        if (listItem1.Count > 1)
+                        {
+                            for (int i = 0; i < listItem1.Count - 1; i++)
+                            {
+                                GMapRoute line_layer = new GMapRoute("single_line");
+                                line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
+
+                                var lat1 = Convert.ToDouble(listItem1[i].Lat);
+                                var lon1 = Convert.ToDouble(listItem1[i].Lon);
+
+                                var lat2 = Convert.ToDouble(listItem1[i + 1].Lat);
+                                var lon2 = Convert.ToDouble(listItem1[i + 1].Lon);
+
+                                var point1 = new PointLatLng(lat1, lon1);
+                                var point2 = new PointLatLng(lat2, lon2);
+
+                                line_layer.Points.Add(point1);
+                                line_layer.Points.Add(point2);
+                                overlay.Routes.Add(line_layer);
+                                historyListRoute.Add(line_layer);
+                                mapControl.UpdateRouteLocalPosition(line_layer);
+                            }
+                        }
+                        mapControl.Refresh();
+                    }
+                    count++;
+                }
+            }
+            
         }
 
         private void btnClearHistory_Click(object sender, EventArgs e)
@@ -221,6 +202,7 @@ namespace Enofibom
             ClearHistory();
             listHistoryPosition = new List<Position>();
             dataGridView1.DataSource = null;
+            txtRecords.Text = "0";
         }
 
         private void dpFromDate_ValueChanged(object sender, EventArgs e)
@@ -229,7 +211,7 @@ namespace Enofibom
             {
                 dpToDate.Value = dpFromDate.Value;
             }
-            lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy");
+            lblFromDate.Text = dpFromDate.Value.ToString("dd/MM/yyyy HH:mm");
             ReloadTrackBar();
         }
 
@@ -239,7 +221,7 @@ namespace Enofibom
             {
                 dpToDate.Value = dpFromDate.Value;
             }
-            lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy");
+            lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy HH:mm");
             ReloadTrackBar();
         }
         private void ClearHistory()
@@ -321,5 +303,7 @@ namespace Enofibom
                 catch { }
             }
         }
+
+       
     }
 }

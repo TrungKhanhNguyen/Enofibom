@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,8 +36,70 @@ namespace Enofibom
         {
             try
             {
-                var mobi = await api.GetLocation(phoneNumber);
-                await helper.InsertPositionToDB(mobi);
+                var url = StaticKey.requestPositionUrl;
+                var handler = new HttpClientHandler() { };
+                using (var httpClient = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(url),
+                    Timeout = new TimeSpan(0, 1, 0)
+                })
+                {
+                    var inputBody = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:v1='http://schema.intersec.com/igloo/sdk/v1.2'><soapenv:Header/><soapenv:Body><v1:pull.retrieveV3Req><args><params><filter><msisdn><explicit><kind>2</kind>"
+                    + "<m>" + phoneNumber.Trim() + "</m>"
+                    + "</explicit></msisdn></filter><options><subscriberFields>msisdn</subscriberFields><subscriberFields>imsi</subscriberFields><locationFields>location</locationFields><locationFields>event</locationFields><locationFields>eventStamp</locationFields><locationFields>locStamp</locationFields></options></params></args></v1:pull.retrieveV3Req></soapenv:Body></soapenv:Envelope>";
+
+                    var httpContent = new StringContent(inputBody, Encoding.UTF8, "application/xml");
+                    var request = new HttpRequestMessage();
+                    request.Method = HttpMethod.Post;
+                    request.RequestUri = new Uri(url);
+                    request.Content = httpContent;
+                    request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/xml");
+
+
+                    var byteArray = Encoding.ASCII.GetBytes("tctk_api:$5$rounds=5000$bbf460274ac2fcd8$u0raxguDBJcCDUWKabiHX0LXjxuTszOnUJlZhqGXFQ2");
+                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                    httpClient.DefaultRequestHeaders.Add("MobifoneKey", "74a5c84c-f2c3-4bbd-9819-5958094d604e");
+
+                    //var responseMessage = await httpClient.SendAsync(request);
+                    var contentReponse = "";
+                    using (HttpResponseMessage responseMessage = await httpClient.SendAsync(request))
+                    using (HttpContent content = responseMessage.Content)
+                    {
+                        if (responseMessage.StatusCode == HttpStatusCode.OK)
+                        {
+                            contentReponse = content.ReadAsStringAsync().Result;
+                        }
+                    }
+                    //await Task.When
+                    if (!String.IsNullOrEmpty(contentReponse))
+                    {
+                        var mobi = helper.GetPositionObjectByContentReponse(contentReponse);
+                        if (mobi.Kind.Trim().Contains("C4G") == true)
+                        {
+                            try
+                            {
+                                var result = mobi.CGI.Split('-');
+                                string lcrId = result[result.Length - 1];
+                                string btsId = result[result.Length - 2];
+                                using (MapOfflineEntities db = new MapOfflineEntities())
+                                {
+                                    var cell = db.OperatorCells.Where(m => m.lcrId.ToLower() == lcrId && m.btsId.ToLower() == btsId.ToLower()).FirstOrDefault();
+                                    if (cell != null)
+                                        if (!String.IsNullOrEmpty(cell.TAC))
+                                            mobi.TAC = cell.TAC;
+                                }
+                            }
+                            catch { }
+                            //var cell = 
+                        }
+                        if (mobi != null)
+                        {
+                            await helper.InsertPositionToDB(mobi);
+                        }
+
+                    }
+
+                }
             }
             catch
             {

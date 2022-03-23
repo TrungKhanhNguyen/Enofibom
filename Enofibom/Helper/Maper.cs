@@ -39,6 +39,7 @@ namespace Enofibom.Helper
                     case 5: marker = new GMarkerGoogle(point, GMarkerGoogleType.pink_dot); break;
                     case 6: marker = new GMarkerGoogle(point, GMarkerGoogleType.purple_dot); break;
                     case 7: marker = new GMarkerGoogle(point, GMarkerGoogleType.lightblue_dot); break;
+                    
                 }
                 marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
                 marker.ToolTipText = tooltiptext;

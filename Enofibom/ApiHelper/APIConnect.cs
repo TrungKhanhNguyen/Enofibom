@@ -12,9 +12,8 @@ namespace Enofibom.ApiHelper
 {
     public class APIConnect
     {
-        public async Task<Position> GetLocation(string SDT)
+        public void GetLocation(string SDT)
         {
-            Position _mem = null;
             using (var httpClient = new HttpClient())
             {
                 try
@@ -24,11 +23,8 @@ namespace Enofibom.ApiHelper
                         new MediaTypeWithQualityHeaderValue("application/json"));
                     
                     var response = httpClient.GetAsync(StaticKey.API_GETLOCATION + SDT);
-                    var responseObj = await response.Result.Content.ReadAsStringAsync();
-                    _mem = JsonConvert.DeserializeObject<Position>(responseObj);
-                    return _mem;
                 }
-                catch { return null; }
+                catch { }
             }
         }
 
