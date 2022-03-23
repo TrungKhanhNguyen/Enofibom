@@ -31,7 +31,7 @@ namespace EnofiFrameAPI.Controllers
                 using (var httpClient = new HttpClient(handler)
                 {
                     BaseAddress = new Uri(url),
-                    Timeout = new TimeSpan(0, 2, 0)
+                    Timeout = new TimeSpan(0, 1, 0)
                 })
                 {
                     var inputBody = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:v1='http://schema.intersec.com/igloo/sdk/v1.2'><soapenv:Header/><soapenv:Body><v1:pull.retrieveV3Req><args><params><filter><msisdn><explicit><kind>2</kind>"
