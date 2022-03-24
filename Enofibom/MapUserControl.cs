@@ -96,7 +96,7 @@ namespace Enofibom
                         {
                             client.DefaultRequestHeaders.Add("MobifoneKey", "74a5c84c-f2c3-4bbd-9819-5958094d604e");
                             var contentReponse = "";
-                            using (HttpResponseMessage responseMessage = await client.GetAsync(urlIMEI + sdt.Trim()))
+                            using (HttpResponseMessage responseMessage = await client.GetAsync(urlIMEI + helper.ConvertPhoneNumber(sdt.Trim())))
                             using (HttpContent content = responseMessage.Content)
                             {
                                 if (responseMessage.StatusCode == HttpStatusCode.OK)
@@ -200,8 +200,12 @@ namespace Enofibom
                                         {
                                             var cell = db.OperatorCells.Where(m => m.lcrId.ToLower() == lcrId && m.btsId.ToLower() == btsId.ToLower()).FirstOrDefault();
                                             if (cell != null)
+                                            {
                                                 if (!String.IsNullOrEmpty(cell.TAC))
                                                     mobi.TAC = cell.TAC;
+                                                if (!String.IsNullOrEmpty(cell.CellName))
+                                                    mobi.CellName = cell.CellName;
+                                            }
                                         }
                                     }
                                     catch { }
@@ -299,7 +303,7 @@ namespace Enofibom
         {
             txtCGI.Text = txtIMSI.Text = txtKind.Text = txtLat.Text = txtLon.Text = txtMSISDN.Text = txtPlanName.Text = txtRadius.Text = "";
             txtLocationStamp.Text = txtEventStamp.Text = "";
-            txtTAC.Text = "";
+            txtTAC.Text = ""; txtIMEI.Text = ""; txtCellName.Text = "";
             dataGrid1.DataSource = null;
             dataGrid1.Refresh();
         }
@@ -323,6 +327,7 @@ namespace Enofibom
                     txtEventStamp.Text = listObject[e.RowIndex].eventStamp?.ToString("dd/MM/yyyy HH:mm");
                     txtIMEI.Text = listObject[e.RowIndex].IMEI;
                     txtTAC.Text = listObject[e.RowIndex].TAC;
+                    txtCellName.Text = listObject[e.RowIndex].CellName;
                 }
                 catch
                 {

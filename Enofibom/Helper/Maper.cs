@@ -14,7 +14,6 @@ namespace Enofibom.Helper
 {
     public class Maper
     {
-        
 
         public GMapMarker GetMarkerFromData(Position temp, int numbers)
         {
@@ -25,10 +24,10 @@ namespace Enofibom.Helper
                 var realLat = Convert.ToDouble(tempLat);
                 var realLng = Convert.ToDouble(tempLng);
                 var rad = Convert.ToDouble(temp.Radius);
-                var tooltiptext = Environment.NewLine + "IMSI=" + temp.IMSI + "; MSISDN=" + temp.MSISDN + Environment.NewLine +
-                    ";CGI=" + temp.CGI + "; Kind=" + temp.Kind + Environment.NewLine +
-                    "; Lat=" + temp.Lat + "; Lon=" + temp.Lon + "; Radius=" + temp.Radius + "; Event Time=" + temp.eventStamp?.ToString("dd/MM/yyyy HH:mm:ss")
-                    + "; Location Time=" + temp.locStamp?.ToString("dd/MM/yyyy HH:mm:ss");
+                var tooltiptext = Environment.NewLine + "IMSI=" + temp.IMSI + "; MSISDN=" + temp.MSISDN + "; IMEI=" + temp.IMEI + Environment.NewLine +
+                    "CGI=" + temp.CGI + "; TAC=" + temp.TAC + "; Kind=" + temp.Kind + "; CellName=" + temp.CellName + Environment.NewLine +
+                    "Lat=" + temp.Lat + "; Lon=" + temp.Lon + "; Radius=" + temp.Radius + "; Event Time=" + temp.eventStamp?.ToString("dd/MM/yyyy HH:mm:ss") + ";" +
+                    "Location Time=" + temp.locStamp?.ToString("dd/MM/yyyy HH:mm:ss");
                 var point = new PointLatLng(realLat, realLng);
                 GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
                 switch (numbers)
@@ -131,7 +130,6 @@ namespace Enofibom.Helper
         }
         public static double DistanceTwoPoint(double startLat, double startLong, double endLat, double endLong)
         {
-
             var startPoint = new GeoCoordinate(startLat, startLong);
             var endPoint = new GeoCoordinate(endLat, endLong);
 

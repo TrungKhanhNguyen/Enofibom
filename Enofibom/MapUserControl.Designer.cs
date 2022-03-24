@@ -29,7 +29,7 @@ namespace Enofibom
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mapControl = new GMap.NET.WindowsForms.GMapControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblCountLeft = new System.Windows.Forms.Label();
@@ -70,6 +70,8 @@ namespace Enofibom
             this.lblCGI = new System.Windows.Forms.Label();
             this.lblIMSI = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtCellName = new System.Windows.Forms.Label();
+            this.lblCellName = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
@@ -233,8 +235,8 @@ namespace Enofibom
             // MSISDN
             // 
             this.MSISDN.DataPropertyName = "MSISDN";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MSISDN.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MSISDN.DefaultCellStyle = dataGridViewCellStyle1;
             this.MSISDN.FillWeight = 120F;
             this.MSISDN.HeaderText = "MSISDN";
             this.MSISDN.MinimumWidth = 100;
@@ -330,6 +332,8 @@ namespace Enofibom
             // groupBox2
             // 
             this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox2.Controls.Add(this.txtCellName);
+            this.groupBox2.Controls.Add(this.lblCellName);
             this.groupBox2.Controls.Add(this.txtTAC);
             this.groupBox2.Controls.Add(this.lblTAC);
             this.groupBox2.Controls.Add(this.txtLocationStamp);
@@ -612,6 +616,26 @@ namespace Enofibom
             this.panel1.Size = new System.Drawing.Size(470, 788);
             this.panel1.TabIndex = 17;
             // 
+            // txtCellName
+            // 
+            this.txtCellName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtCellName.AutoSize = true;
+            this.txtCellName.Location = new System.Drawing.Point(107, 246);
+            this.txtCellName.Name = "txtCellName";
+            this.txtCellName.Size = new System.Drawing.Size(0, 17);
+            this.txtCellName.TabIndex = 25;
+            // 
+            // lblCellName
+            // 
+            this.lblCellName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblCellName.AutoSize = true;
+            this.lblCellName.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCellName.Location = new System.Drawing.Point(32, 246);
+            this.lblCellName.Name = "lblCellName";
+            this.lblCellName.Size = new System.Drawing.Size(68, 17);
+            this.lblCellName.TabIndex = 24;
+            this.lblCellName.Text = "CellName:";
+            // 
             // MapUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -675,5 +699,7 @@ namespace Enofibom
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label txtTAC;
         private System.Windows.Forms.Label lblTAC;
+        private System.Windows.Forms.Label txtCellName;
+        private System.Windows.Forms.Label lblCellName;
     }
 }

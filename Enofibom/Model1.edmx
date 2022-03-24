@@ -56,6 +56,7 @@
           <Property Name="IMEI" Type="nvarchar" MaxLength="50" />
           <Property Name="eventStamp" Type="datetime" />
           <Property Name="TAC" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellName" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Target">
           <Key>
@@ -132,6 +133,7 @@
           <Property Name="IMEI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="eventStamp" Type="DateTime" Precision="3" />
           <Property Name="TAC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Target">
           <Key>
@@ -211,6 +213,7 @@
                 <ScalarProperty Name="IMEI" ColumnName="IMEI" />
                 <ScalarProperty Name="eventStamp" ColumnName="eventStamp" />
                 <ScalarProperty Name="TAC" ColumnName="TAC" />
+                <ScalarProperty Name="CellName" ColumnName="CellName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

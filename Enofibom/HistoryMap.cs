@@ -95,16 +95,7 @@ namespace Enofibom
             mapControl.Overlays.Add(overlay);
             chkShowMap.Checked = false;
         }
-        private string ConvertPhoneNumber(string phone)
-        {
-            var temp = phone.Substring(0, 2);
-            if(temp != "84")
-            {
-                var returnPhone = "84" + phone.Substring(1);
-                return returnPhone;
-            }
-            return phone;
-        }
+        
         private void btnSearchHistory_Click(object sender, EventArgs e)
         {
             try
@@ -122,7 +113,7 @@ namespace Enofibom
                 else {
                     foreach (var item in listSDT)
                     {
-                        listArraySDT.Add(ConvertPhoneNumber(item.Trim()));
+                        listArraySDT.Add(helper.ConvertPhoneNumber(item.Trim()));
                     }
                     listHistoryPosition = helper.GetListPositionByDate(listArraySDT.ToArray(), dpFromDate.Value, dpToDate.Value);
                 }

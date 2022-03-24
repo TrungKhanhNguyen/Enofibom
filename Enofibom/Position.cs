@@ -29,5 +29,6 @@ namespace Enofibom
         public string IMEI { get; set; }
         public Nullable<System.DateTime> eventStamp { get; set; }
         public string TAC { get; set; }
+        public string CellName { get; set; }
     }
 }
