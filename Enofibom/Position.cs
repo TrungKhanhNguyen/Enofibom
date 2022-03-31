@@ -30,5 +30,6 @@ namespace Enofibom
         public Nullable<System.DateTime> eventStamp { get; set; }
         public string TAC { get; set; }
         public string CellName { get; set; }
+        public Nullable<System.DateTime> RequestTime { get; set; }
     }
 }

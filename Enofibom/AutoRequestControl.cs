@@ -74,6 +74,7 @@ namespace Enofibom
                     if (!String.IsNullOrEmpty(contentReponse))
                     {
                         var mobi = helper.GetPositionObjectByContentReponse(contentReponse);
+                        mobi.RequestTime = DateTime.Now;
                         if (mobi.Kind.Trim().Contains("C4G") == true)
                         {
                             try
@@ -85,8 +86,12 @@ namespace Enofibom
                                 {
                                     var cell = db.OperatorCells.Where(m => m.lcrId.ToLower() == lcrId && m.btsId.ToLower() == btsId.ToLower()).FirstOrDefault();
                                     if (cell != null)
+                                    {
                                         if (!String.IsNullOrEmpty(cell.TAC))
                                             mobi.TAC = cell.TAC;
+                                        if (!String.IsNullOrEmpty(cell.CellName))
+                                            mobi.CellName = cell.CellName;
+                                    }
                                 }
                             }
                             catch { }

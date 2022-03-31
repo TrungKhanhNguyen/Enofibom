@@ -189,6 +189,7 @@ namespace Enofibom
                             if (!String.IsNullOrEmpty(contentReponse))
                             {
                                 var mobi = helper.GetPositionObjectByContentReponse(contentReponse);
+                                mobi.RequestTime = DateTime.Now;
                                 if (mobi.Kind.Trim().Contains("C4G") == true)
                                 {
                                     try

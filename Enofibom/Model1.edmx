@@ -57,6 +57,7 @@
           <Property Name="eventStamp" Type="datetime" />
           <Property Name="TAC" Type="nvarchar" MaxLength="50" />
           <Property Name="CellName" Type="nvarchar" MaxLength="200" />
+          <Property Name="RequestTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Target">
           <Key>
@@ -134,6 +135,7 @@
           <Property Name="eventStamp" Type="DateTime" Precision="3" />
           <Property Name="TAC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CellName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RequestTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Target">
           <Key>
@@ -214,6 +216,7 @@
                 <ScalarProperty Name="eventStamp" ColumnName="eventStamp" />
                 <ScalarProperty Name="TAC" ColumnName="TAC" />
                 <ScalarProperty Name="CellName" ColumnName="CellName" />
+                <ScalarProperty Name="RequestTime" ColumnName="RequestTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
