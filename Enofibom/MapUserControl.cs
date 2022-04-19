@@ -151,6 +151,8 @@ namespace Enofibom
                 {
                     try
                     {
+                        api.GetLocation(sdt);
+                        Thread.Sleep(1500);
                         var url = StaticKey.requestPositionUrl;
                         var handler = new HttpClientHandler() { };
                         using (var httpClient = new HttpClient(handler)
@@ -269,6 +271,24 @@ namespace Enofibom
                         await helper.InsertPositionToDB(item);
                     count++;
                 }
+                if (listObject.Count > 0)
+                {
+                    var temp1 = listObject[0];
+                    txtCGI.Text = temp1.CGI;
+                    txtIMSI.Text = temp1.IMSI;
+                    txtMSISDN.Text = temp1.MSISDN;
+                    txtLat.Text = temp1.Lat;
+                    txtLon.Text = temp1.Lon;
+                    txtRadius.Text = temp1.Radius;
+                    txtPlanName.Text = temp1.PlanName;
+                    txtKind.Text = temp1.Kind;
+                    txtLocationStamp.Text = temp1.locStamp?.ToString("dd/MM/yyyy HH:mm");
+                    txtEventStamp.Text = temp1.eventStamp?.ToString("dd/MM/yyyy HH:mm");
+                    txtIMEI.Text = temp1.IMEI;
+                    txtTAC.Text = temp1.TAC;
+                    txtCellName.Text = temp1.CellName;
+                    dataGrid1.Rows[0].Selected = true;
+                }
                 var userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
                 var tempLog = new LogEvent
                 {
@@ -360,11 +380,11 @@ namespace Enofibom
 
         private void txtSearchMSISDN_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Space)
-            {
-                txtSearchMSISDN.Text += ";";
-                txtSearchMSISDN.Select(txtSearchMSISDN.Text.Length, 0);
-            }
+            //if (e.KeyCode == Keys.Space)
+            //{
+            //    txtSearchMSISDN.Text += ";";
+            //    txtSearchMSISDN.Select(txtSearchMSISDN.Text.Length, 0);
+            //}
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -36,6 +36,7 @@ namespace Enofibom
         {
             try
             {
+                api.GetLocation(phoneNumber);
                 var url = StaticKey.requestPositionUrl;
                 var handler = new HttpClientHandler() { };
                 using (var httpClient = new HttpClient(handler)

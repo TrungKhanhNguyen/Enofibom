@@ -12,7 +12,7 @@ namespace EnofiFrameAPI
     public class LocationHelper
     {
         
-        public void CallSilentMessage(string phonenumber)
+        public string CallSilentMessage(string phonenumber)
         {
             SerialPort _serialPort;
             _serialPort = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
@@ -25,26 +25,30 @@ namespace EnofiFrameAPI
                 if (_serialPort.IsOpen)
                 {
                     _serialPort.WriteLine("AT+CMGF=0" + Environment.NewLine);
-                    Thread.Sleep(100);
+                    Thread.Sleep(200);
 
                     _serialPort.WriteLine("AT+CMGS=" + 17 + Environment.NewLine);
-                    Thread.Sleep(100);
+                    Thread.Sleep(200);
 
                     var pduMsg = "00B1000B91" + SwapPosition(phonenumber) + "4000AA03201008";
                     _serialPort.WriteLine(pduMsg + char.ConvertFromUtf32(26));
-                    Thread.Sleep(500);
+                    Thread.Sleep(1000);
 
                     var sdsd = _serialPort.ReadExisting();
+                    return sdsd;
                 }
+                
                 _serialPort.Close();
                 _serialPort.Dispose();
+                return "";
             }
-            catch { if (_serialPort.IsOpen) _serialPort.Close(); _serialPort.Dispose(); }
+            catch { if (_serialPort.IsOpen) _serialPort.Close(); _serialPort.Dispose(); return ""; }
             
         }
 
-        private string SwapPosition(string _originalMsg)
+        public string SwapPosition(string _originalMsg)
         {
+            
             var msg = _originalMsg.Substring(1);
             msg = "84" + msg + "F";
             string returnStr = "";

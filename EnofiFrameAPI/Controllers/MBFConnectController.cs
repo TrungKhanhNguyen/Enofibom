@@ -21,9 +21,10 @@ namespace EnofiFrameAPI.Controllers
         [ActionName("GetLocation")]
         public IHttpActionResult GetLocation(string id)
         {
-           
-            helper.CallSilentMessage(id);
-            return Ok();
+
+            //var swapPosition = helper.SwapPosition("0774213991");
+            var res = helper.CallSilentMessage(id);
+            return Ok(res);
             
         }
        

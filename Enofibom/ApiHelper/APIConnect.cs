@@ -2,7 +2,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -14,17 +16,26 @@ namespace Enofibom.ApiHelper
     {
         public void GetLocation(string SDT)
         {
-            using (var httpClient = new HttpClient())
+            //using (var httpClient = new HttpClient())
+            //{
+            //    try
+            //    {
+            //        httpClient.DefaultRequestHeaders.Accept.Clear();
+            //        httpClient.DefaultRequestHeaders.Accept.Add(
+            //            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //        var response = httpClient.GetAsync(StaticKey.API_GETLOCATION + SDT);
+            //    }
+            //    catch { }
+            //}
+            //var url = StaticKey.API_GETLOCATION + SDT;
+            using (var client = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate }))
             {
-                try
-                {
-                    httpClient.DefaultRequestHeaders.Accept.Clear();
-                    httpClient.DefaultRequestHeaders.Accept.Add(
-                        new MediaTypeWithQualityHeaderValue("application/json"));
-                    
-                    var response = httpClient.GetAsync(StaticKey.API_GETLOCATION + SDT);
-                }
-                catch { }
+                client.BaseAddress = new Uri(StaticKey.API_GETLOCATION);
+                HttpResponseMessage response = client.GetAsync(SDT).Result;
+                response.EnsureSuccessStatusCode();
+                string result = response.Content.ReadAsStringAsync().Result;
+                //Console.WriteLine("Result: " + result);
             }
         }
 

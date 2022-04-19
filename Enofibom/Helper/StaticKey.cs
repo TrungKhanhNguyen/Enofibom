@@ -14,7 +14,7 @@ namespace Enofibom.Helper
         public static string requestPositionUrl = "https://10.3.64.246/mbfn/sb/lbs/sdk";
         public static string requestIMEIUrl = "https://10.3.64.246/mbfn/sb/adc/sendMessage?msisdn=";
 
-        public static string API_MAIN = "http://10.0.0.235:8088/api";
+        public static string API_MAIN = "http://192.168.50.100:8088/api";
         //public static string API_GETLOGINMEMBER = API_MAIN + "/GetAllMembers";
         //public static string API_GETMEMBER = API_MAIN + "/GetMember";
         //public static string API_ADDMEMBER = API_MAIN + "/AddMember";
