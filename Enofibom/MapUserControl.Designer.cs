@@ -45,6 +45,8 @@ namespace Enofibom
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.txtSearchMSISDN = new Guna.UI2.WinForms.Guna2TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtCellName = new System.Windows.Forms.Label();
+            this.lblCellName = new System.Windows.Forms.Label();
             this.txtTAC = new System.Windows.Forms.Label();
             this.lblTAC = new System.Windows.Forms.Label();
             this.txtLocationStamp = new System.Windows.Forms.Label();
@@ -70,8 +72,12 @@ namespace Enofibom
             this.lblCGI = new System.Windows.Forms.Label();
             this.lblIMSI = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtCellName = new System.Windows.Forms.Label();
-            this.lblCellName = new System.Windows.Forms.Label();
+            this.txtPresence = new System.Windows.Forms.Label();
+            this.lblPresence = new System.Windows.Forms.Label();
+            this.txtPresentFlag = new System.Windows.Forms.Label();
+            this.lblPresentFlag = new System.Windows.Forms.Label();
+            this.txtDisappearFlag = new System.Windows.Forms.Label();
+            this.lblDisappearFlag = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
@@ -332,6 +338,12 @@ namespace Enofibom
             // groupBox2
             // 
             this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox2.Controls.Add(this.txtDisappearFlag);
+            this.groupBox2.Controls.Add(this.lblDisappearFlag);
+            this.groupBox2.Controls.Add(this.txtPresentFlag);
+            this.groupBox2.Controls.Add(this.lblPresentFlag);
+            this.groupBox2.Controls.Add(this.txtPresence);
+            this.groupBox2.Controls.Add(this.lblPresence);
             this.groupBox2.Controls.Add(this.txtCellName);
             this.groupBox2.Controls.Add(this.lblCellName);
             this.groupBox2.Controls.Add(this.txtTAC);
@@ -365,6 +377,26 @@ namespace Enofibom
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Location Detail";
+            // 
+            // txtCellName
+            // 
+            this.txtCellName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtCellName.AutoSize = true;
+            this.txtCellName.Location = new System.Drawing.Point(107, 246);
+            this.txtCellName.Name = "txtCellName";
+            this.txtCellName.Size = new System.Drawing.Size(0, 17);
+            this.txtCellName.TabIndex = 25;
+            // 
+            // lblCellName
+            // 
+            this.lblCellName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblCellName.AutoSize = true;
+            this.lblCellName.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCellName.Location = new System.Drawing.Point(32, 246);
+            this.lblCellName.Name = "lblCellName";
+            this.lblCellName.Size = new System.Drawing.Size(68, 17);
+            this.lblCellName.TabIndex = 24;
+            this.lblCellName.Text = "CellName:";
             // 
             // txtTAC
             // 
@@ -616,25 +648,65 @@ namespace Enofibom
             this.panel1.Size = new System.Drawing.Size(470, 788);
             this.panel1.TabIndex = 17;
             // 
-            // txtCellName
+            // txtPresence
             // 
-            this.txtCellName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtCellName.AutoSize = true;
-            this.txtCellName.Location = new System.Drawing.Point(107, 246);
-            this.txtCellName.Name = "txtCellName";
-            this.txtCellName.Size = new System.Drawing.Size(0, 17);
-            this.txtCellName.TabIndex = 25;
+            this.txtPresence.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtPresence.AutoSize = true;
+            this.txtPresence.Location = new System.Drawing.Point(347, 246);
+            this.txtPresence.Name = "txtPresence";
+            this.txtPresence.Size = new System.Drawing.Size(0, 17);
+            this.txtPresence.TabIndex = 27;
             // 
-            // lblCellName
+            // lblPresence
             // 
-            this.lblCellName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblCellName.AutoSize = true;
-            this.lblCellName.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCellName.Location = new System.Drawing.Point(32, 246);
-            this.lblCellName.Name = "lblCellName";
-            this.lblCellName.Size = new System.Drawing.Size(68, 17);
-            this.lblCellName.TabIndex = 24;
-            this.lblCellName.Text = "CellName:";
+            this.lblPresence.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblPresence.AutoSize = true;
+            this.lblPresence.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPresence.Location = new System.Drawing.Point(272, 246);
+            this.lblPresence.Name = "lblPresence";
+            this.lblPresence.Size = new System.Drawing.Size(65, 17);
+            this.lblPresence.TabIndex = 26;
+            this.lblPresence.Text = "Presence:";
+            // 
+            // txtPresentFlag
+            // 
+            this.txtPresentFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtPresentFlag.AutoSize = true;
+            this.txtPresentFlag.Location = new System.Drawing.Point(107, 285);
+            this.txtPresentFlag.Name = "txtPresentFlag";
+            this.txtPresentFlag.Size = new System.Drawing.Size(0, 17);
+            this.txtPresentFlag.TabIndex = 29;
+            // 
+            // lblPresentFlag
+            // 
+            this.lblPresentFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblPresentFlag.AutoSize = true;
+            this.lblPresentFlag.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPresentFlag.Location = new System.Drawing.Point(19, 285);
+            this.lblPresentFlag.Name = "lblPresentFlag";
+            this.lblPresentFlag.Size = new System.Drawing.Size(82, 17);
+            this.lblPresentFlag.TabIndex = 28;
+            this.lblPresentFlag.Text = "PresentFlag:";
+            // 
+            // txtDisappearFlag
+            // 
+            this.txtDisappearFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtDisappearFlag.AutoSize = true;
+            this.txtDisappearFlag.Location = new System.Drawing.Point(345, 285);
+            this.txtDisappearFlag.Name = "txtDisappearFlag";
+            this.txtDisappearFlag.Size = new System.Drawing.Size(0, 17);
+            this.txtDisappearFlag.TabIndex = 31;
+            // 
+            // lblDisappearFlag
+            // 
+            this.lblDisappearFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblDisappearFlag.AutoSize = true;
+            this.lblDisappearFlag.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDisappearFlag.Location = new System.Drawing.Point(225, 285);
+            this.lblDisappearFlag.Name = "lblDisappearFlag";
+            this.lblDisappearFlag.Size = new System.Drawing.Size(111, 17);
+            this.lblDisappearFlag.TabIndex = 30;
+            this.lblDisappearFlag.Text = "DisappearedFlag:";
             // 
             // MapUserControl
             // 
@@ -701,5 +773,11 @@ namespace Enofibom
         private System.Windows.Forms.Label lblTAC;
         private System.Windows.Forms.Label txtCellName;
         private System.Windows.Forms.Label lblCellName;
+        private System.Windows.Forms.Label txtDisappearFlag;
+        private System.Windows.Forms.Label lblDisappearFlag;
+        private System.Windows.Forms.Label txtPresentFlag;
+        private System.Windows.Forms.Label lblPresentFlag;
+        private System.Windows.Forms.Label txtPresence;
+        private System.Windows.Forms.Label lblPresence;
     }
 }

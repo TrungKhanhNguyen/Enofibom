@@ -70,6 +70,7 @@ namespace Enofibom
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            ClearText();
             LoadData();
         }
 
@@ -163,7 +164,7 @@ namespace Enofibom
                         {
                             var inputBody = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:v1='http://schema.intersec.com/igloo/sdk/v1.2'><soapenv:Header/><soapenv:Body><v1:pull.retrieveV3Req><args><params><filter><msisdn><explicit><kind>2</kind>"
                             + "<m>" + sdt.Trim() + "</m>"
-                            + "</explicit></msisdn></filter><options><subscriberFields>msisdn</subscriberFields><subscriberFields>imsi</subscriberFields><locationFields>location</locationFields><locationFields>event</locationFields><locationFields>eventStamp</locationFields><locationFields>locStamp</locationFields></options></params></args></v1:pull.retrieveV3Req></soapenv:Body></soapenv:Envelope>";
+                            + "</explicit></msisdn></filter><options><subscriberFields>msisdn</subscriberFields><subscriberFields>imsi</subscriberFields><locationFields>location</locationFields><locationFields>event</locationFields><locationFields>eventStamp</locationFields><locationFields>locStamp</locationFields><locationFields>presence</locationFields><locationFields>presenceStamp</locationFields></options></params></args></v1:pull.retrieveV3Req></soapenv:Body></soapenv:Envelope>";
 
                             var httpContent = new StringContent(inputBody, Encoding.UTF8, "application/xml");
                             var request = new HttpRequestMessage();
@@ -287,6 +288,17 @@ namespace Enofibom
                     txtIMEI.Text = temp1.IMEI;
                     txtTAC.Text = temp1.TAC;
                     txtCellName.Text = temp1.CellName;
+                    txtPresence.Text = temp1.Presence;
+                    try
+                    {
+                        txtPresentFlag.Text = DBHelper.UnixTimeStampToDateTime(Convert.ToDouble(temp1.PresentFlag)).ToString("dd/MM/yyyy HH:mm");
+                        txtDisappearFlag.Text = DBHelper.UnixTimeStampToDateTime(Convert.ToDouble(temp1.DisappearedFlag)).ToString("dd/MM/yyyy HH:mm");
+                    }
+                    catch {
+                    
+                    }
+                    
+
                     dataGrid1.Rows[0].Selected = true;
                 }
                 var userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
@@ -325,6 +337,7 @@ namespace Enofibom
             txtCGI.Text = txtIMSI.Text = txtKind.Text = txtLat.Text = txtLon.Text = txtMSISDN.Text = txtPlanName.Text = txtRadius.Text = "";
             txtLocationStamp.Text = txtEventStamp.Text = "";
             txtTAC.Text = ""; txtIMEI.Text = ""; txtCellName.Text = "";
+            txtPresence.Text = txtPresentFlag.Text = txtDisappearFlag.Text = "";
             dataGrid1.DataSource = null;
             dataGrid1.Refresh();
         }

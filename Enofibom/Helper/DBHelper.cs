@@ -100,9 +100,8 @@ namespace Enofibom.Helper
         {
             try
             {
-                string imsi, msisdn, longitude, latitude, radius, cgi, kind, anglestart, angleend, planName;
-                imsi = msisdn = longitude = latitude = radius = cgi = kind = anglestart = angleend = planName = "";
-
+                string imsi, msisdn, longitude, latitude, radius, cgi, kind, anglestart, angleend, planName, presence, presentFlag, disappearedFlag;
+                imsi = msisdn = longitude = latitude = radius = cgi = kind = anglestart = angleend = planName = presence = presentFlag = disappearedFlag = "";
                 XElement root = XElement.Parse(response);
                 var currLocation = root.Descendants().Where(m => m.Name.LocalName.ToString() == "currLocation").FirstOrDefault();
                 var prevNode = root.Descendants().Where(m => m.Name.LocalName.ToString() == "prevLocation").FirstOrDefault();
@@ -115,6 +114,7 @@ namespace Enofibom.Helper
                 msisdn = root.Descendants("msisdn").FirstOrDefault().Value;
 
                 DateTime eventStamp = new DateTime(); DateTime locStamp = new DateTime();
+                
                 if (!String.IsNullOrEmpty(currLat) && !String.IsNullOrEmpty(currLon))
                 {
                     XElement node;
@@ -138,6 +138,10 @@ namespace Enofibom.Helper
                     var locStampStr = node.Descendants("locStamp").FirstOrDefault().Value;
                     eventStamp = UnixTimeStampToDateTime(Convert.ToDouble(eventStampStr));
                     locStamp = UnixTimeStampToDateTime(Convert.ToDouble(locStampStr));
+
+                    presence = node.Descendants("presence").FirstOrDefault().Value;
+                    presentFlag = node.Descendants("presentFlag").FirstOrDefault().Value;
+                    disappearedFlag = node.Descendants("disappearedFlag").FirstOrDefault().Value;
                 }
 
 
@@ -159,7 +163,10 @@ namespace Enofibom.Helper
                         Radius = radius,
                         PlanName = planName,
                         eventStamp = eventStamp,
-                        locStamp = locStamp
+                        locStamp = locStamp,
+                        Presence = presence,
+                        PresentFlag = presentFlag,
+                        DisappearedFlag = disappearedFlag
                     };
                     return mobi;
                 }

@@ -31,5 +31,8 @@ namespace Enofibom
         public string TAC { get; set; }
         public string CellName { get; set; }
         public Nullable<System.DateTime> RequestTime { get; set; }
+        public string Presence { get; set; }
+        public string PresentFlag { get; set; }
+        public string DisappearedFlag { get; set; }
     }
 }

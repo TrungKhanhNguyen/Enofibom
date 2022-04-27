@@ -16,7 +16,7 @@ namespace Enofibom
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SignIn());
+            Application.Run(new Main());
         }
     }
 }
