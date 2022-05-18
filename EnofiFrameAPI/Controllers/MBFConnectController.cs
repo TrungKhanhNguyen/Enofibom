@@ -18,15 +18,20 @@ namespace EnofiFrameAPI.Controllers
         LocationHelper helper = new LocationHelper();
 
         [HttpGet]
+        [ActionName("CheckBalance")]
+        public IHttpActionResult CheckBalance()
+        {
+            var atd = helper.callATD();
+            return Ok(atd);
+        }
+
+        [HttpGet]
         [ActionName("GetLocation")]
         public IHttpActionResult GetLocation(string id)
         {
-
-            //var swapPosition = helper.SwapPosition("0774213991");
             var res = helper.CallSilentMessage(id);
             return Ok(res);
-            
         }
-       
+
     }
 }

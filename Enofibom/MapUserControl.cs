@@ -70,8 +70,10 @@ namespace Enofibom
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             ClearText();
             LoadData();
+            this.Cursor = Cursors.Default;
         }
 
         private void LoadData()
@@ -289,6 +291,7 @@ namespace Enofibom
                     txtTAC.Text = temp1.TAC;
                     txtCellName.Text = temp1.CellName;
                     txtPresence.Text = temp1.Presence;
+                    txtReqTime.Text = temp1.RequestTime?.ToString("dd/MM/yyyy HH:mm");
                     try
                     {
                         txtPresentFlag.Text = DBHelper.UnixTimeStampToDateTime(Convert.ToDouble(temp1.PresentFlag)).ToString("dd/MM/yyyy HH:mm");
@@ -338,6 +341,7 @@ namespace Enofibom
             txtLocationStamp.Text = txtEventStamp.Text = "";
             txtTAC.Text = ""; txtIMEI.Text = ""; txtCellName.Text = "";
             txtPresence.Text = txtPresentFlag.Text = txtDisappearFlag.Text = "";
+            txtReqTime.Text = "";
             dataGrid1.DataSource = null;
             dataGrid1.Refresh();
         }
@@ -362,6 +366,7 @@ namespace Enofibom
                     txtIMEI.Text = listObject[e.RowIndex].IMEI;
                     txtTAC.Text = listObject[e.RowIndex].TAC;
                     txtCellName.Text = listObject[e.RowIndex].CellName;
+                    txtReqTime.Text = listObject[e.RowIndex].RequestTime?.ToString("dd/MM/yyyy HH:mm");
                 }
                 catch
                 {

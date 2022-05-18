@@ -45,6 +45,12 @@ namespace Enofibom
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.txtSearchMSISDN = new Guna.UI2.WinForms.Guna2TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtDisappearFlag = new System.Windows.Forms.Label();
+            this.lblDisappearFlag = new System.Windows.Forms.Label();
+            this.txtPresentFlag = new System.Windows.Forms.Label();
+            this.lblPresentFlag = new System.Windows.Forms.Label();
+            this.txtPresence = new System.Windows.Forms.Label();
+            this.lblPresence = new System.Windows.Forms.Label();
             this.txtCellName = new System.Windows.Forms.Label();
             this.lblCellName = new System.Windows.Forms.Label();
             this.txtTAC = new System.Windows.Forms.Label();
@@ -72,12 +78,8 @@ namespace Enofibom
             this.lblCGI = new System.Windows.Forms.Label();
             this.lblIMSI = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtPresence = new System.Windows.Forms.Label();
-            this.lblPresence = new System.Windows.Forms.Label();
-            this.txtPresentFlag = new System.Windows.Forms.Label();
-            this.lblPresentFlag = new System.Windows.Forms.Label();
-            this.txtDisappearFlag = new System.Windows.Forms.Label();
-            this.lblDisappearFlag = new System.Windows.Forms.Label();
+            this.txtReqTime = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
@@ -338,6 +340,8 @@ namespace Enofibom
             // groupBox2
             // 
             this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox2.Controls.Add(this.txtReqTime);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.txtDisappearFlag);
             this.groupBox2.Controls.Add(this.lblDisappearFlag);
             this.groupBox2.Controls.Add(this.txtPresentFlag);
@@ -377,6 +381,66 @@ namespace Enofibom
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Location Detail";
+            // 
+            // txtDisappearFlag
+            // 
+            this.txtDisappearFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtDisappearFlag.AutoSize = true;
+            this.txtDisappearFlag.Location = new System.Drawing.Point(345, 285);
+            this.txtDisappearFlag.Name = "txtDisappearFlag";
+            this.txtDisappearFlag.Size = new System.Drawing.Size(0, 17);
+            this.txtDisappearFlag.TabIndex = 31;
+            // 
+            // lblDisappearFlag
+            // 
+            this.lblDisappearFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblDisappearFlag.AutoSize = true;
+            this.lblDisappearFlag.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDisappearFlag.Location = new System.Drawing.Point(225, 285);
+            this.lblDisappearFlag.Name = "lblDisappearFlag";
+            this.lblDisappearFlag.Size = new System.Drawing.Size(111, 17);
+            this.lblDisappearFlag.TabIndex = 30;
+            this.lblDisappearFlag.Text = "DisappearedFlag:";
+            // 
+            // txtPresentFlag
+            // 
+            this.txtPresentFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtPresentFlag.AutoSize = true;
+            this.txtPresentFlag.Location = new System.Drawing.Point(107, 285);
+            this.txtPresentFlag.Name = "txtPresentFlag";
+            this.txtPresentFlag.Size = new System.Drawing.Size(0, 17);
+            this.txtPresentFlag.TabIndex = 29;
+            // 
+            // lblPresentFlag
+            // 
+            this.lblPresentFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblPresentFlag.AutoSize = true;
+            this.lblPresentFlag.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPresentFlag.Location = new System.Drawing.Point(19, 285);
+            this.lblPresentFlag.Name = "lblPresentFlag";
+            this.lblPresentFlag.Size = new System.Drawing.Size(82, 17);
+            this.lblPresentFlag.TabIndex = 28;
+            this.lblPresentFlag.Text = "PresentFlag:";
+            // 
+            // txtPresence
+            // 
+            this.txtPresence.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtPresence.AutoSize = true;
+            this.txtPresence.Location = new System.Drawing.Point(347, 246);
+            this.txtPresence.Name = "txtPresence";
+            this.txtPresence.Size = new System.Drawing.Size(0, 17);
+            this.txtPresence.TabIndex = 27;
+            // 
+            // lblPresence
+            // 
+            this.lblPresence.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblPresence.AutoSize = true;
+            this.lblPresence.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPresence.Location = new System.Drawing.Point(272, 246);
+            this.lblPresence.Name = "lblPresence";
+            this.lblPresence.Size = new System.Drawing.Size(65, 17);
+            this.lblPresence.TabIndex = 26;
+            this.lblPresence.Text = "Presence:";
             // 
             // txtCellName
             // 
@@ -648,65 +712,25 @@ namespace Enofibom
             this.panel1.Size = new System.Drawing.Size(470, 788);
             this.panel1.TabIndex = 17;
             // 
-            // txtPresence
+            // txtReqTime
             // 
-            this.txtPresence.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtPresence.AutoSize = true;
-            this.txtPresence.Location = new System.Drawing.Point(347, 246);
-            this.txtPresence.Name = "txtPresence";
-            this.txtPresence.Size = new System.Drawing.Size(0, 17);
-            this.txtPresence.TabIndex = 27;
+            this.txtReqTime.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtReqTime.AutoSize = true;
+            this.txtReqTime.Location = new System.Drawing.Point(107, 325);
+            this.txtReqTime.Name = "txtReqTime";
+            this.txtReqTime.Size = new System.Drawing.Size(0, 17);
+            this.txtReqTime.TabIndex = 33;
             // 
-            // lblPresence
+            // label7
             // 
-            this.lblPresence.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblPresence.AutoSize = true;
-            this.lblPresence.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPresence.Location = new System.Drawing.Point(272, 246);
-            this.lblPresence.Name = "lblPresence";
-            this.lblPresence.Size = new System.Drawing.Size(65, 17);
-            this.lblPresence.TabIndex = 26;
-            this.lblPresence.Text = "Presence:";
-            // 
-            // txtPresentFlag
-            // 
-            this.txtPresentFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtPresentFlag.AutoSize = true;
-            this.txtPresentFlag.Location = new System.Drawing.Point(107, 285);
-            this.txtPresentFlag.Name = "txtPresentFlag";
-            this.txtPresentFlag.Size = new System.Drawing.Size(0, 17);
-            this.txtPresentFlag.TabIndex = 29;
-            // 
-            // lblPresentFlag
-            // 
-            this.lblPresentFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblPresentFlag.AutoSize = true;
-            this.lblPresentFlag.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPresentFlag.Location = new System.Drawing.Point(19, 285);
-            this.lblPresentFlag.Name = "lblPresentFlag";
-            this.lblPresentFlag.Size = new System.Drawing.Size(82, 17);
-            this.lblPresentFlag.TabIndex = 28;
-            this.lblPresentFlag.Text = "PresentFlag:";
-            // 
-            // txtDisappearFlag
-            // 
-            this.txtDisappearFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtDisappearFlag.AutoSize = true;
-            this.txtDisappearFlag.Location = new System.Drawing.Point(345, 285);
-            this.txtDisappearFlag.Name = "txtDisappearFlag";
-            this.txtDisappearFlag.Size = new System.Drawing.Size(0, 17);
-            this.txtDisappearFlag.TabIndex = 31;
-            // 
-            // lblDisappearFlag
-            // 
-            this.lblDisappearFlag.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblDisappearFlag.AutoSize = true;
-            this.lblDisappearFlag.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDisappearFlag.Location = new System.Drawing.Point(225, 285);
-            this.lblDisappearFlag.Name = "lblDisappearFlag";
-            this.lblDisappearFlag.Size = new System.Drawing.Size(111, 17);
-            this.lblDisappearFlag.TabIndex = 30;
-            this.lblDisappearFlag.Text = "DisappearedFlag:";
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(11, 325);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 17);
+            this.label7.TabIndex = 32;
+            this.label7.Text = "RequestTime:";
             // 
             // MapUserControl
             // 
@@ -779,5 +803,7 @@ namespace Enofibom
         private System.Windows.Forms.Label lblPresentFlag;
         private System.Windows.Forms.Label txtPresence;
         private System.Windows.Forms.Label lblPresence;
+        private System.Windows.Forms.Label txtReqTime;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mapControl = new GMap.NET.WindowsForms.GMapControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -48,6 +51,9 @@
             this.lblFromDate = new System.Windows.Forms.Label();
             this.txtSearchHistory = new Guna.UI2.WinForms.Guna2TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.txtRecords = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IMSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MSISDN = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,9 +67,10 @@
             this.IMEI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.locStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eventStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtRecords = new System.Windows.Forms.Label();
+            this.Presence = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.presentFlag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.disappearedFlag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RequestTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -342,26 +349,64 @@
             this.PlanName,
             this.IMEI,
             this.locStamp,
-            this.eventStamp});
+            this.eventStamp,
+            this.Presence,
+            this.presentFlag,
+            this.disappearedFlag,
+            this.RequestTime});
             this.dataGridView1.GridColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.Location = new System.Drawing.Point(6, 296);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView1.Size = new System.Drawing.Size(1184, 207);
             this.dataGridView1.TabIndex = 28;
             this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.txtRecords);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.groupBox3);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(723, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(470, 506);
+            this.panel1.TabIndex = 29;
+            // 
+            // txtRecords
+            // 
+            this.txtRecords.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtRecords.AutoSize = true;
+            this.txtRecords.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRecords.Location = new System.Drawing.Point(79, 280);
+            this.txtRecords.Name = "txtRecords";
+            this.txtRecords.Size = new System.Drawing.Size(16, 17);
+            this.txtRecords.TabIndex = 24;
+            this.txtRecords.Text = "0";
+            this.txtRecords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(10, 280);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 17);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Records:";
             // 
             // Id
             // 
@@ -430,7 +475,7 @@
             // PlanName
             // 
             this.PlanName.DataPropertyName = "PlanName";
-            this.PlanName.HeaderText = "PlaneName";
+            this.PlanName.HeaderText = "PlanName";
             this.PlanName.Name = "PlanName";
             this.PlanName.ReadOnly = true;
             // 
@@ -459,39 +504,39 @@
             this.eventStamp.Name = "eventStamp";
             this.eventStamp.ReadOnly = true;
             // 
-            // panel1
+            // Presence
             // 
-            this.panel1.Controls.Add(this.txtRecords);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.groupBox3);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(723, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(470, 506);
-            this.panel1.TabIndex = 29;
+            this.Presence.DataPropertyName = "Presence";
+            this.Presence.HeaderText = "Presence";
+            this.Presence.Name = "Presence";
+            this.Presence.ReadOnly = true;
             // 
-            // label1
+            // presentFlag
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 280);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 17);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "Records:";
+            this.presentFlag.DataPropertyName = "presentFlag";
+            dataGridViewCellStyle4.Format = "dd/MM/yyyy HH:mm";
+            this.presentFlag.DefaultCellStyle = dataGridViewCellStyle4;
+            this.presentFlag.HeaderText = "presentFlag";
+            this.presentFlag.Name = "presentFlag";
+            this.presentFlag.ReadOnly = true;
             // 
-            // txtRecords
+            // disappearedFlag
             // 
-            this.txtRecords.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtRecords.AutoSize = true;
-            this.txtRecords.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRecords.Location = new System.Drawing.Point(79, 280);
-            this.txtRecords.Name = "txtRecords";
-            this.txtRecords.Size = new System.Drawing.Size(16, 17);
-            this.txtRecords.TabIndex = 24;
-            this.txtRecords.Text = "0";
-            this.txtRecords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.disappearedFlag.DataPropertyName = "disappearedFlag";
+            dataGridViewCellStyle5.Format = "dd/MM/yyyy HH:mm";
+            this.disappearedFlag.DefaultCellStyle = dataGridViewCellStyle5;
+            this.disappearedFlag.HeaderText = "disappearedFlag";
+            this.disappearedFlag.Name = "disappearedFlag";
+            this.disappearedFlag.ReadOnly = true;
+            // 
+            // RequestTime
+            // 
+            this.RequestTime.DataPropertyName = "RequestTime";
+            dataGridViewCellStyle6.Format = "dd/MM/yyyy HH:mm";
+            this.RequestTime.DefaultCellStyle = dataGridViewCellStyle6;
+            this.RequestTime.HeaderText = "RequestTime";
+            this.RequestTime.Name = "RequestTime";
+            this.RequestTime.ReadOnly = true;
             // 
             // HistoryMap
             // 
@@ -530,6 +575,10 @@
         private Guna.UI2.WinForms.Guna2TextBox txtSearchHistory;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.CheckBox chkShowMap;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label txtRecords;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn IMSI;
         private System.Windows.Forms.DataGridViewTextBoxColumn MSISDN;
@@ -543,9 +592,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IMEI;
         private System.Windows.Forms.DataGridViewTextBoxColumn locStamp;
         private System.Windows.Forms.DataGridViewTextBoxColumn eventStamp;
-        private System.Windows.Forms.CheckBox chkShowMap;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label txtRecords;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Presence;
+        private System.Windows.Forms.DataGridViewTextBoxColumn presentFlag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn disappearedFlag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RequestTime;
     }
 }

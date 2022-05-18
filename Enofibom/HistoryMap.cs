@@ -25,6 +25,9 @@ namespace Enofibom
         List<GMapRoute> historyListRoute = new List<GMapRoute>();
 
         List<Position> listCurrentHistoryPosition = new List<Position>();
+
+        List<PositionObject> listConvertedObject = new List<PositionObject>();
+
         Maper maper = new Maper();
         DBHelper helper = new DBHelper();
         private bool sortAscending = false;
@@ -35,6 +38,47 @@ namespace Enofibom
             InitializeComponent();
             dataGridView1.BringToFront();
             new ToolTip().SetToolTip(pictureBox1, "Display maximum 7 targets path.");
+        }
+
+        private List<PositionObject> ConvertToListPositionObject(List<Position> listObject)
+        {
+            var listConverted = new List<PositionObject>();
+            try
+            {
+                foreach (var item in listObject)
+                {
+
+                    var temp = new PositionObject
+                    {
+                        Id = item.Id,
+                       CGI = item.CGI,
+                       AngleEnd = item.AngleEnd,
+                       AngleStart = item.AngleStart,
+                       CellName = item.CellName,
+                       locStamp = item.locStamp,
+                       eventStamp = item.eventStamp,
+                       IMEI = item.IMEI,
+                       IMSI = item.IMSI,
+                       Kind = item.Kind,
+                       Lat = item.Lat,
+                       Lon = item.Lon,
+                       MSISDN = item.MSISDN,
+                       PlanName = item.PlanName,
+                       Presence = item.Presence,
+                       Radius = item.Radius,
+                       TAC = item.TAC,
+                       RequestTime = item.RequestTime,
+                       PresentFlag = DBHelper.UnixTimeStampToDateTime(Convert.ToDouble(item.PresentFlag)),
+                       DisappearedFlag = DBHelper.UnixTimeStampToDateTime(Convert.ToDouble(item.DisappearedFlag)),
+
+                    };
+                    listConverted.Add(temp);
+
+
+                }
+            }
+            catch { }
+            return listConverted;
         }
 
         private void ReloadTrackBar()
@@ -68,6 +112,8 @@ namespace Enofibom
                 ShowPointsAndLines(listCurrentHistoryPosition);
             }
             txtRecords.Text = listCurrentHistoryPosition.Count().ToString();
+
+            listConvertedObject = ConvertToListPositionObject(listCurrentHistoryPosition);
             dataGridView1.DataSource = listCurrentHistoryPosition;
         }
 
@@ -125,7 +171,9 @@ namespace Enofibom
 
                 //var kkk = historyListRoute;
                 txtRecords.Text = listHistoryPosition.Count().ToString();
-                dataGridView1.DataSource = listHistoryPosition.OrderByDescending(m => m.eventStamp).ToList();
+
+                listConvertedObject = ConvertToListPositionObject(listHistoryPosition);
+                dataGridView1.DataSource = listConvertedObject.OrderByDescending(m => m.eventStamp).ToList();
             }
             catch { }
             
@@ -192,6 +240,7 @@ namespace Enofibom
         {
             ClearHistory();
             listHistoryPosition = new List<Position>();
+            listConvertedObject = new List<PositionObject>();
             dataGridView1.DataSource = null;
             txtRecords.Text = "0";
         }
@@ -250,7 +299,10 @@ namespace Enofibom
                     case "PlanName": listHistoryPosition = listHistoryPosition.OrderBy(m => m.PlanName).ToList(); break;
                     case "locStamp": listHistoryPosition = listHistoryPosition.OrderBy(m => m.locStamp).ToList(); break;
                     case "eventStamp": listHistoryPosition = listHistoryPosition.OrderBy(m => m.eventStamp).ToList(); break;
-                    //default: listCurrentHistoryPosition = listCurrentHistoryPosition.OrderBy(m => m.eventStamp).ToList(); break;
+                    case "Presence": listHistoryPosition = listHistoryPosition.OrderBy(m => m.Presence).ToList(); break;
+                    case "presentFlag": listHistoryPosition = listHistoryPosition.OrderBy(m => m.PresentFlag).ToList(); break;
+                    case "disappearedFlag": listHistoryPosition = listHistoryPosition.OrderBy(m => m.DisappearedFlag).ToList(); break;
+                        //default: listCurrentHistoryPosition = listCurrentHistoryPosition.OrderBy(m => m.eventStamp).ToList(); break;
                 }
             }
             else
@@ -267,10 +319,14 @@ namespace Enofibom
                     case "PlanName": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.PlanName).ToList(); break;
                     case "locStamp": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.locStamp).ToList(); break;
                     case "eventStamp": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.eventStamp).ToList(); break;
+                    case "Presence": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.Presence).ToList(); break;
+                    case "presentFlag": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.PresentFlag).ToList(); break;
+                    case "disappearedFlag": listHistoryPosition = listHistoryPosition.OrderByDescending(m => m.DisappearedFlag).ToList(); break;
                 }
             }
             sortAscending = !sortAscending;
-            dataGridView1.DataSource = listHistoryPosition;
+            listConvertedObject = ConvertToListPositionObject(listHistoryPosition);
+            dataGridView1.DataSource = listConvertedObject;
             dataGridView1.Refresh();
             
         }
