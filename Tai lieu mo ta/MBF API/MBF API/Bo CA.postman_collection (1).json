@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "6e71d492-9420-485b-94a7-2dd75e4a5bf2",
+		"name": "Bo CA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ADC",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "MobifoneKey",
+						"value": "74a5c84c-f2c3-4bbd-9819-5958094d604e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://10.3.64.246/mbfn/sb/adc/sendMessage?msisdn=84907055468",
+					"protocol": "https",
+					"host": [
+						"10",
+						"3",
+						"64",
+						"246"
+					],
+					"path": [
+						"mbfn",
+						"sb",
+						"adc",
+						"sendMessage"
+					],
+					"query": [
+						{
+							"key": "msisdn",
+							"value": "84907055468"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LBS QUA APIGW",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "$5$rounds=5000$bbf460274ac2fcd8$u0raxguDBJcCDUWKabiHX0LXjxuTszOnUJlZhqGXFQ2",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tctk_api",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					},
+					{
+						"key": "MobifoneKey",
+						"value": "74a5c84c-f2c3-4bbd-9819-5958094d604e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v1=\"http://schema.intersec.com/igloo/sdk/v1.2\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <v1:pull.retrieveV3Req>\r\n         <args>\r\n            <params>\r\n               <filter>\r\n                  <!--Optional:-->\r\n                     <msisdn>\r\n                     <explicit>\r\n                     <kind>2</kind>\r\n                     <m>84907055468</m>\r\n                     </explicit>\r\n                  </msisdn>\r\n               </filter>\r\n                <options>\r\n                  <subscriberFields>msisdn</subscriberFields>\r\n                  <subscriberFields>imsi</subscriberFields>\r\n                  <locationFields>location</locationFields>\r\n               </options>\r\n            </params>\r\n         </args>\r\n      </v1:pull.retrieveV3Req>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n"
+				},
+				"url": {
+					"raw": "https://10.3.64.246/mbfn/sb/lbs/sdk",
+					"protocol": "https",
+					"host": [
+						"10",
+						"3",
+						"64",
+						"246"
+					],
+					"path": [
+						"mbfn",
+						"sb",
+						"lbs",
+						"sdk"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

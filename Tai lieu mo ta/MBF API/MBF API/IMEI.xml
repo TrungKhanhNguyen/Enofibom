@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdm>
+    <response>
+        <result code="200" desc="OK">
+            <record>
+                <parm name="MSISDN" value="+84904466197"/>
+                <parm name="sub.imei" value="356828115757120"/>
+            </record>
+        </result>
+    </response>
+</mdm>

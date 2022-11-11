@@ -67,7 +67,7 @@
       <HintPath>..\packages\GSMComm.1.21.1\lib\GSMCommunication.dll</HintPath>
     </Reference>
     <Reference Include="Guna.UI2">
-      <HintPath>..\..\Setup\GunaUI Framework 2.0.1.4\lib\net40\Guna.UI2.dll</HintPath>
+      <HintPath>..\..\..\Users\frank\OneDrive\Work\GunaUI Framework 2.0.1.4\lib\net40\Guna.UI2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

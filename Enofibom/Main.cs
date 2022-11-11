@@ -17,6 +17,8 @@ namespace Enofibom
         public Main()
         {
             InitializeComponent();
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -35,8 +37,7 @@ namespace Enofibom
             userLoggedIn = System.Configuration.ConfigurationManager.AppSettings[StaticKey.UserLoggedIn];
             lblUserLoggedIn.Text = userLoggedIn;
 
-            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
-            this.WindowState = FormWindowState.Maximized;
+            
             try
             {
                 if (Convert.ToBoolean(isAdmin))

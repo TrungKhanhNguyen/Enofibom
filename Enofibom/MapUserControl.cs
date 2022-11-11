@@ -40,6 +40,9 @@ namespace Enofibom
         public MapUserControl()
         {
             InitializeComponent();
+            //this.Parent.Width = Screen.FromHandle(this.Handle).WorkingArea.Width;
+            //this.Parent.Height = Screen.FromHandle(this.Handle).WorkingArea.Height;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         }
         private void MapUserControl_Load(object sender, EventArgs e)
         {
@@ -70,10 +73,12 @@ namespace Enofibom
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            //this.Cursor = Cursors.WaitCursor;
             ClearText();
             LoadData();
-            this.Cursor = Cursors.Default;
+            //this.Cursor = Cursors.Default;
+
+            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
         }
 
         private void LoadData()
@@ -154,7 +159,7 @@ namespace Enofibom
                 {
                     try
                     {
-                        api.GetLocation(sdt);
+                        //api.GetLocation(sdt);
                         Thread.Sleep(1500);
                         var url = StaticKey.requestPositionUrl;
                         var handler = new HttpClientHandler() { };
