@@ -27,7 +27,7 @@ namespace Enofibom.Helper
             Member mem = null;
             try
             {
-                mem = db.Members.Where(m => m.Username == username && m.Password.ToLower() == password).FirstOrDefault();
+                mem = db.Members.Where(m => m.Username == username && m.Password.ToLower() == password.ToLower()).FirstOrDefault();
             }
             catch { }
             return mem;

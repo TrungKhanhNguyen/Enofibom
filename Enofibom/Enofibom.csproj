@@ -42,6 +42,9 @@
     <StartupObject>Enofibom.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bunifu.UI.WinForms.BunifuImageButton">
+      <HintPath>..\..\..\Users\frank\Downloads\BunifuCrackV5-main\BunifuCrackV5-main\Bunifu.UI.WinForms.BunifuImageButton.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -326,6 +329,8 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="place.ico" />
+    <None Include="Resources\icons8-chevron-up-100.png" />
+    <None Include="Resources\icons8-up-arrow-96.png" />
     <None Include="Resources\icons8_help_16.png" />
     <None Include="Resources\icons8_help_32.png" />
     <None Include="Resources\password_reset_48px.png" />

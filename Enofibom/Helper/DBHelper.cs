@@ -102,22 +102,22 @@ namespace Enofibom.Helper
             {
                 string imsi, msisdn, longitude, latitude, radius, cgi, kind, anglestart, angleend, planName, presence, presentFlag, disappearedFlag;
                 imsi = msisdn = longitude = latitude = radius = cgi = kind = anglestart = angleend = planName = presence = presentFlag = disappearedFlag = "";
+                //string currLat, currLon;
+                //currLat = currLon = "";
                 XElement root = XElement.Parse(response);
                 var currLocation = root.Descendants().Where(m => m.Name.LocalName.ToString() == "currLocation").FirstOrDefault();
                 var prevNode = root.Descendants().Where(m => m.Name.LocalName.ToString() == "prevLocation").FirstOrDefault();
 
-                var currLat = currLocation.Descendants("latitude").FirstOrDefault().Value;
-                var currLon = currLocation.Descendants("longitude").FirstOrDefault().Value;
-                var currRadius = currLocation.Descendants("radius").FirstOrDefault().Value;
-
-                imsi = root.Descendants("imsi").FirstOrDefault().Value;
-                msisdn = root.Descendants("msisdn").FirstOrDefault().Value;
-
-                DateTime eventStamp = new DateTime(); DateTime locStamp = new DateTime();
-                
-                if (!String.IsNullOrEmpty(currLat) && !String.IsNullOrEmpty(currLon))
+                var currLatObject = currLocation.Descendants("latitude").FirstOrDefault();
+                var currLonObject = currLocation.Descendants("longitude").FirstOrDefault();
+                XElement node;
+                if (currLatObject != null && currLonObject != null)
                 {
-                    XElement node;
+                    node = currLocation;
+
+                    var currLat = currLocation.Descendants("latitude").FirstOrDefault().Value;
+                    var currLon = currLocation.Descendants("longitude").FirstOrDefault().Value;
+
                     if (GetLastCharacter(currLat, 4) != "0000" && GetLastCharacter(currLon, 4) != "0000")
                     {
                         node = currLocation;
@@ -126,23 +126,29 @@ namespace Enofibom.Helper
                     {
                         node = prevNode;
                     }
-                    cgi = node.Descendants("cgi").FirstOrDefault().Value;
-                    kind = node.Descendants("kind").FirstOrDefault().Value;
-                    latitude = node.Descendants("latitude").FirstOrDefault().Value;
-                    longitude = node.Descendants("longitude").FirstOrDefault().Value;
-                    radius = node.Descendants("radius").FirstOrDefault().Value;
-                    planName = node.Descendants("planName").FirstOrDefault().Value;
-                    anglestart = node.Descendants("angleStart").FirstOrDefault().Value;
-                    angleend = node.Descendants("angleEnd").FirstOrDefault().Value;
-                    var eventStampStr = node.Descendants("eventStamp").FirstOrDefault().Value;
-                    var locStampStr = node.Descendants("locStamp").FirstOrDefault().Value;
-                    eventStamp = UnixTimeStampToDateTime(Convert.ToDouble(eventStampStr));
-                    locStamp = UnixTimeStampToDateTime(Convert.ToDouble(locStampStr));
-
-                    presence = node.Descendants("presence").FirstOrDefault().Value;
-                    presentFlag = node.Descendants("presentFlag").FirstOrDefault().Value;
-                    disappearedFlag = node.Descendants("disappearedFlag").FirstOrDefault().Value;
                 }
+                else
+                {
+                    node = prevNode;
+                }
+                
+                imsi = root.Descendants("imsi").FirstOrDefault().Value;
+                msisdn = root.Descendants("msisdn").FirstOrDefault().Value;
+
+                DateTime eventStamp = new DateTime(); DateTime locStamp = new DateTime();
+
+                cgi = node.Descendants("cgi").FirstOrDefault() == null ? string.Empty : node.Descendants("cgi").FirstOrDefault().Value;
+                kind = node.Descendants("kind").FirstOrDefault() == null ? string.Empty : node.Descendants("kind").FirstOrDefault().Value;
+                latitude = node.Descendants("latitude").FirstOrDefault() == null ? string.Empty : node.Descendants("latitude").FirstOrDefault().Value;
+                longitude = node.Descendants("longitude").FirstOrDefault() == null ? string.Empty : node.Descendants("longitude").FirstOrDefault().Value;
+                radius = node.Descendants("radius").FirstOrDefault() == null ? string.Empty : node.Descendants("radius").FirstOrDefault().Value;
+                planName = node.Descendants("planName").FirstOrDefault() == null ? string.Empty : node.Descendants("planName").FirstOrDefault().Value;
+                anglestart = node.Descendants("angleStart").FirstOrDefault() == null ? string.Empty : node.Descendants("angleStart").FirstOrDefault().Value;
+                angleend = node.Descendants("angleEnd").FirstOrDefault() == null ? string.Empty : node.Descendants("angleEnd").FirstOrDefault().Value;
+
+                presence = node.Descendants("presence").FirstOrDefault() == null ? string.Empty : node.Descendants("presence").FirstOrDefault().Value;
+                presentFlag = node.Descendants("presentFlag").FirstOrDefault() == null ? string.Empty : node.Descendants("presentFlag").FirstOrDefault().Value;
+                disappearedFlag = node.Descendants("disappearedFlag").FirstOrDefault() == null ? string.Empty : node.Descendants("disappearedFlag").FirstOrDefault().Value;
 
 
                 if (!String.IsNullOrEmpty(latitude) && !String.IsNullOrEmpty(longitude))
@@ -162,12 +168,26 @@ namespace Enofibom.Helper
                         MSISDN = msisdn,
                         Radius = radius,
                         PlanName = planName,
-                        eventStamp = eventStamp,
-                        locStamp = locStamp,
+                        //eventStamp = eventStamp,
+                        //locStamp = locStamp,
                         Presence = presence,
                         PresentFlag = presentFlag,
                         DisappearedFlag = disappearedFlag
                     };
+
+                    var eventStampStr = node.Descendants("eventStamp").FirstOrDefault() == null ? string.Empty : node.Descendants("eventStamp").FirstOrDefault().Value;
+                    var locStampStr = node.Descendants("locStamp").FirstOrDefault() == null ? string.Empty : node.Descendants("locStamp").FirstOrDefault().Value;
+                    if (!String.IsNullOrEmpty(eventStampStr))
+                    {
+                        eventStamp = UnixTimeStampToDateTime(Convert.ToDouble(eventStampStr));
+                        mobi.eventStamp = eventStamp;
+                    }
+                    if (!String.IsNullOrEmpty(locStampStr))
+                    {
+                        locStamp = UnixTimeStampToDateTime(Convert.ToDouble(locStampStr));
+                        mobi.locStamp = locStamp;
+                    }
+                        
                     return mobi;
                 }
                 return null;

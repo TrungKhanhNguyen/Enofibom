@@ -73,10 +73,10 @@ namespace Enofibom
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            //this.Cursor = Cursors.WaitCursor;
+            this.Cursor = Cursors.WaitCursor;
             ClearText();
             LoadData();
-            //this.Cursor = Cursors.Default;
+            this.Cursor = Cursors.Default;
 
             //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
         }
@@ -166,7 +166,7 @@ namespace Enofibom
                         using (var httpClient = new HttpClient(handler)
                         {
                             BaseAddress = new Uri(url),
-                            Timeout = new TimeSpan(0, 1, 0)
+                            Timeout = new TimeSpan(0, 2, 0)
                         })
                         {
                             var inputBody = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:v1='http://schema.intersec.com/igloo/sdk/v1.2'><soapenv:Header/><soapenv:Body><v1:pull.retrieveV3Req><args><params><filter><msisdn><explicit><kind>2</kind>"
@@ -195,6 +195,7 @@ namespace Enofibom
                                     contentReponse = content.ReadAsStringAsync().Result;
                                 }
                             }
+                            //string testContent = "<?xml version='1.0' encoding='UTF-8'?><s:Envelope xmlns:s='http://schemas.xmlsoap.org/soap/envelope/' xmlns:n= 'http://schema.intersec.com/igloo/sdk/v1.2' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><s:Body><n:pull.retrieveV3Res><result><subscriber><imsi>452019165202215</imsi><msisdn>84931111841</msisdn><imeiCur>356266761943221</imeiCur></subscriber><currLocation><planName>GSM</planName><location><cell><cgi>4G:452-01-685979-11</cgi><kind>UNKNOWN</kind></cell></location><locStamp>1670818691</locStamp><presence>DISAPPEARED</presence></currLocation><prevLocation><planName>GSM</planName><location><cell><cgi>452-01-44621-47047</cgi><kind>C3G</kind><geom><longitude>103959800</longitude><latitude>10215300</latitude><radius>3000</radius><angleStart>-15230769</angleStart><angleEnd>15230769</angleEnd></geom></cell></location><locStamp>1670818660</locStamp><presence>DISAPPEARED</presence></prevLocation></result></n:pull.retrieveV3Res></s:Body></s:Envelope>";
                             //await Task.When
                             if (!String.IsNullOrEmpty(contentReponse))
                             {
@@ -275,7 +276,7 @@ namespace Enofibom
                         mapControl.Refresh();
                     }
 
-                    if (isLocationLoaded && isIMEILoaded)
+                    //if (isLocationLoaded && isIMEILoaded)
                         await helper.InsertPositionToDB(item);
                     count++;
                 }

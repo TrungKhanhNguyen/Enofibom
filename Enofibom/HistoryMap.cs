@@ -139,7 +139,9 @@ namespace Enofibom
             lblToDate.Text = dpToDate.Value.ToString("dd/MM/yyyy HH:mm");
 
             mapControl.Overlays.Add(overlay);
-            chkShowMap.Checked = false;
+            chkShowMap.Checked = true;
+
+            
         }
         
         private void btnSearchHistory_Click(object sender, EventArgs e)
@@ -159,7 +161,9 @@ namespace Enofibom
                 else {
                     foreach (var item in listSDT)
                     {
-                        listArraySDT.Add(helper.ConvertPhoneNumber(item.Trim()));
+                        if (!String.IsNullOrEmpty(item))
+                            listArraySDT.Add(helper.ConvertPhoneNumber(item.Trim()));
+                        
                     }
                     listHistoryPosition = helper.GetListPositionByDate(listArraySDT.ToArray(), dpFromDate.Value, dpToDate.Value);
                 }
@@ -192,25 +196,25 @@ namespace Enofibom
                         foreach (var itemPos in listItem1)
                         {
                             var marker1 = maper.GetMarkerFromData(itemPos, count);
-                            var poly = maper.GetPolygonFromData(itemPos);
+                            //var poly = maper.GetPolygonFromData(itemPos);
                             if (marker1 != null)
                             {
                                 overlay.Markers.Add(marker1);
                                 historyListMarker.Add(marker1);
                             }
-                            if (poly != null)
-                            {
+                            //if (poly != null)
+                            //{
 
-                                overlay.Polygons.Add(poly);
-                                historyListPolygon.Add(poly);
-                            }
+                            //    overlay.Polygons.Add(poly);
+                            //    historyListPolygon.Add(poly);
+                            //}
                         }
                         if (listItem1.Count > 1)
                         {
                             for (int i = 0; i < listItem1.Count - 1; i++)
                             {
                                 GMapRoute line_layer = new GMapRoute("single_line");
-                                line_layer.Stroke = new Pen(Brushes.Black, 2); //width and color of line
+                                line_layer.Stroke = new Pen(Brushes.Black, 1); //width and color of line
 
                                 var lat1 = Convert.ToDouble(listItem1[i].Lat);
                                 var lon1 = Convert.ToDouble(listItem1[i].Lon);
@@ -339,7 +343,11 @@ namespace Enofibom
                 {
                     var valuelat = listHistoryPosition[e.RowIndex].Lat;
                     var valuelng = listHistoryPosition[e.RowIndex].Lon;
-                    //var valuemsisdn = listObject[e.RowIndex].MSISDN;
+                    var valuemsisdn = listHistoryPosition[e.RowIndex].MSISDN;
+                    if(txtSearchHistory.Text.Contains(valuemsisdn + ";") != true)
+                    {
+                        txtSearchHistory.Text += valuemsisdn + ";";
+                    }
                     if (!String.IsNullOrEmpty(valuelat) && !String.IsNullOrEmpty(valuelng))
                     {
                         var realLat = Convert.ToDouble(valuelat);
@@ -351,6 +359,21 @@ namespace Enofibom
             }
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Height = 250;
+        }
+
+        //private void dataGridView1_MultiSelectChanged(object sender, EventArgs e)
+        //{
+        //    string s = "";
+        //    foreach(DataGridViewRow tempRow in dataGridView1.Rows)
+        //    {
+        //        if (tempRow.Selected)
+        //        {
+        //            s += tempRow.Cells[0].ToString();
+        //        }
+        //    }
+        //}
     }
 }

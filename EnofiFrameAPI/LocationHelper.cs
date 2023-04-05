@@ -30,8 +30,6 @@ namespace EnofiFrameAPI
 
         public string callATD()
         {
-            //SerialPort _serialPort;
-            //_serialPort = new SerialPort("COM4", 9600, Parity.None, 8, StopBits.One);
             
             string sms = "";
             var val1 = ConfigurationManager.AppSettings["COMMPORT"];
