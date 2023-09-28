@@ -27,7 +27,7 @@ namespace Enofibom.Helper
             Member mem = null;
             try
             {
-                mem = db.Members.Where(m => m.Username == username && m.Password.ToLower() == password.ToLower()).FirstOrDefault();
+                mem = db.Members.Where(m => m.Username == username && m.Password.ToLower() == password.ToLower() && m.Active == true).FirstOrDefault();
             }
             catch { }
             return mem;
@@ -61,7 +61,7 @@ namespace Enofibom.Helper
             catch { }
         }
 
-        public async void UpdateUser(List<Member> listMember,string idTarget, bool isActive, bool isAdmin, string userLoggedIn)
+        public void UpdateUser(List<Member> listMember,string idTarget, bool isActive, bool isAdmin, string userLoggedIn)
         {
             try
             {
@@ -76,13 +76,13 @@ namespace Enofibom.Helper
                         mem.Active = isActive;
                         db.SaveChanges();
                     }
-                    var tempLog = new LogEvent
-                    {
-                        EventDate = DateTime.Now,
-                        User = userLoggedIn,
-                        Task = "Update user " + mem.Username + " info"
-                    };
-                    await DBHelper.InsertToLog(tempLog);
+                    //var tempLog = new LogEvent
+                    //{
+                    //    EventDate = DateTime.Now,
+                    //    User = userLoggedIn,
+                    //    Task = "Update user " + mem.Username + " info"
+                    //};
+                    //await DBHelper.InsertToLog(tempLog);
                 }
             }
             catch { }

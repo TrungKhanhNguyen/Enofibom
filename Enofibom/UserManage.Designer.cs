@@ -83,10 +83,12 @@ namespace Enofibom
             // 
             this.chkIsActive.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkIsActive.AutoSize = true;
+            this.chkIsActive.Checked = true;
             this.chkIsActive.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
             this.chkIsActive.CheckedState.BorderRadius = 2;
             this.chkIsActive.CheckedState.BorderThickness = 0;
             this.chkIsActive.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(147)))), ((int)(((byte)(55)))));
+            this.chkIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkIsActive.Location = new System.Drawing.Point(267, 32);
             this.chkIsActive.Name = "chkIsActive";
             this.chkIsActive.Size = new System.Drawing.Size(71, 19);
@@ -111,6 +113,7 @@ namespace Enofibom
             this.txtUsername.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtUsername.FocusedState.Parent = this.txtUsername;
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtUsername.ForeColor = System.Drawing.Color.Black;
             this.txtUsername.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtUsername.HoverState.Parent = this.txtUsername;
             this.txtUsername.Location = new System.Drawing.Point(34, 26);
@@ -128,7 +131,6 @@ namespace Enofibom
             this.btnSave.BorderRadius = 3;
             this.btnSave.CheckedState.Parent = this.btnSave;
             this.btnSave.CustomImages.Parent = this.btnSave;
-            
             this.btnSave.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(134)))), ((int)(((byte)(1)))));
             this.btnSave.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
@@ -149,7 +151,6 @@ namespace Enofibom
             this.btnClear.BorderRadius = 3;
             this.btnClear.CheckedState.Parent = this.btnClear;
             this.btnClear.CustomImages.Parent = this.btnClear;
-            
             this.btnClear.FillColor = System.Drawing.Color.Silver;
             this.btnClear.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.White;
@@ -220,7 +221,6 @@ namespace Enofibom
             this.btnAdd.BorderRadius = 3;
             this.btnAdd.CheckedState.Parent = this.btnAdd;
             this.btnAdd.CustomImages.Parent = this.btnAdd;
-            
             this.btnAdd.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(163)))), ((int)(((byte)(15)))));
             this.btnAdd.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.Color.White;

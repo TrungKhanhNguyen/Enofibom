@@ -1,4 +1,5 @@
 ﻿using Enofibom.Helper;
+using Enofibom.PageControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,12 @@ namespace Enofibom
     public partial class Main : Form
     {
         string userLoggedIn = "";
+        UserControl mapUserControl = new MapUserControl();
+        UserControl logUserControl = new LogCheck();
+        UserControl userManageControl = new UserManage();
+        UserControl changePasswordControl = new ChangePasswordControl();
+        UserControl historyMapControl = new HistoryMap();
+        UserControl autoRequestControl = new AutoRequestControl();
         public Main()
         {
             InitializeComponent();
@@ -23,13 +30,9 @@ namespace Enofibom
 
         private void Main_Load(object sender, EventArgs e)
         {
-            mapUserControl2.Show();
-            mapUserControl2.BringToFront();
-            logCheck2.Hide();
-            userManage1.Hide();
-            changePasswordControl1.Hide();
-            historyMap1.Hide();
-            autoRequestControl1.Hide();
+            panel1.Controls.Clear();
+            panel1.Controls.Add(mapUserControl);
+            mapUserControl.Dock = DockStyle.Fill;
 
             btnLogCheck.Visible = false;
             btnUserManage.Visible = false;
@@ -52,36 +55,24 @@ namespace Enofibom
 
         private void btnLogCheck_Click(object sender, EventArgs e)
         {
-            mapUserControl2.Hide();
-            changePasswordControl1.Hide();
-            historyMap1.Hide();
-            logCheck2.Show();
-            logCheck2.BringToFront();
-            autoRequestControl1.Hide();
-
+            panel1.Controls.Clear();
+            panel1.Controls.Add(logUserControl);
+            logUserControl.Dock = DockStyle.Fill;
         }
 
         private void btnUserManage_Click(object sender, EventArgs e)
         {
-            mapUserControl2.Hide();
-            logCheck2.Hide();
-            userManage1.Show();
-            userManage1.BringToFront();
-            historyMap1.Hide();
-            changePasswordControl1.Hide();
-            autoRequestControl1.Hide();
+            panel1.Controls.Clear();
+            panel1.Controls.Add(userManageControl);
+            userManageControl.Dock = DockStyle.Fill;
         }
 
 
         private void btnDataOnline_Click(object sender, EventArgs e)
         {
-            mapUserControl2.Show();
-            mapUserControl2.BringToFront();
-            logCheck2.Hide();
-            historyMap1.Hide();
-            userManage1.Hide();
-            changePasswordControl1.Hide();
-            autoRequestControl1.Hide();
+            panel1.Controls.Clear();
+            panel1.Controls.Add(mapUserControl);
+            mapUserControl.Dock = DockStyle.Fill;
         }
 
 
@@ -95,32 +86,35 @@ namespace Enofibom
 
         private void lblUserLoggedIn_Click(object sender, EventArgs e)
         {
-            mapUserControl2.Hide();
-            logCheck2.Hide();
-            
-            changePasswordControl1.Show();
-            changePasswordControl1.BringToFront();
-            autoRequestControl1.Hide();
+            panel1.Controls.Clear();
+            panel1.Controls.Add(changePasswordControl);
+            changePasswordControl.Dock = DockStyle.Fill;
         }
 
         private void btnHistoryCheck_Click(object sender, EventArgs e)
         {
-            mapUserControl2.Hide();
-            logCheck2.Hide();
-            changePasswordControl1.Hide();
-            autoRequestControl1.Hide();
-            historyMap1.Show();
-            historyMap1.BringToFront();
+            //mapUserControl2.Hide();
+            //logCheck2.Hide();
+            //changePasswordControl1.Hide();
+            //autoRequestControl1.Hide();
+            //historyMap1.Show();
+            //historyMap1.BringToFront();
+            panel1.Controls.Clear();
+            panel1.Controls.Add(historyMapControl);
+            historyMapControl.Dock = DockStyle.Fill;
         }
 
         private void btnAutoRequest_Click(object sender, EventArgs e)
         {
-            mapUserControl2.Hide();
-            logCheck2.Hide();
-            changePasswordControl1.Hide();
-            historyMap1.Hide();
-            autoRequestControl1.Show();
-            autoRequestControl1.BringToFront();
+            //mapUserControl2.Hide();
+            //logCheck2.Hide();
+            //changePasswordControl1.Hide();
+            //historyMap1.Hide();
+            //autoRequestControl1.Show();
+            //autoRequestControl1.BringToFront();
+            panel1.Controls.Clear();
+            panel1.Controls.Add(autoRequestControl);
+            autoRequestControl.Dock = DockStyle.Fill;
         }
     }
 }

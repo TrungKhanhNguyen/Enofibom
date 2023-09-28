@@ -21,7 +21,7 @@ namespace Enofibom
             InitializeComponent();
         }
 
-        private async void btnLogIn_Click(object sender, EventArgs e)
+        private void btnLogIn_Click(object sender, EventArgs e)
         {
             var username = txtUsername.Text;
             var password = StaticKey.CreateMD5(txtPassword.Text);
@@ -36,13 +36,13 @@ namespace Enofibom
                     configuration.Save();
                     ConfigurationManager.RefreshSection("appSettings");
 
-                    var eventLog = new LogEvent
-                    {
-                        EventDate = DateTime.Now,
-                        User = username,
-                        Task = "Logged in"
-                    };
-                    await DBHelper.InsertToLog(eventLog);
+                    //var eventLog = new LogEvent
+                    //{
+                    //    EventDate = DateTime.Now,
+                    //    User = username,
+                    //    Task = "Logged in"
+                    //};
+                    //await DBHelper.InsertToLog(eventLog);
                     this.Hide();
                     var form1 = new Main();
                     form1.Closed += (s, args) => { this.Close(); };
